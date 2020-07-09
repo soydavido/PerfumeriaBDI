@@ -6,6 +6,9 @@ const BarraMenu = () => {
         
         <nav class="sidebar">
             <div class="sidebar-header">
+                <i>
+                    <img src="../images/LogoBlanco.png" width="40"/>
+                 </i>
                 <h3 className="text center mt-3 ml-3">Adomatics</h3>
             </div>
         </nav>
