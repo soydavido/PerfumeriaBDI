@@ -3,11 +3,12 @@ import React,{ Fragment, useState } from "react";
 
 const BarraMenu = () => {
     return  (
-        <div class="sidebar">
+        
+        <nav class="sidebar">
             <div class="sidebar-header">
-                <h3>Hola</h3>
+                <h3 className="text center mt-3 ml-3">Adomatics</h3>
             </div>
-        </div>
+        </nav>
     )
 };
 

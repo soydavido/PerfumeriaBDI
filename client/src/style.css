@@ -1,4 +1,4 @@
-#sidebar{
+.sidebar{
     position: absolute;
     width: 263px;
     height: 1024px;
@@ -9,12 +9,10 @@
     box-sizing: border-box;
 }
 
-#sidebar .sidebar-header{
+.sidebar-header{
     position: absolute;
-    width: 120px;
+    width: 120;
     height: 28px;
-    left: calc(50% - 120px/2 - 559px);
-    top: calc(50% - 28px/2 - 447px);
 
     font-family: Roboto;
     font-style: normal;
