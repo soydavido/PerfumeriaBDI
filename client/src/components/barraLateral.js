@@ -1,8 +1,14 @@
-import React from "react";
+import React, {Fragment, useState} from "react";
+import "./styles/disenoBarraLateral.css";
 
-const barraLateral = () => {
+const barraLateral = () =>{
+
     return (
-        <h1>Hola Mundo</h1>
+       <Fragment>
+           <div class="sidebar">
+
+           </div>
+       </Fragment>
     )
 };
 

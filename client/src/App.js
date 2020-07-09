@@ -1,10 +1,9 @@
 import React, { Fragment } from "react";
 import "./App.css"
-import styles from "./mystyle.module.css";
 
 //Components
 
-import InputTodo from "./components/InputTodo";
+import InputTodo from "./components/barraLateral";
 function App(){
     return( 
       <InputTodo/>
