@@ -8,9 +8,17 @@ const BarraMenu = () => {
             <div class="sidebar-header">
                 <i>
                     <img src="../images/LogoBlanco.png" width="40"/>
-                 </i>
-                <h3 className="text center mt-3 ml-3">Adomatics</h3>
+                </i>
+                <h3 className="text mt-3 ml-5">Adomatics</h3>
+                <ul>
+                    <h3 href="#">Inicio</h3>
+                    <h3 href="#">Consulta</h3>
+                    <h3 href="#">Recomendador</h3>
+                    <h3 href="#">Reportes</h3>
+                </ul>
             </div>
+            
+            
         </nav>
     )
 };
