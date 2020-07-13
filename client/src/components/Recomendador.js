@@ -1,13 +1,13 @@
 import "./../style.css";
 import React,{ Fragment, useState } from "react";
 
-const Inicio = () => {
+const Recomendador = () => {
     return  (
         
         <div class="body">
-            <h1>Soy el inicio</h1>
+            <h1>Soy el recomendador</h1>
         </div>
     )
 };
 
-export default Inicio;
+export default Recomendador;

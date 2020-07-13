@@ -1,5 +1,10 @@
 import React, { Fragment } from "react";
+import ReactDOM from 'react-dom';
 import "./App.css"
+import Inicio from "./components/Inicio"
+import Evaluacion from "./components/Evaluacion"
+import Consulta from "./components/Consulta"
+import Recomendador from "./components/Recomendador"
 
 //Components
 import BarraMenu from "./components/BarraMenu"
@@ -7,8 +12,8 @@ class App extends React.Component{
   constructor(props){
     super(props);
     this.state = {
-      inicio: "1",
-      consulta: "",
+      inicio: "",
+      consulta: "1",
       evaluacion: "",
       recomendador: ""
     }
@@ -38,15 +43,24 @@ class App extends React.Component{
 }
 
   render(){
-
+    let activo="";
     console.log(this.state);
+
+    if (this.state.inicio){
+      ReactDOM.render(<Inicio/>,document.getElementById("contenido"))
+    }
+    else{
+      if (this.state.consulta){
+        ReactDOM.render(<Consulta/>,document.getElementById("contenido"))
+      }
+    }
+
+
 
     return(
       <div>
         <BarraMenu/>
-        <div class="body">
-          <input type='text' name='recomendador' onChange={this.myChangeHandler}></input>
-         </div>
+        {activo}
       </div>  
     )
   }
