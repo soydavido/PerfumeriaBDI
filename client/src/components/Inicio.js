@@ -5,7 +5,19 @@ const Inicio = () => {
     return  (
         
         <div class="body">
-            <h1>Soy el inicio</h1>
+            
+            <div className="card-board1">
+                <a>Hola</a>
+            </div>
+            <div class="card-board2">
+                <a>Hola</a>
+            </div>
+            <div class="card-board3">
+                <a>Hola</a>
+            </div>
+            <div class="card-board4">
+                <a>Hola</a>
+            </div>
         </div>
     )
 };

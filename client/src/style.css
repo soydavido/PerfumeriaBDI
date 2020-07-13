@@ -4,8 +4,8 @@
     height: 1024px;
     left: 0px;
     top: 0px;
-    background: #ffbc96;
-    border: 1px solid #ffbc96;
+    background: #ff7d31;
+    border: 1px solid #ff7d31;
     box-sizing: border-box;
 }
 
@@ -29,4 +29,47 @@
 .body{
     position: absolute;
     left: 270px;
+}
+
+/* CCS DEL INICIO */
+
+.card-board1{
+    position: absolute;
+    width: 220px;
+    height: 74px;
+    left: 38px;
+    top: 38px;
+    background: #ff7d31;
+    backdrop-filter: blur(4px);
+    border-radius: 5px;
+}
+.card-board2{
+    position: absolute;
+    width: 220px;
+    height: 74px;
+    left: 325px;
+    top: 38px;
+    background: #ff7d31;
+    backdrop-filter: blur(4px);
+    border-radius: 5px;
+}
+.card-board3{
+    position: absolute;
+    width: 220px;
+    height: 74px;
+    left: 632px;
+    top: 38px;
+    background: #ff7d31;
+    backdrop-filter: blur(4px);
+    border-radius: 5px;
+}
+.card-board4{
+    position: absolute;
+    width: 220px;
+    height: 74px;
+    left: 919px;
+    top: 38px;
+    background: #ff7d31;
+    backdrop-filter: blur(4px);
+    border-radius: 5px;
 }

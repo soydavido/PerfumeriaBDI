@@ -12,8 +12,8 @@ class App extends React.Component{
   constructor(props){
     super(props);
     this.state = {
-      inicio: "",
-      consulta: "1",
+      inicio: "1",
+      consulta: "",
       evaluacion: "",
       recomendador: ""
     }
@@ -52,6 +52,16 @@ class App extends React.Component{
     else{
       if (this.state.consulta){
         ReactDOM.render(<Consulta/>,document.getElementById("contenido"))
+      }
+      else{
+        if (this.state.evaluacion){
+          ReactDOM.render(<Evaluacion/>,document.getElementById("contenido"))
+        }
+        else{
+          if (this.state.recomendador){
+            ReactDOM.render(<Recomendador/>,document.getElementById("contenido"))
+          }
+        }
       }
     }
 
