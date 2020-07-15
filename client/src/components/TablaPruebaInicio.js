@@ -44,13 +44,7 @@ const ListTodos = () => {
         <th>Delete</th>
       </tr>
     </thead>
-    <tbody>
-      {/*<tr>
-        <td>John</td>
-        <td>Doe</td>
-        <td>john@example.com</td>
-      </tr>*/}
-      
+    <tbody> 
       {todos.map(todo => (
             <tr key={todo.id}>
               <td>{todo.descripcion}</td>
@@ -60,9 +54,7 @@ const ListTodos = () => {
                   onClick={() => deleteTodo(todo.id)}>Delete</button>
             </td>
             </tr>
-          ))}
-
-      
+          ))}   
     </tbody>
   </table>
     </Fragment>

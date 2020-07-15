@@ -1,5 +1,7 @@
 import React, { Fragment } from "react";
 import ReactDOM from 'react-dom';
+import "./style.css";
+import logo from "./images/LogoBlanco.png"
 import "./App.css"
 import Inicio from "./components/Inicio"
 import Evaluacion from "./components/Evaluacion"
@@ -7,16 +9,14 @@ import Consulta from "./components/Consulta"
 import Recomendador from "./components/Recomendador"
 import TablaPruebaInicio from "./components/TablaPruebaInicio"
 
-//Components
-import BarraMenu from "./components/BarraMenu"
 class App extends React.Component{
   constructor(props){
     super(props);
     this.state = {
-      inicio: "",
+      inicio: "1",
       consulta: "",
       evaluacion: "",
-      recomendador: "1"
+      recomendador: ""
     }
   }
   
@@ -38,7 +38,6 @@ class App extends React.Component{
         }
         if(event.target.value==4){
           this.setState({inicio:"",consulta:"",evaluacion:"",recomendador:"1"});
-          console.log("Render recomendador");
         }
       }
     }
@@ -71,7 +70,19 @@ class App extends React.Component{
 
     return(
       <div>
-        <BarraMenu/>
+        <nav class="sidebar">
+            <div class="sidebar-header">
+                <img src={logo} width="40" height="40"/>
+                <h3 className="text mt-3 ml-5">Adomatics</h3>
+                <ul>
+                    <button className="boton-barra-menu-inicio">Inicio</button>
+                    <button className="boton-barra-menu-consulta">Consulta</button>
+                    <button className="boton-barra-menu-evaluacion">Evaluacion</button>
+                    <button className="boton-barra-menu-recomendador">Recomendador</button>
+                    
+                </ul>
+            </div>  
+        </nav>
       </div>  
     )
   }

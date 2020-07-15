@@ -35,10 +35,10 @@ class Recomendador extends React.Component{
 
         return(
             <div class="body">
-            <h1>Soy el recomendador</h1>
-            <input name='descripcion' className="ml-5" onChange={this.myChangeHandler}></input>
-            <input name='estado' className="ml-5" onChange={this.myChangeHandler}></input>
-        </div>
+                <h1>Soy el recomendador</h1>
+                <input name='descripcion' className="ml-5" onChange={this.myChangeHandler}></input>
+                <input name='estado' className="ml-5" onChange={this.myChangeHandler}></input>
+            </div>
         )
     }
 
