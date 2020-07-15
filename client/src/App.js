@@ -13,10 +13,10 @@ class App extends React.Component{
   constructor(props){
     super(props);
     this.state = {
-      inicio: "1",
+      inicio: "",
       consulta: "",
       evaluacion: "",
-      recomendador: ""
+      recomendador: "1"
     }
   }
   
@@ -38,6 +38,7 @@ class App extends React.Component{
         }
         if(event.target.value==4){
           this.setState({inicio:"",consulta:"",evaluacion:"",recomendador:"1"});
+          console.log("Render recomendador");
         }
       }
     }
