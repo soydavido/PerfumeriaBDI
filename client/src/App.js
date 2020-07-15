@@ -5,6 +5,7 @@ import Inicio from "./components/Inicio"
 import Evaluacion from "./components/Evaluacion"
 import Consulta from "./components/Consulta"
 import Recomendador from "./components/Recomendador"
+import TablaPruebaInicio from "./components/TablaPruebaInicio"
 
 //Components
 import BarraMenu from "./components/BarraMenu"
@@ -70,7 +71,6 @@ class App extends React.Component{
     return(
       <div>
         <BarraMenu/>
-        {activo}
       </div>  
     )
   }

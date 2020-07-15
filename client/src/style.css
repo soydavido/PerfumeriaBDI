@@ -22,6 +22,47 @@
     color: #FFFFFF;
 }
 
+.boton-barra-menu-inicio{
+    position: absolute;
+    top: 100px;
+    width: 182px;
+    height: 35px;
+    background: #ff7d31;
+    backdrop-filter: blur(4px);
+    border-radius: 5px;
+    border: 0px solid rgba(0,0,0,0.5)
+}
+.boton-barra-menu-consulta{
+    position: absolute;
+    top: 160px;
+    width: 182px;
+    height: 35px;
+    background: #ff7d31;
+    backdrop-filter: blur(4px);
+    border-radius: 5px;
+    border: 0px solid rgba(0,0,0,0.5)
+}
+.boton-barra-menu-evaluacion{
+    position: absolute;
+    top: 220px;
+    width: 182px;
+    height: 35px;
+    background: #ff7d31;
+    backdrop-filter: blur(4px);
+    border-radius: 5px;
+    border: 0px solid rgba(0,0,0,0.5)
+}
+.boton-barra-menu-recomendador{
+    position: absolute;
+    top: 280px;
+    width: 182px;
+    height: 35px;
+    background: #ff7d31;
+    backdrop-filter: blur(4px);
+    border-radius: 5px;
+    border: 0px solid rgba(0,0,0,0.5)
+}
+
 .sidebar-list{
     padding-top:100px;
 }
