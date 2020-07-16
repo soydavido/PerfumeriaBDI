@@ -26,8 +26,8 @@ app.post("/prueba", async(req,res) => {
     }
 })
 
-//get
 //todos
+
 app.get("/prueba/", async(req,res) =>{
     try {
         console.log(req.params);

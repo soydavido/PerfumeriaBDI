@@ -13,7 +13,6 @@
     position: absolute;
     width: 120;
     height: 28px;
-
     font-family: Roboto;
     font-style: normal;
     font-weight: normal;
@@ -114,3 +113,4 @@
     backdrop-filter: blur(4px);
     border-radius: 5px;
 }
+
