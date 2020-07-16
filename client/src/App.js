@@ -13,10 +13,10 @@ class App extends React.Component{
   constructor(props){
     super(props);
     this.state = {
-      inicio: "",
+      inicio: "1",
       consulta: "",
       evaluacion: "",
-      recomendador: "1"
+      recomendador: ""
     }
   }
   

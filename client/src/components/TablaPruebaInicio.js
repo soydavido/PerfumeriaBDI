@@ -1,11 +1,30 @@
 import React, {Fragment, useEffect, useState} from "react"
 //import EditTodo from "./EditTodo";
 
+
+
 const ListTodos = () => {
+    
+  
+// 
+const EditTodo = async id => {
+try {
+   const body = {descripcion};
+   const response = await fetch (`http://localhost:5000/prueba/${id}`,{
+       method: "PUT",
+       headers: {"Content-Type": "application/json"},
+       body: JSON.stringify(body)
+
+   });
+  window.location="/";     
+} catch (err) {
+   console.error(err.message); 
+}}
+
 
     const deleteTodo = async id => {
         try {
-            const deleteTodo = await fetch(`http://localhost:5000/todos/${id}`, {
+            const deleteTodo = await fetch(`http://localhost:5000/prueba/${id}`, {
             method: "DELETE"});
             console.log(deleteTodo);
             setTodos(todos.filter(todo => todo.id !== id));
@@ -50,11 +69,14 @@ const ListTodos = () => {
         <td>Doe</td>
         <td>john@example.com</td>
       </tr>*/}
+
+
+
       
       {todos.map(todo => (
             <tr key={todo.id}>
               <td>{todo.descripcion}</td>
-            {/*  <td><EditTodo todo= {todo}/></td>  */}
+           {/*    <td><EditTodo todo= {todo}/> </td> */}
               <td>
                   <button className="btn btn-danger" 
                   onClick={() => deleteTodo(todo.id)}>Delete</button>
