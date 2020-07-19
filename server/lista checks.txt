@@ -1,0 +1,30 @@
+add_perfumistas
+-perfu_genero ('m', 'f') (masculino, femenino)
+
+add_condiciones_envio
+-con_env_tipo_transporte ('t', 'm', 'a') (terrestre, maritimo, aereo)
+
+add_contratos
+-con_exclusividad ('s', 'n') (si, no)
+
+add_pedidos
+-ped_status ('s', 'c', 'p', 'e') (solicitado, cancelado, pagado, enviado)
+
+add_miembros_ifra
+-mie_ifr_tipo ('p', 's') (principal, secundario)
+
+add_perfumes
+-per_edad_dirigida ('i', 'j', 'a', 'am', 'at') (infantil, juvenil, adulto, adulto mayor, atemporal)
+-per_genero ('m', 'f', 'u') (masculino, femenino, unisex)
+
+add_formulas_eval
+-for_eva_tipo ('i', 'a') (inicial, anual)
+
+add_esencias_perfumes
+-ese_per_tipo ('n', 's') (natural, sintetico)
+
+add_intensidades
+-int_nombre ('p', 'edp', 'edt', 'edc', 'eds') (perfume, eau de perfume, eau de toilette, eau de cologne, splash perfume)
+
+add_notas
+-not_tipo ('s', 'c', 'f') (salida, corazon, fondo)
