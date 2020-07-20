@@ -7,15 +7,14 @@ import Inicio from "./components/Inicio"
 import Evaluacion from "./components/Evaluacion"
 import Consulta from "./components/Consulta"
 import Recomendador from "./components/Recomendador"
-import TablaPruebaInicio from "./components/TablaPruebaInicio"
 
 class App extends React.Component{
   constructor(props){
     super(props);
     this.state = {
-      inicio: "1",
+      inicio: "",
       consulta: "",
-      evaluacion: "",
+      evaluacion: "1",
       recomendador: ""
     }
   }
@@ -23,20 +22,21 @@ class App extends React.Component{
   myChangeHandler = (event) =>{
     let nam = event.target.name;
     let val = event.target.value;
+    console.log(event.target.name);
     this.setState({[nam]: val});
     console.log(this.state);
-    if(event.target.value==1){
+    if(event.target.name=="inicio"){
       this.setState({inicio:"1",consulta:"",evaluacion:"",recomendador:""});
     }
     else{
-      if(event.target.value==2){
+      if(event.target.name=="consulta"){
         this.setState({inicio:"",consulta:"1",evaluacion:"",recomendador:""});
       }
       else{
-        if(event.target.value==3){
+        if(event.target.name=="evaluacion"){
           this.setState({inicio:"",consulta:"",evaluacion:"1",recomendador:""});
         }
-        if(event.target.value==4){
+        if(event.target.name=="recomendador"){
           this.setState({inicio:"",consulta:"",evaluacion:"",recomendador:"1"});
         }
       }
@@ -48,6 +48,7 @@ class App extends React.Component{
     console.log(this.state);
 
     if (this.state.inicio){
+      console.log("what");
       ReactDOM.render(<Inicio/>,document.getElementById("contenido"))
     }
     else{
@@ -75,10 +76,10 @@ class App extends React.Component{
                 <img src={logo} width="40" height="40"/>
                 <h3 className="text mt-3 ml-5">Adomatics</h3>
                 <ul>
-                    <button className="boton-barra-menu-inicio">Inicio</button>
-                    <button className="boton-barra-menu-consulta">Consulta</button>
-                    <button className="boton-barra-menu-evaluacion">Evaluacion</button>
-                    <button className="boton-barra-menu-recomendador">Recomendador</button>
+                    <button className="boton-barra-menu-inicio" name="inicio" onClick={this.myChangeHandler}>Inicio</button>
+                    <button className="boton-barra-menu-consulta" name="consulta" onClick={this.myChangeHandler}>Consulta</button>
+                    <button className="boton-barra-menu-evaluacion" name="evaluacion" onClick={this.myChangeHandler}>Evaluacion</button>
+                    <button className="boton-barra-menu-recomendador" name="recomendador" onClick={this.myChangeHandler}>Recomendador</button>
                     
                 </ul>
             </div>  
