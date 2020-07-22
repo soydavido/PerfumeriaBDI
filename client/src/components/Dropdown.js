@@ -1,5 +1,4 @@
 import React, { useState, Component } from 'react';
-import "../styles.scss"
 
 ////LA ESTRUCTURA QUE RECIBE ES SENCILLA, SOLO LEERA LAS COLUMNAS ID Y VALUE
 
@@ -21,7 +20,6 @@ class Dropdown extends React.Component{
 
   render(){
     const data=this.props.data;
-    console.log(this.state.activo);
     var dataList= data.map(objeto=>{
       return(
        <option key={objeto.id} >{objeto.value}</option>

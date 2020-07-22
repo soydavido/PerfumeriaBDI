@@ -119,3 +119,19 @@
     backdrop-filter: blur(4px);
     border-radius: 5px;
 }
+
+/* CSS EVALUACION*/
+
+.table-pers{
+ width: 1000px;
+}
+
+.table-borders{
+    border: 1px solid black;
+}
+
+.th, tr, td{
+        padding: 15px;
+        text-align: left;
+        border: 1px black
+}
