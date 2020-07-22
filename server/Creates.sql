@@ -5,7 +5,7 @@ create table add_paises (
 
 create table add_asociaciones_nacionales (
 	aso_nac_id serial primary key,
-	aso_nac_nombre varchar (50) unique not null,
+	aso_nac_nombre varchar (75) unique not null,
 	aso_nac_region varchar (10) not null,
 	aso_nac_id_pai int not null,
 	constraint aso_nac_fk_pai foreign key (aso_nac_id_pai) references add_paises (pai_id)
