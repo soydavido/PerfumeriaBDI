@@ -38,3 +38,11 @@ insert into add_productores (prod_nombre,prod_email,prod_pag_web,prod_direccion,
 insert into add_proveedores (prov_nombre,prov_email,prov_pag_web,prov_direccion,prov_id_aso_nac,prov_id_pai) values 
 ('Firmenich','info@firmenich.com','www.firmenich.com/','Rue de la Bergère 7, 1217 Meyrin, Suiza',3,15),
 ('Privi','info@privi.co.in','www.privi.com/','Privi House, A-71,TTC Industrial Area,Thane Belapur Road,Kopar Khairane,Navi Mumbai - 400 709, India',null,1);
+
+insert into add_telefonos (tel_cod_pais, tel_numero, tel_id_prod, tel_id_prov) values
+		('+41', '22 780 22 11', null, 1),
+		('+91', '22 33043500', null, 2),
+		('+91', '22 33043600', null, 2),
+		('+49', '(0)5531/90-0', 1, null),
+		('+34', '961 278 559', 2, null),
+		('+33','6 26 22 36 53', 3, null);
