@@ -1,6 +1,6 @@
 import "./../style.css";
 import Inicio from "./Inicio";
-import React,{ Fragment, useState } from "react";
+import React,{ Fragment, useState, useEffect } from "react";
 import Dropdown from "./Dropdown";
 import styles from "../style.css"
 import InputFuncional from "./InputFuncional";
@@ -100,17 +100,130 @@ class Evaluacion extends React.Component{
     myInputScoreCallback = (nombre,valor) => {
       this.setState({[nombre]: valor});
     }
-    validarPuntuajes = () => {
-      
+
+    handleSubmit =(event) => {
+      var variables=this.state.variables;
+      var extension=(variables).length;
+      var apto=true; 
+      if(this.state.variable_1>0){
+        if (this.state.variable_1<=this.state.variables[0].peso_total){
+          if(this.state.variable_2>0){
+            if (this.state.variable_2<=this.state.variables[1].peso_total){
+              if(this.state.variable_3>0){
+                if (this.state.variable_3<=this.state.variables[2].peso_total){
+                  if(this.state.variable_4>0){
+                    if (this.state.variable_4<=this.state.variables[3].peso_total){
+                      if(this.state.variable_5>0){
+                        if (this.state.variable_5<=this.state.variables[4].peso_total){
+                          if(this.state.variable_6>0){
+                            if (this.state.variable_6<=this.state.variables[5].peso_total){
+                              if(this.state.variable_7>0){
+                                if (this.state.variable_7<=this.state.variables[6].peso_total){
+                                  if(this.state.variable_8>0){
+                                    if (this.state.variable_8<=this.state.variables[7].peso_total){
+                                      if(this.state.variable_9>0){
+                                        if (this.state.variable_9<=this.state.variables[8].peso_total){
+                                          if(this.state.variable_10>0){
+                                            if (this.state.variable_10<=this.state.variables[9].peso_total){
+                                                
+                                            }
+                                            else{
+                                              apto=false;
+                                            }
+                                          }else{
+                                    
+                                          }
+                                    
+                                        }
+                                        else{
+                                          apto=false;
+                                        }
+                                      }else{
+                                
+                                      }
+                                
+                                    }
+                                    else{
+                                      apto=false;
+                                    }
+                                  }else{
+                            
+                                  }
+                            
+                                }
+                                else{
+                                  apto=false;
+                                }
+                              }else{
+                        
+                              }
+                        
+                            }
+                            else{
+                              apto=false;
+                            }
+                          }else{
+                    
+                          }
+                     
+                        }
+                        else{
+                          apto=false;
+                        }
+                      }else{
+                
+                      }
+                
+                    }
+                    else{
+                      apto=false;
+                    }
+                  }else{
+            
+                  }
+            
+                }
+                else{
+                  apto=false;
+                }
+              }else{
+        
+              }
+        
+            }
+            else{
+              apto=false;
+            }
+          }else{
+    
+          }
+    
+        }
+        else{
+          apto=false;
+        }
+      }else{
+
+      }
+
+      //SE CHEQUEA ANTES DEL FETCH
+
+      if(apto){
+        console.log("FELICIDADES");
+        apto=true;
+        //se registra
+      }
+      else{
+        alert("Verifique los campos");
+      }
     }
+  
 
     render(){
 
       //  console.log("Soy el activo ahora"+this.state.productor_activo);
-      console.log(this.state);
       var variables=this.state.variables;
       var extension=(this.state.variables).length;
-      console.log(extension);
       var variableList= variables.map(objeto=>{
         return(
           <tr key={objeto.id}>
@@ -122,7 +235,6 @@ class Evaluacion extends React.Component{
       })
 
         return(
-          <form>
             <div className="body">
                 <h1 className="mt-3 ml-3">Evaluacion de proveedores</h1>
             <div>
@@ -159,10 +271,9 @@ class Evaluacion extends React.Component{
                   })}
                   </tbody>
                 </table>
-                <button class="mt-3 ml-3">Enviar Evaluacion</button>
+                <button class="btn btn-warning mt-3 ml-3" onClick={this.handleSubmit}>Enviar Evaluacion</button>
             </div>
             </div>
-          </form>
         )
         console.log(this.state.productor_activo);
     }

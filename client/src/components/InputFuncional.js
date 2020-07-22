@@ -22,9 +22,8 @@ class InputFuncional extends React.Component{
     render(){
         const nom=this.props.papa;
         var nombreVariable= nom.concat(this.props.informacion.id);
-        console.log(this.props.informacion.peso_total);
         return(
-            <input type="number" name={nombreVariable} onChange={this.myChangeHandler} max={this.props.informacion.peso_total}></input>
+            <input type="number" name={nombreVariable} onChange={this.myChangeHandler} min="0" max={this.props.informacion.peso_total}></input>
         )
     }
 }
