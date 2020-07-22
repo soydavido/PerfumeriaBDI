@@ -5,7 +5,7 @@ create table add_paises (
 
 create table add_asociaciones_nacionales (
 	aso_nac_id serial primary key,
-	aso_nac_nombre varchar (30) unique not null,
+	aso_nac_nombre varchar (50) unique not null,
 	aso_nac_region varchar (10) not null,
 	aso_nac_id_pai int not null,
 	constraint aso_nac_fk_pai foreign key (aso_nac_id_pai) references add_paises (pai_id)
@@ -68,7 +68,6 @@ create table add_prod_pais (
 
 create table add_ingredientes_esencias (
 	ing_ese_ipc int primary key,
-	ing_ese_nombre varchar (30) not null,
 	ing_ese_id_prov int not null,
 	ing_ese_tscacas varchar (15),
 	ing_ese_territorio_olfativo varchar (15),
@@ -105,7 +104,7 @@ create table add_ingredientes_otros (
 create table add_telefonos (
 	tel_id serial primary key,
 	tel_cod_pais varchar (4) not null,
-	tel_numero varchar (10) not null,
+	tel_numero varchar (15) not null,
 	tel_id_prod int,
 	tel_id_prov int,
 	constraint tel_fk_prod foreign key (tel_id_prod) references add_productores (prod_id),
@@ -115,7 +114,7 @@ create table add_telefonos (
 create table add_condiciones_pago (
 	con_pag_id serial not null,
 	con_pag_id_prov int not null,
-	con_pag_descripcion varchar (30) not null,
+	con_pag_descripcion varchar (50) not null,
 	con_pag_tipo varchar (20) not null,
 	con_pag_cuotas int,
 	con_pag_porcentaje real,
@@ -280,7 +279,7 @@ create table add_presentaciones_ing (
 
 create table add_esencias_perfumes (
 	ese_per_id serial primary key,
-	ese_per_nombre varchar (20),
+	ese_per_nombre varchar (20) not null,
 	ese_per_tipo char not null,
 	ese_per_descripcion varchar (40),
 	constraint check_ese_per_tipo check (ese_per_tipo in ('n', 's'))
@@ -400,4 +399,12 @@ create table add_pal_cla_fam_olf (
 create table add_prohibidos (
 	pro_tscacas varchar (15) primary key,
 	pro_nombre varchar (30) not null
+);
+
+create table add_ing_ese_ese_per (
+	ing_ese_ese_per_id_ing_ese int,
+	ing_ese_ese_per_id_ese_per int,
+	constraint pk_ing_ese_ese_per primary key (ing_ese_ese_per_id_ing_ese, ing_ese_ese_per_id_ese_per),
+	constraint ing_ese_ese_per_fk_ing_ese foreign key (ing_ese_ese_per_id_ing_ese) references add_ingredientes_esencias (ing_ese_ipc),
+	constraint ing_ese_ese_per_fk_ese_per foreign key (ing_ese_ese_per_id_ese_per) references add_esencias_perfumes (ese_per_id)
 );

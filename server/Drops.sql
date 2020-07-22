@@ -1,3 +1,4 @@
+drop table add_ing_ese_ese_per cascade;
 drop table add_prohibidos cascade;
 drop table add_pal_cla_fam_olf cascade;
 drop table add_palabras_clave cascade;
