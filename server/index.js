@@ -28,18 +28,17 @@ app.post("/prueba", async(req,res) => {
 
 //todos
 
-app.get("/prueba/", async(req,res) =>{
+app.get("/productores/", async(req,res) =>{
     try {
         console.log(req.params);
-        const todo = await pool.query("SELECT * FROM public.prueba");
+        const todo = await pool.query("SELECT prod_id as id, prod_nombre as value FROM add_productores");
         res.json(todo.rows);
-        console.log("Todos");
     } catch (err) {
         console.log(err.message);
     }
 });
 //uno
-app.get("/prueba/:id", async(req,res) =>{
+app.get("/productores/:id", async(req,res) =>{
     try {
         const {id} = req.params;
         const todo = await pool.query("SELECT * FROM public.prueba WHERE id=$1",[id]);
