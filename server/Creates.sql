@@ -14,8 +14,8 @@ create table add_asociaciones_nacionales (
 create table add_proveedores (
 	prov_id serial primary key,
 	prov_nombre varchar (30) not null,
-	prov_email varchar (20) unique not null,
-	prov_pag_web varchar (20) unique not null,
+	prov_email varchar (30) unique not null,
+	prov_pag_web varchar (30) unique not null,
 	prov_direccion varchar (50) not null,
 	prov_id_pai int not null,
 	prov_id_aso_nac int,
@@ -51,8 +51,8 @@ create table add_condiciones_envio (
 create table add_productores (
 	prod_id serial primary key,
 	prod_nombre varchar (30) not null,
-	prod_email varchar (20) unique not null,
-	prod_pag_web varchar (20) unique not null,
+	prod_email varchar (30) unique not null,
+	prod_pag_web varchar (30) unique not null,
 	prod_direccion varchar (50) not null,
 	prod_id_aso_nac int,
 	constraint prod_fk_aso_nac foreign key (prod_id_aso_nac) references add_asociaciones_nacionales (aso_nac_id)
