@@ -45,10 +45,8 @@ class App extends React.Component{
 
   render(){
     let activo="";
-    console.log(this.state);
 
     if (this.state.inicio){
-      console.log("what");
       ReactDOM.render(<Inicio/>,document.getElementById("contenido"))
     }
     else{
@@ -66,8 +64,6 @@ class App extends React.Component{
         }
       }
     }
-
-
 
     return(
       <div>

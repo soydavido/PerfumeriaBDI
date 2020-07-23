@@ -37,6 +37,25 @@ app.get("/productores/", async(req,res) =>{
         console.log(err.message);
     }
 });
+
+app.get("/proveedores/", async(req,res) =>{
+    try {
+        console.log(req.params);
+        const todo = await pool.query("SELECT prov_id as id, prov_nombre as value FROM add_proveedores");
+        res.json(todo.rows);
+    } catch (err) {
+        console.log(err.message);
+    }
+});
+app.get("/proveedores/:nombreEmpresa", async(req,res) =>{
+    try {
+        console.log(req.params);
+        const todo = await pool.query("SELECT prov_id as id FROM add_proveedores where prov_nombre='nombreEmpresa'");
+        res.json(todo.rows);
+    } catch (err) {
+        console.log(err.message);
+    }
+});
 //uno
 app.get("/productores/:id", async(req,res) =>{
     try {

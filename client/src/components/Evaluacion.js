@@ -4,6 +4,7 @@ import React,{ Fragment, useState, useEffect } from "react";
 import Dropdown from "./Dropdown";
 import styles from "../style.css"
 import InputFuncional from "./InputFuncional";
+import axios from "axios";
 
 
 
@@ -16,6 +17,8 @@ class Evaluacion extends React.Component{
             productor_activo: "",
             evaluacion_activa: "",
             calificacion_total: "",
+            productores: [],
+            proveedores: [],
             variable_1:"", variable_2:"", variable_3:"", variable_4:"", variable_5:"",
             variable_6:"", variable_7:"", variable_8:"", variable_9:"", variable_10:"",
             tipo_eva:[
@@ -28,34 +31,6 @@ class Evaluacion extends React.Component{
                 value: "Anual"
               }
             ],
-            items : [
-                {
-                  id: 1,
-                  value: 'Pulp Fiction',
-                },
-                {
-                  id: 2,
-                  value: 'The Prestige',
-                },
-                {
-                  id: 3,
-                  value: 'Blade Runner 2049',
-                },
-              ],
-              items2 : [
-                {
-                  id: 1,
-                  value: 'Fiction',
-                },
-                {
-                  id: 2,
-                  value: 'Testige',
-                },
-                {
-                  id: 3,
-                  value: 'Blade 2049',
-                },
-              ],
               variables: [
                 { 
                   id: "1",
@@ -217,11 +192,37 @@ class Evaluacion extends React.Component{
         alert("Verifique los campos");
       }
     }
+
+    setStateAsync(state){
+      return new Promise(resolve =>{
+        this.setState(state,resolve);
+      });
+    }
+
+    async componentDidMount(){
+      var lista=[]
+      for( var i=1;i<4;i++){
+        if (this.state.productores.length){
+          if(this.state.proveedores.length){
   
+          }else{
+            const res= await fetch('http://localhost:5000/proveedores/')
+            const lista = await res.json();
+            await this.setStateAsync({proveedores: lista});
+          }
+        }
+        else{
+          const res= await fetch('http://localhost:5000/productores/')
+           const lista = await res.json();
+          await this.setStateAsync({productores: lista});
+        }
+      }  
+      
+    }
 
     render(){
 
-      //  console.log("Soy el activo ahora"+this.state.productor_activo);
+      console.log(this.state);
       var variables=this.state.variables;
       var extension=(this.state.variables).length;
       var variableList= variables.map(objeto=>{
@@ -232,19 +233,18 @@ class Evaluacion extends React.Component{
               <td>{objeto.peso_total}</td>
             </tr>
         )
-      })
-
+      });
         return(
             <div className="body">
                 <h1 className="mt-3 ml-3">Evaluacion de proveedores</h1>
             <div>
                 <tr>
                     <h4 className="mt-3 ml-3 mr-3">Nombre del productor</h4>
-                    <th><Dropdown data={this.state.items} nombre={"productor_activo"} callbackFromParent={this.myCallback}/></th>
+                    <th><Dropdown data={this.state.productores} nombre={"productor_activo"} callbackFromParent={this.myCallback}/></th>
                 </tr>
                 <tr>
                     <h4 className="mt-3 ml-3 mr-3">Nombre del proveedor</h4>
-                    <th><Dropdown data={this.state.items2} nombre={"proveedor_activo"} callbackFromParent={this.myCallback}/></th>
+                    <th><Dropdown data={this.state.proveedores} nombre={"proveedor_activo"} callbackFromParent={this.myCallback}/></th>
                 </tr>
                 <tr>
                     <h4 className="mt-3 ml-3 mr-3">Tipo de evaluacion</h4>

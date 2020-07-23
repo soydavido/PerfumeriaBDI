@@ -7,22 +7,30 @@ class Dropdown extends React.Component{
     super(props);
     this.state={
       items:"",
-      activo: this.props.data[0].value
+      activo: ""
     }
   }
 
   myChangeHandler = (event) =>{
         let nam = event.target.name;
         let val = event.target.value;
+        var idV="";
+        var data= this.props.data;
+        for(var i=0;i<data.length;i++){
+          var nombre=data[i].value;
+          if(nombre==val){
+            idV=data[i].id;
+          }
+        }
         this.setState({[nam]: val});
-        this.props.callbackFromParent(this.props.nombre,event.target.value);
+        this.props.callbackFromParent(this.props.nombre,idV);
     }
 
   render(){
     const data=this.props.data;
     var dataList= data.map(objeto=>{
       return(
-       <option key={objeto.id} >{objeto.value}</option>
+       <option key={objeto.id} >{objeto.id,objeto.value}</option>
       )
     })
     
