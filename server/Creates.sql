@@ -6,7 +6,7 @@ create table add_paises (
 create table add_asociaciones_nacionales (
 	aso_nac_id serial primary key,
 	aso_nac_nombre varchar (75) unique not null,
-	aso_nac_region varchar (10) not null,
+	aso_nac_region varchar (15) not null,
 	aso_nac_id_pai int not null,
 	constraint aso_nac_fk_pai foreign key (aso_nac_id_pai) references add_paises (pai_id)
 );
@@ -193,13 +193,13 @@ create table add_pedidos (
 create table add_miembros_ifra (
 	mie_ifr_id serial primary key,
 	mie_ifr_fecha_ini date not null,
-	mie_ifr_tipo char not null,
+	mie_ifr_tipo char(2) not null,
 	mie_ifr_fecha_fin date,
 	mie_ifr_id_prov int,
 	mie_ifr_id_prod int,
 	constraint mie_ifr_fk_prov foreign key (mie_ifr_id_prov) references add_proveedores (prov_id),
 	constraint mie_ifr_fk_prod foreign key (mie_ifr_id_prod) references add_productores (prod_id),
-	constraint check_mie_ifr_tipo check (mie_ifr_tipo in ('p', 's'))
+	constraint check_mie_ifr_tipo check (mie_ifr_tipo in ('r', 's', 'mn'))
 );
 
 create table add_perfumes (

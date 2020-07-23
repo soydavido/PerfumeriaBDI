@@ -11,7 +11,7 @@ add_pedidos
 -ped_status ('s', 'c', 'p', 'e') (solicitado, cancelado, pagado, enviado)
 
 add_miembros_ifra
--mie_ifr_tipo ('p', 's') (principal, secundario)
+-mie_ifr_tipo ('r', 's', 'mn') (regular, secundario, miembro nacional)
 
 add_perfumes
 -per_edad_dirigida ('i', 'j', 'a', 'am', 'at') (infantil, juvenil, adulto, adulto mayor, atemporal)
