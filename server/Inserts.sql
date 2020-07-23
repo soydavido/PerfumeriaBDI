@@ -65,3 +65,4 @@ insert into add_ing_ese_ese_per (ing_ese_ese_per_id_ing_ese, ing_ese_ese_per_id_
 insert into add_ingredientes_otros (ing_otr_nombre, ing_otr_tipo, ing_otr_ipc, ing_otr_tsacas, ing_otr_id_prov) values 
 		('phenylethanol nat', 'n', 972375, '60-12-8', 1),
 		('damascenone fab', 's', 937451, '23696-85-7', 1);
+--

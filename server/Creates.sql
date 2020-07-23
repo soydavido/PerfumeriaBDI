@@ -68,8 +68,6 @@ create table add_prod_pais (
 
 create table add_ingredientes_esencias (
 	ing_ese_ipc int primary key,
-	ing_ese_nombre varchar(15),
-	ing_ese_tipo varchar(15),
 	ing_ese_id_prov int not null,
 	ing_ese_tscacas varchar (15),
 	ing_ese_territorio_olfativo varchar (15),
@@ -411,3 +409,4 @@ create table add_ing_ese_ese_per (
 	constraint ing_ese_ese_per_fk_ing_ese foreign key (ing_ese_ese_per_id_ing_ese) references add_ingredientes_esencias (ing_ese_ipc),
 	constraint ing_ese_ese_per_fk_ese_per foreign key (ing_ese_ese_per_id_ese_per) references add_esencias_perfumes (ese_per_id)
 );
+--
