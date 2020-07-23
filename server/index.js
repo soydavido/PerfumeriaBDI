@@ -26,8 +26,7 @@ app.post("/prueba", async(req,res) => {
     }
 })
 
-//todos
-
+//Ventana de evaluacion
 app.get("/productores/", async(req,res) =>{
     try {
         console.log(req.params);
@@ -73,16 +72,18 @@ app.get("/formula/:id", async(req,res) =>{
         console.log(err.message);
     }
 });
-
-app.get("/proveedores/:nombreEmpresa", async(req,res) =>{
+app.post("/registroEvaluacion/", async(req,res) => {
+    const {descripcion} = req.body;
+    console.log(req.body);
     try {
-        console.log(req.params);
-        const todo = await pool.query("SELECT prov_id as id FROM add_proveedores where prov_nombre='nombreEmpresa'");
-        res.json(todo.rows);
+        const nuevaEvaluacion = await pool.query(
+           `insert into add_historicos_evluaciones (his_eva_fecha,his_eva_id_prod,his_eva_id_prov,his_eva_calificacion,his_eva_tipo) values (current_date,$1,$2,$3,'i')`,
+        [req.body.his_eva_id_prod,req.body.his_eva_id_prov,req.body.his_eva_calificacion]);
+        res.json(nuevaEvaluacion.rows[0]);
     } catch (err) {
-        console.log(err.message);
+        console.error(err.message);
     }
-});
+})
 //uno
 app.get("/productores/:id", async(req,res) =>{
     try {

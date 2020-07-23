@@ -57,11 +57,10 @@ class Evaluacion extends React.Component{
     }
     //Funcion para setear lo obtenido en las variables
     myInputScoreCallback = (name,valor) => {
-      this.setState({[name]: valor});
+      this.setState({[name]: parseInt(valor,10)});
     }
 
-    handleSubmit =(event) => {
-      console.log(this.state);
+    handleSubmit = async(event) => {
       var variables=this.state.variables;
       var extension=(variables).length;
       var apto=true; 
@@ -165,14 +164,25 @@ class Evaluacion extends React.Component{
       }else{
 
       }
+      var total_obtenido=this.state.variable_1+this.state.variable_2+this.state.variable_3+this.state.variable_4+this.state.variable_5+this.state.variable_6+this.state.variable_7+this.state.variable_8;
 
       //SE CHEQUEA ANTES DEL FETCH
 
       if(apto){
         console.log("FELICIDADES");
-        console.log(this.state.variable_1);
-        var total=parseInt(this.state.variable_1,10)+parseInt(this.state.variable_1,10);
-        console.log(total);
+        let estructura = {
+          his_eva_id_prod: parseInt(this.state.productor_activo),
+          his_eva_id_prov: parseInt(this.state.proveedor_activo),
+          his_eva_calificacion: total_obtenido,
+          his_eva_tipo: 'i'
+        };
+        const res= await fetch(`http://localhost:5000/registroEvaluacion/`,{
+          method: "POST",
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(estructura)
+        });
+            const lista = await res.json();
+            await this.setStateAsync({proveedores: lista});
       }
       else{
         alert("Verifique los campos");
@@ -311,6 +321,7 @@ class Evaluacion extends React.Component{
                   </tbody>
                 </table>
                 <button class="btn btn-warning mt-3 ml-3" onClick={this.handleSubmit}>Enviar Evaluacion</button>
+                <button class="btn btn-delete mt-3 ml-3">Cancelar</button>
             </div>
             </div>
         )
