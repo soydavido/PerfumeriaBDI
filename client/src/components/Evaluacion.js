@@ -19,8 +19,10 @@ class Evaluacion extends React.Component{
             calificacion_total: "",
             productores: [],
             proveedores: [],
-            variable_1:"", variable_2:"", variable_3:"", variable_4:"", variable_5:"",
-            variable_6:"", variable_7:"", variable_8:"", variable_9:"", variable_10:"",
+            formula: [],
+            variable_auxiliar:0,
+            variable_1:0, variable_2:0, variable_3:0, variable_4:0, variable_5:0,
+            variable_6:0, variable_7:0, variable_8:0, variable_9:0, variable_10:0,
             tipo_eva:[
               {
                 id: 1,
@@ -34,27 +36,9 @@ class Evaluacion extends React.Component{
               variables: [
                 { 
                   id: "1",
-                  nombre: "Flexibilidad",
-                  obtenido: "",
-                  peso_total: "20"
-                },
-                {
-                  id: "2",
-                  nombre: "Envios",
-                  obtenido: "",
-                  peso_total: "40"
-                },
-                {
-                  id: "3",
-                  nombre: "Puntualidad",
-                  obtenido: "",
-                  peso_total: "30"
-                },
-                {
-                  id: "4",
-                  nombre: "Capacidad",
-                  obtenido: "",
-                  peso_total: "10"
+                  nombre: " ",
+                  obtenido: " ",
+                  peso_total: " "
                 }
               ]
         
@@ -72,11 +56,12 @@ class Evaluacion extends React.Component{
       this.setState({[name]: dataFromChild});
     }
     //Funcion para setear lo obtenido en las variables
-    myInputScoreCallback = (nombre,valor) => {
-      this.setState({[nombre]: valor});
+    myInputScoreCallback = (name,valor) => {
+      this.setState({[name]: valor});
     }
 
     handleSubmit =(event) => {
+      console.log(this.state);
       var variables=this.state.variables;
       var extension=(variables).length;
       var apto=true; 
@@ -185,8 +170,9 @@ class Evaluacion extends React.Component{
 
       if(apto){
         console.log("FELICIDADES");
-        apto=true;
-        //se registra
+        console.log(this.state.variable_1);
+        var total=parseInt(this.state.variable_1,10)+parseInt(this.state.variable_1,10);
+        console.log(total);
       }
       else{
         alert("Verifique los campos");
@@ -206,10 +192,10 @@ class Evaluacion extends React.Component{
           if(this.state.proveedores.length){
   
           }else{
-            const res= await fetch('http://localhost:5000/proveedores/')
+            const res= await fetch(`http://localhost:5000/proveedores/${this.state.productor_activo}`);
             const lista = await res.json();
             await this.setStateAsync({proveedores: lista});
-          }
+          } 
         }
         else{
           const res= await fetch('http://localhost:5000/productores/')
@@ -220,9 +206,61 @@ class Evaluacion extends React.Component{
       
     }
 
-    render(){
+    async componentDidUpdate(){
+      if((this.state.proveedor_activo=="")&&(this.state.productor_activo!=="")){
+        const res= await fetch(`http://localhost:5000/proveedores/${this.state.productor_activo}`);
+        const lista = await res.json();
+        await this.setStateAsync({proveedores: lista});
+      }
+      if((this.state.proveedor_activo!=="")&&(this.state.productor_activo!=="")&&(this.state.formula.length===0)){
+        const res= await fetch(`http://localhost:5000/formula/${this.state.productor_activo}`);
+        const lista = await res.json();
+        console.log(this.state.variables);
+        var i=lista.length;
+        var cont=0;
+        if(cont<i){
+          cont++;
+          lista[0].id=cont;
+          if(cont<i){
+            cont++;
+            lista[1].id=cont;
+          }
+          if(cont<i){
+            cont++;
+            lista[2].id=cont;
+          }
+          if(cont<i){
+            cont++;
+            lista[3].id=cont;
+          }
+          if(cont<i){
+            cont++;
+            lista[4].id=cont;
+          }
+          if(cont<i){
+            cont++;
+            lista[5].id=cont;
+          }
+        }
+        await this.setStateAsync({variables: lista});
+        await this.setStateAsync({formula: lista});
+      }
+    }
 
+    async asignarFiltro(){
+      if(this.state.proveedores.length){
+  
+      }else{
+        console.log(this.state.productor_activo);
+        const res= await fetch(`http://localhost:5000/proveedores/${this.state.productor_activo}`);
+        const lista = await res.json();
+        await this.setStateAsync({proveedores: lista});
+      }
+    }
+
+    render(){
       console.log(this.state);
+      this.asignarFiltro();
       var variables=this.state.variables;
       var extension=(this.state.variables).length;
       var variableList= variables.map(objeto=>{
@@ -261,6 +299,7 @@ class Evaluacion extends React.Component{
                 </thead>
                 <tbody>
                   {variables.map(objeto=>{ 
+                    this.state.i=this.state.i+1;
                     return(
                     <tr key={objeto.id} class="table-borders">
                       <td>{objeto.nombre}</td>

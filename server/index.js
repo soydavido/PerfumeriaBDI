@@ -41,12 +41,39 @@ app.get("/productores/", async(req,res) =>{
 app.get("/proveedores/", async(req,res) =>{
     try {
         console.log(req.params);
-        const todo = await pool.query("SELECT prov_id as id, prov_nombre as value FROM add_proveedores");
+        const todo = await pool.query(
+            "SELECT prov_id as id, prov_nombre as value FROM add_proveedores");
         res.json(todo.rows);
     } catch (err) {
         console.log(err.message);
     }
 });
+app.get("/proveedores/:id", async(req,res) =>{
+    try {
+        console.log(req);
+        const {id} = req.params;
+        console.log(req.params.id);
+        const todo = await pool.query(
+            `select P.prov_id as id, P.prov_nombre as value from add_proveedores P,  add_prod_pais R, add_condiciones_envio C where P.prov_id = C.con_env_id_prov and C.con_env_id_pai = R.prod_pais_id_pai and R.prod_pais_id_prod = $1;`
+            ,[id]);
+        res.json(todo.rows);
+    } catch (err) {
+        console.log(err.message);
+    }
+});
+app.get("/formula/:id", async(req,res) =>{
+    try {
+        console.log(req.params);
+        const {id} = req.params;
+        const todo = await pool.query(
+            `select V.var_nombre as nombre, V.var_peso as peso_total from add_variables V, add_formulas_eval F where V.var_id_prod=$1 and F.for_eva_fecha=V.var_id_for_eva and V.var_id_prod=F.for_eva_fk_prod and F.for_eva_tipo='i'`,
+            [id]);
+        res.json(todo.rows);
+    } catch (err) {
+        console.log(err.message);
+    }
+});
+
 app.get("/proveedores/:nombreEmpresa", async(req,res) =>{
     try {
         console.log(req.params);
