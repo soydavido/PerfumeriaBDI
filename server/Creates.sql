@@ -232,22 +232,24 @@ create table add_pagos (
 	constraint pag_fk_prod foreign key (pag_id_prod) references add_productores (prod_id)
 );
 
-create table add_variables (
-	var_id serial primary key,
-	var_nombre varchar (20) not null
-);
-
 create table add_formulas_eval (
 	for_eva_fecha date not null,
-	for_eva_fk_var int not null,
 	for_eva_fk_prod int not null,
 	for_eva_tipo char not null,
-	for_eva_peso real not null,
 	for_eva_fechaf date,
-	constraint pk_for_eva primary key (for_eva_fecha, for_eva_fk_var, for_eva_fk_prod),
-	constraint for_eva_fk_var foreign key (for_eva_fk_var) references add_variables (var_id),
+	constraint pk_for_eva primary key (for_eva_fecha, for_eva_fk_prod),
 	constraint for_eva_fk_prod foreign key (for_eva_fk_prod) references add_productores (prod_id),
 	constraint check_for_eva_tipo check (for_eva_tipo in ('i', 'a'))
+);
+
+create table add_variables (
+	var_id serial not null,
+	var_id_for_eva date not null,
+	var_id_prod int not null,
+	var_nombre varchar (50) not null,
+	var_peso real not null,
+	constraint pk_var primary key (var_id, var_id_for_eva, var_id_prod),
+	constraint var_id_prod foreign key (var_id_for_eva, var_id_prod) references add_formulas_eval (for_eva_fecha, for_eva_fk_prod)
 );
 
 create table add_escalas (
@@ -399,7 +401,7 @@ create table add_pal_cla_fam_olf (
 
 create table add_prohibidos (
 	pro_tscacas varchar (15) primary key,
-	pro_nombre varchar (30) not null
+	pro_nombre varchar (50) not null
 );
 
 create table add_ing_ese_ese_per (

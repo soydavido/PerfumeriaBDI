@@ -52,6 +52,7 @@ insert into add_telefonos (tel_cod_pais, tel_numero, tel_id_prod, tel_id_prov) v
 insert into add_ingredientes_esencias (ing_ese_ipc, ing_ese_id_prov, ing_ese_tscacas, ing_ese_territorio_olfativo, ing_ese_descripcion_olfativa, ing_ese_parte_procesada, ing_ese_proceso, ing_ese_descripcion_visual, ing_ese_cosecha, ing_ese_einecs, ing_ese_solubilidad, ing_ese_punto_inflamabilidad, ing_ese_ipc_alt,ing_ese_duracion) values 
 		(969340, 1, '68917-05-5', 'naturaleza', 'tiene delicado y único afrutado floral facetas que recuerdan albaricoque seco y flores blancas con matiz coriáceo.', 'flores', 'Una extracción primaria con solvente volátil en fresco o rendimientos de biomasa seca a un concreto o resinoide. El Absoluto se obtiene mediante un segundo paso de purificación en el proceso.', 'naranja a marrón oscuro', '930 Kg de flores aproximadamente para producir 1 Kg de absoluto.','296-209-1','alcohol, aceite mineral','83°C', null, '24 meses'),
 		(10610004, 2, '24720-09-0', 'naturaleza', 'Nota frutal floral única y sofisticada con un delicado y natural carácter de rosa. Nota de manzana compleja, menta y grosella negra con matices de ciruela.', null, null, 'Incoloro a amarillo pálido', null, '246-430-4', 'soluble en etanol 95º en todas las proporciones', '101°C', null, '2 años');
+
 insert into add_origenes (ori_id_pai, ori_id_ing_ese) values 
 		(5,969340);
 		
@@ -66,4 +67,12 @@ insert into add_ing_ese_ese_per (ing_ese_ese_per_id_ing_ese, ing_ese_ese_per_id_
 insert into add_ingredientes_otros (ing_otr_nombre, ing_otr_tipo, ing_otr_ipc, ing_otr_tsacas, ing_otr_id_prov) values 
 		('phenylethanol nat', 'n', 972375, '60-12-8', 1),
 		('damascenone fab', 's', 937451, '23696-85-7', 1),
-		('pine oil-20', 's', 11250013, null, 1);
+		('pine oil-20', 's', 11250013, null, 2),
+		('dihydromyrcene Extra pure', 'n', 10320011, '2436-90-0', 2),
+		('hexyl cinnamic aldehyde', 's', 1000000031, '165184-98-5', 3),
+		('benzyl salicylate', 's',  1000000006, '118-58-1', 3),
+		('hamber', 'n',  1000000022,  '54464-57-2', 3);
+
+insert into add_prohibidos (pro_tscacas, pro_nombre) values
+		('118-58-1', 'benzyl salicylate'),
+		('54464-57-2', 'hamber');
