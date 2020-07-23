@@ -97,3 +97,18 @@ insert into add_miembros_ifra (mie_ifr_fecha_ini, mie_ifr_tipo, mie_ifr_fecha_fi
 		('1994-09-06', 'mn', '2015-07-12', null, 4),
 		('2003-06-20', 'mn', null, null, 5),
 		('1986-11-17', 'mn', null, 4, null);
+
+insert into add_condiciones_pago (con_pag_id_prov, con_pag_descripcion, con_pag_tipo, con_pag_cuotas, con_pag_porcentaje, con_pag_meses) values
+		(1, 'Pago completo previo al envio de mercancia', 'adelantado', 1, 100, null),
+		(1, 'Pago parcial previo al envio de mercancia', 'adelantado',1, 30, null),
+		(1, 'Pago parcial posterior a la entrega de la mercancia', 'aplazado', 3, 70, 3),
+		(2, 'Pago completo al recibir de mercancia', 'al contado', 1, 100, null),
+		(2, 'Pago inicial antes del envio', 'adelantado', 1, 40, null),
+		(2, 'Pagos posteriores al envio de mercancia', 'aplazado', 2, 60, 2),
+		(3, 'Pago unico luego de recibir la mercancia', 'aplazado', 1, 100, 1),
+		(3, 'Pago anticipado al envio', 'anticipado', 1, 20, null),
+		(3, 'Pagos posteriores a recibir la mercancia', 'aplazado', 4, 80, 4),
+		(4, 'Pago en cuotas mensuales luego de recibir la mercancia', 'aplazado', 3,100, 3),
+		(4, 'Pago completo al enviar la mercancia', 'al contado', 1, 100, null),
+		(4, 'Pago en cuotas al recibir la mercancia', 'aplazado', 5, 100, 5);
+
