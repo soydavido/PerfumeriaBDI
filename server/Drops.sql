@@ -40,3 +40,4 @@ drop table add_perfumistas;
 drop table add_proveedores cascade;
 drop table add_asociaciones_nacionales cascade;
 drop table add_paises cascade;
+--
