@@ -112,3 +112,26 @@ insert into add_condiciones_pago (con_pag_id_prov, con_pag_descripcion, con_pag_
 		(4, 'Pago completo al enviar la mercancia', 'al contado', 1, 100, null),
 		(4, 'Pago en cuotas al recibir la mercancia', 'aplazado', 5, 100, 5);
 
+insert into add_formulas_eval (for_eva_fecha,for_eva_fk_prod,for_eva_tipo) values 
+('2020-07-23',1,'i'),
+('2020-07-23',2,'i');
+
+insert into add_variables (var_id_for_eva,var_id_prod,var_nombre,var_peso) values 
+('2020-07-23',1,'Ubicacion geografica',20),
+('2020-07-23',1,'Costos',40), 
+('2020-07-23',1,'Alternativas de envios',20),
+('2020-07-23',1,'Alternativas de pagos',20),
+('2020-07-23',2,'Costos',40), 
+('2020-07-23',2,'Alternativas de envios',30),
+('2020-07-23',2,'Alternativas de pagos',30);
+
+insert into add_condiciones_envio (con_env_id_pai,con_env_id_prov,con_env_descripcion,con_env_tipo_transporte,con_env_costo) values 
+(14,1,null,'a',2000),
+(11,1,null,'m',1200),
+(10,2,null,'a',1000);
+
+insert into add_prod_pais (prod_pais_id_pai,prod_pais_id_prod) values 
+(11,1),
+(14,3),
+(10,3);
+
