@@ -68,6 +68,8 @@ create table add_prod_pais (
 
 create table add_ingredientes_esencias (
 	ing_ese_ipc int primary key,
+	ing_ese_nombre varchar(15),
+	ing_ese_tipo varchar(15),
 	ing_ese_id_prov int not null,
 	ing_ese_tscacas varchar (15),
 	ing_ese_territorio_olfativo varchar (15),
