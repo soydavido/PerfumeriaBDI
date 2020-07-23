@@ -181,8 +181,7 @@ class Evaluacion extends React.Component{
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify(estructura)
         });
-            const lista = await res.json();
-            await this.setStateAsync({proveedores: lista});
+         
       }
       else{
         alert("Verifique los campos");
