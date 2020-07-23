@@ -39,7 +39,7 @@ create table add_condiciones_envio (
 	con_env_id serial not null,
 	con_env_id_pai int not null,
 	con_env_id_prov int not null,
-	con_env_descripcion varchar (100),
+	con_env_descripcion varchar (250),
 	con_env_tipo_transporte char,
 	con_env_costo numeric (7,2),
 	constraint pk_con_env primary key (con_env_id, con_env_id_pai, con_env_id_prov),
@@ -71,15 +71,16 @@ create table add_ingredientes_esencias (
 	ing_ese_id_prov int not null,
 	ing_ese_tscacas varchar (15),
 	ing_ese_territorio_olfativo varchar (15),
-	ing_ese_descripcion_olfativa varchar (50),
+	ing_ese_descripcion_olfativa varchar (250),
 	ing_ese_parte_procesada varchar (20),
-	ing_ese_descripcion_visual varchar (50),
-	ing_ese_cosecha varchar (30),
+	ing_ese_proceso varchar (300),
+	ing_ese_descripcion_visual varchar (250),
+	ing_ese_cosecha varchar (100),
 	ing_ese_einecs varchar (10),
-	ing_ese_solubilidad varchar (30),
+	ing_ese_solubilidad varchar (200),
 	ing_ese_punto_inflamabilidad varchar (5),
 	ing_ese_ipc_alt int,
-	ing_ese_duracion varchar (10),
+	ing_ese_duracion varchar (70),
 	constraint ing_ese_fk_prov foreign key (ing_ese_id_prov) references add_proveedores (prov_id)
 );
 
@@ -114,7 +115,7 @@ create table add_telefonos (
 create table add_condiciones_pago (
 	con_pag_id serial not null,
 	con_pag_id_prov int not null,
-	con_pag_descripcion varchar (50) not null,
+	con_pag_descripcion varchar (250) not null,
 	con_pag_tipo varchar (20) not null,
 	con_pag_cuotas int,
 	con_pag_porcentaje real,
@@ -279,9 +280,9 @@ create table add_presentaciones_ing (
 
 create table add_esencias_perfumes (
 	ese_per_id serial primary key,
-	ese_per_nombre varchar (20) not null,
+	ese_per_nombre varchar (50) not null,
 	ese_per_tipo char not null,
-	ese_per_descripcion varchar (40),
+	ese_per_descripcion varchar (250),
 	constraint check_ese_per_tipo check (ese_per_tipo in ('n', 's'))
 );
 
@@ -340,7 +341,7 @@ create table add_intensidades (
 	int_id_per int not null,
 	int_nombre char(3) not null,
 	int_concentracion real,
-	int_descripcion varchar (40),
+	int_descripcion varchar (250),
 	constraint pk_int primary key (int_id, int_id_per) ,
 	constraint int_fk_per foreign key (int_id_per) references add_perfumes (per_id),
 	constraint check_int_nombre check (int_nombre in ('p', 'edp', 'edt', 'edc', 'eds'))
