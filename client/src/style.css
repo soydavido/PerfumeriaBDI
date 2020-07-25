@@ -51,7 +51,7 @@
     border-radius: 5px;
     border: 0px solid rgba(0,0,0,0.5)
 }
-.boton-barra-menu-recomendador{
+.boton-barra-menu-compras{
     position: absolute;
     top: 280px;
     width: 182px;
@@ -61,7 +61,26 @@
     border-radius: 5px;
     border: 0px solid rgba(0,0,0,0.5)
 }
-
+.boton-barra-menu-recomendador{
+    position: absolute;
+    top: 340px;
+    width: 182px;
+    height: 35px;
+    background: #ff7d31;
+    backdrop-filter: blur(4px);
+    border-radius: 5px;
+    border: 0px solid rgba(0,0,0,0.5)
+}
+.boton-barra-menu-contrato{
+    position: absolute;
+    top: 400px;
+    width: 182px;
+    height: 35px;
+    background: #ff7d31;
+    backdrop-filter: blur(4px);
+    border-radius: 5px;
+    border: 0px solid rgba(0,0,0,0.5)
+}
 .sidebar-list{
     padding-top:100px;
 }
@@ -134,4 +153,36 @@
         padding: 15px;
         text-align: left;
         border: 1px black
+}
+
+/* CSS CONTRATO*/
+
+.boton-seleccion-contrato{
+    width: 150px;
+    height: 30px;
+    background: #ffc831;
+    backdrop-filter: blur(4px);
+    border-radius: 5px;
+    border: 0px solid rgba(0,0,0,0.5);
+    margin-left: 3em;
+}
+
+.lista-ingredientes{
+    background: #9e9e9e
+}
+
+/* CSS COMPRA*/
+.input-cantidad{
+    width: 80px;
+    height: 28px;
+    backdrop-filter: blur(4px);
+    border-radius: 5px;
+    border: 1px solid rgba(0,0,0,0.5);
+    margin-left: 15px;
+}
+.dropdown-general{
+    backdrop-filter: blur(4px);
+    border-radius: 5px;
+    border: 1px solid rgba(0,0,0,0.5);
+    margin-left: 15px;
 }

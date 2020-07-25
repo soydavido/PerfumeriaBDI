@@ -1,4 +1,5 @@
 import React, { useState, Component } from 'react';
+import style from '../style.css';
 
 ////LA ESTRUCTURA QUE RECIBE ES SENCILLA, SOLO LEERA LAS COLUMNAS ID Y VALUE
 
@@ -36,7 +37,7 @@ class Dropdown extends React.Component{
     
     return(
       <div>
-        <select name="activo"  onClick={this.myChangeHandler}>
+        <select name="activo"  class="dropdown-general" onClick={this.myChangeHandler}>
           {dataList}
         </select>
       </div>

@@ -7,6 +7,8 @@ import Inicio from "./components/Inicio"
 import Evaluacion from "./components/Evaluacion"
 import Consulta from "./components/Consulta"
 import Recomendador from "./components/Recomendador"
+import Contrato from "./components/Contrato"
+import Compras from "./components/Compras"
 
 class App extends React.Component{
   constructor(props){
@@ -14,8 +16,10 @@ class App extends React.Component{
     this.state = {
       inicio: "",
       consulta: "",
-      evaluacion: "1",
-      recomendador: ""
+      evaluacion: "",
+      recomendador: "",
+      contrato: "",
+      compra: "1"
     }
   }
   
@@ -26,24 +30,37 @@ class App extends React.Component{
     this.setState({[nam]: val});
     console.log(this.state);
     if(event.target.name=="inicio"){
-      this.setState({inicio:"1",consulta:"",evaluacion:"",recomendador:""});
+      this.setState({inicio:"1",consulta:"",evaluacion:"",recomendador:"",compra:"",contrato:""});
     }
     else{
       if(event.target.name=="consulta"){
-        this.setState({inicio:"",consulta:"1",evaluacion:"",recomendador:""});
+        this.setState({inicio:"",consulta:"1",evaluacion:"",recomendador:"",compra:"",contrato:""});
       }
       else{
         if(event.target.name=="evaluacion"){
-          this.setState({inicio:"",consulta:"",evaluacion:"1",recomendador:""});
+          this.setState({inicio:"",consulta:"",evaluacion:"1",recomendador:"",compra:"",contrato:""});
         }
-        if(event.target.name=="recomendador"){
-          this.setState({inicio:"",consulta:"",evaluacion:"",recomendador:"1"});
+        else{
+          if(event.target.name=="recomendador"){
+            this.setState({inicio:"",consulta:"",evaluacion:"",recomendador:"1",compra:"",contrato:""});
+          }
+          else{
+            if(event.target.name=="compra"){
+              this.setState({inicio:"",consulta:"",evaluacion:"",recomendador:"",compra:"1",contrato:""});
+            }
+            else{
+              if(event.target.name=="contrato"){
+                this.setState({inicio:"",consulta:"",evaluacion:"",recomendador:"",compra:"",contrato:"1"});
+              }
+            }
+          }
         }
       }
     }
 }
 
   render(){
+    console.log(this.state);
     let activo="";
 
     if (this.state.inicio){
@@ -61,10 +78,19 @@ class App extends React.Component{
           if (this.state.recomendador){
             ReactDOM.render(<Recomendador/>,document.getElementById("contenido"))
           }
+          else{
+            if(this.state.contrato){
+              ReactDOM.render(<Contrato/>,document.getElementById("contenido"));
+            }
+            else{
+              if(this.state.compra){
+                ReactDOM.render(<Compras/>,document.getElementById("contenido"));
+              }
+            }
+          }
         }
       }
     }
-
     return(
       <div>
         <nav class="sidebar">
@@ -75,8 +101,9 @@ class App extends React.Component{
                     <button className="boton-barra-menu-inicio" name="inicio" onClick={this.myChangeHandler}>Inicio</button>
                     <button className="boton-barra-menu-consulta" name="consulta" onClick={this.myChangeHandler}>Consulta</button>
                     <button className="boton-barra-menu-evaluacion" name="evaluacion" onClick={this.myChangeHandler}>Evaluacion</button>
+                    <button className="boton-barra-menu-compras" name="compra" onClick={this.myChangeHandler}>Compras</button>
                     <button className="boton-barra-menu-recomendador" name="recomendador" onClick={this.myChangeHandler}>Recomendador</button>
-                    
+                    <button className="boton-barra-menu-contrato" name="contrato" onClick={this.myChangeHandler}>Contrato</button>
                 </ul>
             </div>  
         </nav>

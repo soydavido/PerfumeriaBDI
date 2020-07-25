@@ -181,7 +181,7 @@ class Evaluacion extends React.Component{
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify(estructura)
         });
-         
+         console.log(res);
       }
       else{
         alert("Verifique los campos");

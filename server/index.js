@@ -82,6 +82,7 @@ app.post("/registroEvaluacion/", async(req,res) => {
         res.json(nuevaEvaluacion.rows[0]);
     } catch (err) {
         console.error(err.message);
+        res=err;
     }
 })
 //uno
