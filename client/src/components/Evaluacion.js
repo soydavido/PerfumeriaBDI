@@ -204,6 +204,7 @@ class Evaluacion extends React.Component{
             const res= await fetch(`http://localhost:5000/proveedores/${this.state.productor_activo}`);
             const lista = await res.json();
             await this.setStateAsync({proveedores: lista});
+            console.log("ENTRE");
           } 
         }
         else{

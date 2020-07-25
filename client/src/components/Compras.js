@@ -1,4 +1,4 @@
-import React from 'react';
+import React,{ Fragment, useState, useEffect } from "react";
 import styles from '../style.css';
 import Dropdown from './Dropdown.js'
 import InputFuncional from './InputFuncional';
@@ -7,6 +7,18 @@ class Compras extends React.Component{
     constructor(props){
         super(props);
         this.state= {
+            proveedor_activo: 0,
+            productor_activo: 0,
+            tipo_activo: "",
+            contrato: 0,
+            cantidad: 0,
+            ingredientes: [
+                {
+                id:0,
+                nombre: "",
+                costo: 0
+                }
+            ],
             tipo:[
                 {
                   id: 1,
@@ -30,11 +42,8 @@ class Compras extends React.Component{
                 nombre: "",
                 cantidad: 0,
                 total: 0
-               }],
-            proveedor_activo: "",
-            productor_activo: "",
-            tipo_activo: "",
-            cantidad: 0
+               }]
+            
         }
     }
 
@@ -47,6 +56,31 @@ class Compras extends React.Component{
         let val = event.target.value;
         this.setState({[nam]: val});
     }
+
+    async componentDidMount(){
+        var lista=[];
+          if (this.state.productores.length){
+            const res= await fetch('http://localhost:5000/productores/')
+            const lista = await res.json();
+           await this.setStateAsync({productores: lista});
+           console.log("Listo");
+          } 
+        
+      }
+
+      async componentDidUpdate(){
+        if((this.state.proveedor_activo=="")&&(this.state.productor_activo!=="")){
+          const res= await fetch(`http://localhost:5000/proveedores/${this.state.productor_activo}`);
+          const lista = await res.json();
+          await this.setStateAsync({proveedores: lista});
+        }
+      }
+
+      setStateAsync(state){
+        return new Promise(resolve =>{
+          this.setState(state,resolve);
+        });
+      }
 
     render(){
         console.log(this.state);
@@ -73,7 +107,7 @@ class Compras extends React.Component{
                 </tr>
                 <tr>
                     <h4 className="mt-3 ml-3 mr-3">Numero de contrato</h4>
-                    <th><label>#xxxxxxxxxx</label></th>
+                    <th><label className="ml-3">#xxxxxxxxxx</label></th>
                 </tr>
                 <tr>
                     <h4 className="mt-3 ml-3 mr-3">Condiciones de envio</h4>
@@ -110,8 +144,12 @@ class Compras extends React.Component{
                     </tr>
                     )
                   })}
+                  <tr>
+                      <label>Total</label>
+                  </tr>
                   </tbody>
                 </table>
+                <button class="boton-seleccion-contrato mt-3">Ordenar</button>
             </div>
         )
     }

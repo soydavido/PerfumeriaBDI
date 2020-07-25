@@ -49,7 +49,6 @@ app.get("/proveedores/", async(req,res) =>{
 });
 app.get("/proveedores/:id", async(req,res) =>{
     try {
-        console.log(req);
         const {id} = req.params;
         console.log(req.params.id);
         const todo = await pool.query(
