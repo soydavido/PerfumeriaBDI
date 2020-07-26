@@ -1,5 +1,6 @@
 import "./../style.css";
 import React,{ Fragment, useState } from "react";
+import Fondo from "../images/FondoRecomendador.jpg";
 
 
 class Recomendador extends React.Component{
@@ -34,10 +35,12 @@ class Recomendador extends React.Component{
         console.log(this.state);
 
         return(
-            <div class="body">
-                <h1>Soy el recomendador</h1>
-                <input name='descripcion' className="ml-5" onChange={this.myChangeHandler}></input>
-                <input name='estado' className="ml-5" onChange={this.myChangeHandler}></input>
+            <div class="body" >
+                <body  className="body-recomendador">
+                    <h1>Soy el recomendador</h1>
+                    <input name='descripcion' className="ml-5" onChange={this.myChangeHandler}></input>
+                    <input name='estado' className="ml-5" onChange={this.myChangeHandler}></input>
+                </body> 
             </div>
         )
     }

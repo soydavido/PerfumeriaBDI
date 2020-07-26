@@ -1,7 +1,7 @@
 .sidebar{
     position: absolute;
     width: 263px;
-    height: 1024px;
+    height: 950px;
     left: 0px;
     top: 0px;
     background: #ff7d31;
@@ -186,3 +186,18 @@
     border: 1px solid rgba(0,0,0,0.5);
     margin-left: 15px;
 }
+
+/* CSS RECOMENDADOR*/
+.body{
+    position: absolute;
+    left: 263px;
+}
+.body-recomendador{
+    background: url(images/FondoRecomendador.jpg) no-repeat center center fixed;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+    width: 1640px;
+    height: 950px;
+    }
