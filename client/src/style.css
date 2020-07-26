@@ -279,3 +279,12 @@
     border-radius: 5px;
     border: 1px solid rgba(0,0,0,0.5);
 }
+.fondo_lista{
+    position: absolute;
+    top:  420px;
+    left: 100px;
+    width: 1400px;
+    height: 500px;
+    background-color: #ff0000;
+    border-radius: 5px ;
+}

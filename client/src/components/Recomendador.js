@@ -115,15 +115,16 @@ class Recomendador extends React.Component{
                     </div>
                     <div className="dropdown6-recomendador">
                         <DropdownRecomendador data={this.state.familia} nombre={"productor_activo"} callbackFromParent={this.myCallback} />
-                    </div>
-                    
+                    </div> 
                     <div className="dropdown7-recomendador">
                         <DropdownRecomendador data={this.state.genero} nombre={"productor_activo"} callbackFromParent={this.myCallback} />
                     </div>
-                    
                     <div className="dropdown8-recomendador">
                         <DropdownRecomendador data={this.state.aroma} nombre={"productor_activo"} callbackFromParent={this.myCallback} />
                     </div>
+                    <table className="fondo-lista">
+                        <h5>Hello</h5>
+                    </table>
                 </div>
                 
             </div>
