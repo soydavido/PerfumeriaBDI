@@ -200,4 +200,11 @@
     background-size: cover;
     width: 1640px;
     height: 950px;
-    }
+}
+.dropdown1-recomendador{
+    position: absolute;
+    top: 100px;
+    left: 669px;
+    background-color: #acacac63;
+    backdrop-filter: blur(1px);
+}

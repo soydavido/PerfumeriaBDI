@@ -1,6 +1,7 @@
 import "./../style.css";
 import React,{ Fragment, useState } from "react";
 import Fondo from "../images/FondoRecomendador.jpg";
+import Dropdown from "./Dropdown";
 
 
 class Recomendador extends React.Component{
@@ -9,7 +10,14 @@ class Recomendador extends React.Component{
         super(props);
         this.state = {
             descripcion: "",
-            estado: ""
+            estado: "",
+            productores: [
+                {
+                id:0,
+                nombre: "",
+                costo: 0
+                }
+            ]
         }
     }
 
@@ -40,6 +48,10 @@ class Recomendador extends React.Component{
                     <h1>Soy el recomendador</h1>
                     <input name='descripcion' className="ml-5" onChange={this.myChangeHandler}></input>
                     <input name='estado' className="ml-5" onChange={this.myChangeHandler}></input>
+                    <div className="dropdown1-recomendador">
+                        <strong>Caracter</strong>
+                        <Dropdown data={this.state.productores} nombre={"productor_activo"} callbackFromParent={this.myCallback} />
+                    </div>
                 </body> 
             </div>
         )
