@@ -168,9 +168,14 @@ insert into add_familias_olfativas (fam_olf_nombre) values
 		('Verde'),
 		('Citrico'),
 		('Floral'),
+		('Frutal'),
 		('Aromatico'),
 		('Helecho'),
 		('Chipre'),
 		('Madera'),
 		('Oriental'),
 		('Otro');
+
+insert into add_fam_olf_ese_per (fam_olf_ese_per_id_fam_olf, fam_olf_ese_per_id_ese_per) values 
+		(3,1),
+		(4,1);
