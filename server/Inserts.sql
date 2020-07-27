@@ -162,7 +162,13 @@ insert into add_presentaciones_ing (pre_ing_volumen, pre_ing_precio, pre_ing_id_
 		(15, 182, 969340, null),
 		(30, 329, 969340, null),
 		(60, 601, 969340, null),
-		(120, 1104, 969340, null);
+		(120, 1104, 969340, null),
+		(2, 3.24, 10610004, null),
+		(15, 12.44, 10610004, null),
+		(30, 21.14, 10610004, null),
+		(80, 48.51, 10610004, null),
+		(120, 71.85, 10610004, null),
+		(240, 135.85, 10610004, null);
 
 insert into add_familias_olfativas (fam_olf_nombre) values
 		('Verde'),
@@ -178,4 +184,12 @@ insert into add_familias_olfativas (fam_olf_nombre) values
 
 insert into add_fam_olf_ese_per (fam_olf_ese_per_id_fam_olf, fam_olf_ese_per_id_ese_per) values 
 		(3,1),
-		(4,1);
+		(4,1),
+		(3,2),
+		(4,2);
+
+insert into add_fam_olf_ing_ese (fam_olf_ing_ese_id_ing_ese, fam_olf_ing_ese_id_fam_olf) values
+		(969340, 3),
+		(969340, 4),
+		(10610004, 3),
+		(10610004, 4);
