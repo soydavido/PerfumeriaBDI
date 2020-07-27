@@ -41,7 +41,7 @@ create table add_condiciones_envio (
 	con_env_id_prov int not null,
 	con_env_descripcion varchar (250),
 	con_env_tipo_transporte char,
-	con_env_costo numeric (7,2),
+	con_env_costo numeric (8,2),
 	constraint pk_con_env primary key (con_env_id, con_env_id_pai, con_env_id_prov),
 	constraint con_env_fk_pai foreign key (con_env_id_pai) references add_paises (pai_id),
 	constraint con_env_fk_prov foreign key (con_env_id_prov) references add_proveedores (prov_id),
@@ -273,7 +273,7 @@ create table add_componentes_extras (
 create table add_presentaciones_ing (
 	pre_ing_id serial primary key,
 	pre_ing_volumen int not null,
-	pre_ing_precio numeric(5,2) not null,
+	pre_ing_precio numeric(7,2) not null,
 	pre_ing_id_ing_ese int,
 	pre_ing_id_ing_otr int,
 	constraint pre_ing_fk_ing_ese foreign key (pre_ing_id_ing_ese) references add_ingredientes_esencias (ing_ese_ipc),
@@ -290,7 +290,7 @@ create table add_esencias_perfumes (
 
 create table add_familias_olfativas (
 	fam_olf_id serial primary key,
-	fam_olf_nombre varchar (20) not null,
+	fam_olf_nombre varchar (20) not null
 );
 
 create table add_fam_olf_ing_ese (
