@@ -291,8 +291,6 @@ create table add_esencias_perfumes (
 create table add_familias_olfativas (
 	fam_olf_id serial primary key,
 	fam_olf_nombre varchar (20) not null,
-	fam_olf_id_ese_per int,
-	constraint fam_olf_fk_ese_per foreign key (fam_olf_id_ese_per) references add_esencias_perfumes (ese_per_id)
 );
 
 create table add_fam_olf_ing_ese (
@@ -405,10 +403,17 @@ create table add_prohibidos (
 );
 
 create table add_ing_ese_ese_per (
-	ing_ese_ese_per_id_ing_ese int,
-	ing_ese_ese_per_id_ese_per int,
+	ing_ese_ese_per_id_ing_ese int not null,
+	ing_ese_ese_per_id_ese_per int not null,
 	constraint pk_ing_ese_ese_per primary key (ing_ese_ese_per_id_ing_ese, ing_ese_ese_per_id_ese_per),
 	constraint ing_ese_ese_per_fk_ing_ese foreign key (ing_ese_ese_per_id_ing_ese) references add_ingredientes_esencias (ing_ese_ipc),
 	constraint ing_ese_ese_per_fk_ese_per foreign key (ing_ese_ese_per_id_ese_per) references add_esencias_perfumes (ese_per_id)
 );
---
+
+create table add_fam_olf_ese_per (
+	fam_olf_ese_per_id_fam_olf int not null,
+	fam_olf_ese_per_id_ese_per int not null,
+	constraint pk_fam_olf_ese_per primary key (fam_olf_ese_per_id_fam_olf, fam_olf_ese_per_id_ese_per),
+	constraint fam_olf_ese_per_fk_fam_olf foreign key (fam_olf_ese_per_id_fam_olf) references add_familias_olfativas (fam_olf_id),
+	constraint fam_olf_ese_per_fk_ese_per foreign key (fam_olf_ese_per_id_ese_per) references add_esencias_perfumes (ese_per_id)
+);

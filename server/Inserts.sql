@@ -154,3 +154,12 @@ insert into add_prod_pais (prod_pais_id_pai,prod_pais_id_prod) values
 (10,4),
 (24,4),
 (24,5);
+
+insert into add_presentaciones_ing (pre_ing_volumen, pre_ing_precio, pre_ing_id_ing_ese, pre_ing_id_ing_otr) values
+		(1, 17, 1, null),
+		(2, 34, 1, null),
+		(5, 73, 1, null),
+		(15, 182, 1, null),
+		(30, 329, 1, null),
+		(60, 601, 1, null),
+		(120, 1104, 1, null);
