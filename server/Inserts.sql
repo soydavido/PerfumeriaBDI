@@ -114,7 +114,10 @@ insert into add_condiciones_pago (con_pag_id_prov, con_pag_descripcion, con_pag_
 
 insert into add_formulas_eval (for_eva_fecha,for_eva_fk_prod,for_eva_tipo) values 
 ('2020-07-23',1,'i'),
-('2020-07-23',2,'i');
+('2020-07-23',2,'i'),
+('2020-07-23',3,'i'),
+('2020-07-23',4,'i'),
+('2020-07-23',5,'i');
 
 insert into add_variables (var_id_for_eva,var_id_prod,var_nombre,var_peso) values 
 ('2020-07-23',1,'Ubicacion geografica',20),
@@ -123,15 +126,31 @@ insert into add_variables (var_id_for_eva,var_id_prod,var_nombre,var_peso) value
 ('2020-07-23',1,'Alternativas de pagos',20),
 ('2020-07-23',2,'Costos',40), 
 ('2020-07-23',2,'Alternativas de envios',30),
-('2020-07-23',2,'Alternativas de pagos',30);
+('2020-07-23',2,'Alternativas de pagos',30),
+('2020-07-23',3,'Alternativas de envios',50),
+('2020-07-23',3,'Costo',50),
+('2020-07-23',4,'Alternativas de pagos',30),
+('2020-07-23',4,'Alternativas de envios',30),
+('2020-07-23',4,'Costo',40),
+('2020-07-23',5,'Ubicacion geografica',60),
+('2020-07-23',5,'Costo',40);;
+
 
 insert into add_condiciones_envio (con_env_id_pai,con_env_id_prov,con_env_descripcion,con_env_tipo_transporte,con_env_costo) values 
 (14,1,null,'a',2000),
 (11,1,null,'m',1200),
-(10,2,null,'a',1000);
+(10,2,null,'a',1000),
+(14,3,null,'t',1700),
+(24,3,null,'t',3000),
+(24,1,null,'m',2000);
 
 insert into add_prod_pais (prod_pais_id_pai,prod_pais_id_prod) values 
 (11,1),
+(11,2),
+(10,2),
 (14,3),
-(10,3);
-
+(10,3),
+(11,4),
+(10,4),
+(24,4),
+(24,5);
