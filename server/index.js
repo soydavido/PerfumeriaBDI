@@ -87,6 +87,32 @@ app.get("/proveedoresContratados/:id", async(req,res) =>{
     }
 });
 
+//COMPRAS
+app.get("/proveedoresContratados/:id", async(req,res) =>{
+    try {
+        const {id} = req.params;
+        console.log(id);
+        const todo = await pool.query(
+            `select C.con_numero as numero, C.con_id_prov as id, P.prov_nombre as value from add_contratos  C, add_proveedores P where C.con_id_prod=1 and P.prov_id=1;`,
+            [id]);
+        res.json(todo.rows);
+        console.log(res);
+    } catch (err) {
+        console.log(err.message);
+    }
+});
+app.get("/condicionesEnvio/:id", async(req,res) =>{
+    try {
+        const {id} = req.params;
+        const todo = await pool.query(
+            `select C.con_cond_env_id_con as idContrato, C.con_cond_env_id_cond_env as id, C.con_cond_env_id_prov as idProveedor, C.con_cond_env_id_pai as idPais, A.con_env_descripcion as value from add_con_cond_env C, add_condiciones_envio A where C.con_cond_env_id_prov=$1 and C.con_cond_env_id_cond_env= A.con_env_id`,
+            [id]);
+        res.json(todo.rows);
+    } catch (err) {
+        console.log(err.message);
+    }
+});
+
 //EVALUACION
 app.post("/registroEvaluacion/", async(req,res) => {
     const {descripcion} = req.body;

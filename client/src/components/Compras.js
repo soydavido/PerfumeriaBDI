@@ -22,6 +22,12 @@ class Compras extends React.Component{
                 costo: 0
                 }
             ],
+            envios:[
+              {
+                id:1,
+                value: 'Inicial'
+              }
+            ],
             tipo:[
                 {
                   id: 1,
@@ -79,7 +85,12 @@ class Compras extends React.Component{
             await this.setStateAsync({proveedores: lista});
       }
       else{
-        console.log(this.state);
+        if((this.state.contrato!==0)&&(this.state.condicion_envio==0)){
+          const res= await fetch(`http://localhost:5000/condicionesEnvio/${this.state.productor_activo}`);
+          const con_env = await res.json();
+          await this.setStateAsync({envios: con_env});
+          console.log(this.state);
+        }
       }
     }
 
@@ -117,7 +128,7 @@ class Compras extends React.Component{
                 </tr>
                 <tr>
                     <h4 className="mt-3 ml-3 mr-3">Condiciones de envio</h4>
-                    <th><Dropdown data={this.state.tipo} nombre={"condicion_envio"} callbackFromParent={this.myCallback}/></th>
+                    <th><Dropdown data={this.state.envios} nombre={"condicion_envio"} callbackFromParent={this.myCallback}/></th>
                 </tr>
                 <tr>
                     <h4 className="mt-3 ml-3 mr-3">Condiciones de pago</h4>
