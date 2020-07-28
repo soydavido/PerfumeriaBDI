@@ -31,18 +31,18 @@ insert into add_asociaciones_nacionales (aso_nac_nombre,aso_nac_region,aso_nac_i
 ('Prodarom','Europa',10),
 ('Fragrance Creators Association', 'Norte America', 24);
 
+insert into add_proveedores (prov_nombre,prov_email,prov_pag_web,prov_direccion,prov_id_aso_nac,prov_id_pai) values 
+('Firmenich','info@firmenich.com','www.firmenich.com/','Rue de la Bergère 7, 1217 Meyrin, Suiza',3,15),
+('Privi','info@privi.co.in','www.privi.com/','Privi House, A-71,TTC Industrial Area,Thane Belapur Road,Kopar Khairane,Navi Mumbai - 400 709, India',null,1),
+('Eternis','info@eternis.com','www.eternis.com/','1004 Peninsula Tower, Peninsula Corporate Park, G.K. Marg, Lower Parel, Mumbai 400 013 ',null,1),
+('Grau Aromatics', 'info@grau.biz', 'www.grau-aromatics.de/en/','Bismarckstr. 4, 73525 Schwäbisch Gmünd', 2, 11);
+
 insert into add_productores (prod_nombre,prod_email,prod_pag_web,prod_direccion,prod_id_aso_nac) values 
 ('Symrise','info@symrise.com','www.symrise.com/','Muhlenfeldstrasse 1, Holzminden, Lower Saxony 37603 DE',2),
 ('Perfumarte','info@perfumarte.com','www.perfumarte.com/','Pol. Industrial Picassent, Calle Cinco, nº 20.46220 Picassent (Valencia), España',1),
 ('Bellevue Parfums','info@bellevueparfums.com','www.bellevueparfums.com/','12/14 Rond-Point des Champs-Élysées Marcel-Dassault, 75008 Paris, France',4),
 ('Armaf', 'CS@armaf.co.in', 'www.armaf.co.in/', 'Bangalore', null),
 ('DonnaKaran DKNY', 'HELP@DONNAKARAN.COM', 'www.donnakaran.com/home.do', '550 Seventh Avenue, Manhattan, New York', 5);
-
-insert into add_proveedores (prov_nombre,prov_email,prov_pag_web,prov_direccion,prov_id_aso_nac,prov_id_pai) values 
-('Firmenich','info@firmenich.com','www.firmenich.com/','Rue de la Bergère 7, 1217 Meyrin, Suiza',3,15),
-('Privi','info@privi.co.in','www.privi.com/','Privi House, A-71,TTC Industrial Area,Thane Belapur Road,Kopar Khairane,Navi Mumbai - 400 709, India',null,1),
-('Eternis','info@eternis.com','www.eternis.com/','1004 Peninsula Tower, Peninsula Corporate Park, G.K. Marg, Lower Parel, Mumbai 400 013 ',null,1),
-('Grau Aromatics', 'info@grau.biz', 'www.grau-aromatics.de/en/','Bismarckstr. 4, 73525 Schwäbisch Gmünd', 2, 11);
 
 insert into add_telefonos (tel_cod_pais, tel_numero, tel_id_prod, tel_id_prov) values
 		('+41', '22 780 22 11', null, 1),
@@ -76,7 +76,7 @@ insert into add_ingredientes_otros (ing_otr_nombre, ing_otr_tipo, ing_otr_ipc, i
 		('damascenone fab', 's', 937451, '23696-85-7', 1),
 		('pine oil-20', 's', 11250013, null, 2),
 		('dihydromyrcene Extra pure', 'n', 10320011, '2436-90-0', 2),
-		('hexyl cinnamic aldehyde', 's', 1000000031, '165184-98-5', 3),
+		('hexyl cinnamic aldehyde', 's', 1000000031, '101-86-0', 3),
 		('benzyl salicylate', 's',  1000000006, '118-58-1', 3),
 		('hamber', 'n',  1000000022,  '54464-57-2', 3),
 		('benzyl valerate', 's', 502236, '10361-39-4', 4),
@@ -100,17 +100,13 @@ insert into add_miembros_ifra (mie_ifr_fecha_ini, mie_ifr_tipo, mie_ifr_fecha_fi
 
 insert into add_condiciones_pago (con_pag_id_prov, con_pag_descripcion, con_pag_tipo, con_pag_cuotas, con_pag_porcentaje, con_pag_meses) values
 		(1, 'Pago completo previo al envio de mercancia', 'adelantado', 1, 100, null),
-		(1, 'Pago parcial previo al envio de mercancia', 'adelantado',1, 30, null),
-		(1, 'Pago parcial posterior a la entrega de la mercancia', 'aplazado', 3, 70, 3),
+		(1, 'Pago parcial posterior a la entrega de la mercancia', 'aplazado', 3, 33, 3),
 		(2, 'Pago completo al recibir de mercancia', 'al contado', 1, 100, null),
-		(2, 'Pago inicial antes del envio', 'adelantado', 1, 40, null),
-		(2, 'Pagos posteriores al envio de mercancia', 'aplazado', 2, 60, 2),
+		(2, 'Pago antes del envio', 'adelantado', 1, 100, null),
 		(3, 'Pago unico luego de recibir la mercancia', 'aplazado', 1, 100, 1),
-		(3, 'Pago anticipado al envio', 'anticipado', 1, 20, null),
-		(3, 'Pagos posteriores a recibir la mercancia', 'aplazado', 4, 80, 4),
+		(3, 'Pagos posteriores a recibir la mercancia', 'aplazado', 4, 25, 4),
 		(4, 'Pago en cuotas mensuales luego de recibir la mercancia', 'aplazado', 3,100, 3),
-		(4, 'Pago completo al enviar la mercancia', 'al contado', 1, 100, null),
-		(4, 'Pago en cuotas al recibir la mercancia', 'aplazado', 5, 100, 5);
+		(4, 'Pago completo al enviar la mercancia', 'al contado', 1, 100, null);
 
 insert into add_formulas_eval (for_eva_fecha,for_eva_fk_prod,for_eva_tipo) values 
 ('2020-07-23',1,'i'),
