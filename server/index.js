@@ -39,7 +39,6 @@ app.get("/productores/", async(req,res) =>{
 
 app.get("/proveedores/", async(req,res) =>{
     try {
-        console.log(req.params);
         const todo = await pool.query(
             "SELECT prov_id as id, prov_nombre as value FROM add_proveedores");
         res.json(todo.rows);
@@ -59,18 +58,36 @@ app.get("/proveedores/:id", async(req,res) =>{
         console.log(err.message);
     }
 });
-app.get("/formula/:id", async(req,res) =>{
+
+//CONTRATOS
+
+app.get("/contratado/:id", async(req,res) =>{
     try {
-        console.log(req.params);
         const {id} = req.params;
-        const todo = await pool.query(
-            `select V.var_nombre as nombre, V.var_peso as peso_total from add_variables V, add_formulas_eval F where V.var_id_prod=$1 and F.for_eva_fecha=V.var_id_for_eva and V.var_id_prod=F.for_eva_fk_prod and F.for_eva_tipo='i'`,
-            [id]);
-        res.json(todo.rows);
+        console.log({id});
+        const nuevaEvaluacion = await pool.query(
+            `select C.con_numero as numero, C.con_id_prov as id, P.prov_nombre as value from add_contratos C, add_proveedores P where C.con_id_prod = $1 and C.con_id_prov = P.prov_id;`,
+         [id]);
+        res.json(nuevaEvaluacion.rows);
     } catch (err) {
         console.log(err.message);
     }
 });
+app.get("/proveedoresContratados/:id", async(req,res) =>{
+    try {
+        const {id} = req.params;
+        console.log(id);
+        const todo = await pool.query(
+            `select C.con_numero as numero, C.con_id_prov as id, P.prov_nombre as value from add_contratos  C, add_proveedores P where C.con_id_prod=1 and P.prov_id=1;`,
+            [id]);
+        res.json(todo.rows);
+        console.log(res);
+    } catch (err) {
+        console.log(err.message);
+    }
+});
+
+//EVALUACION
 app.post("/registroEvaluacion/", async(req,res) => {
     const {descripcion} = req.body;
     console.log(req.body);
@@ -83,7 +100,20 @@ app.post("/registroEvaluacion/", async(req,res) => {
         console.error(err.message);
         res=err;
     }
-})
+});
+
+app.get("/formula/:id", async(req,res) =>{
+    try {
+        console.log(req.params);
+        const {id} = req.params;
+        const todo = await pool.query(
+            `select V.var_nombre as nombre, V.var_peso as peso_total from add_variables V, add_formulas_eval F where V.var_id_prod=$1 and F.for_eva_fecha=V.var_id_for_eva and V.var_id_prod=F.for_eva_fk_prod and F.for_eva_tipo='i'`,
+            [id]);
+        res.json(todo.rows);
+    } catch (err) {
+        console.log(err.message);
+    }
+});
 //uno
 app.get("/productores/:id", async(req,res) =>{
     try {

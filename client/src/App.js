@@ -17,9 +17,9 @@ class App extends React.Component{
       inicio: "",
       consulta: "",
       evaluacion: "",
-      recomendador: "1",
+      recomendador: "",
       contrato: "",
-      compra: ""
+      compra: "1"
     }
   }
   
@@ -60,7 +60,6 @@ class App extends React.Component{
 }
 
   render(){
-    console.log(this.state);
     let activo="";
 
     if (this.state.inicio){

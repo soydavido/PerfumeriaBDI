@@ -1,6 +1,7 @@
 import React,{ Fragment, useState, useEffect } from "react";
 import styles from '../style.css';
 import Dropdown from './Dropdown.js'
+import DropdownCompra from './DropdownParaCompra';
 import InputFuncional from './InputFuncional';
 
 class Compras extends React.Component{
@@ -9,9 +10,11 @@ class Compras extends React.Component{
         this.state= {
             proveedor_activo: 0,
             productor_activo: 0,
-            tipo_activo: "",
             contrato: 0,
             cantidad: 0,
+            condicion_envio: 0,
+            condicion_pago: 0,
+            informacion: [],
             ingredientes: [
                 {
                 id:0,
@@ -30,12 +33,12 @@ class Compras extends React.Component{
                 }
               ],
               productores: [{
-                  id: 0,
-                  value: ""
+                  id: 1,
+                  value: 1
               }],
               proveedores: [{
-                id: 0,
-                value: ""
+                id: 1,
+                value: 0
                }],
                lista: [{
                 id: 0,
@@ -51,6 +54,7 @@ class Compras extends React.Component{
     myCallback = (name,dataFromChild) => {
         this.setState({[name]: dataFromChild});
     }
+
     myChangeHandler = (event) =>{
         let nam = event.target.name;
         let val = event.target.value;
@@ -60,21 +64,24 @@ class Compras extends React.Component{
     async componentDidMount(){
         var lista=[];
           if (this.state.productores.length){
-            const res= await fetch('http://localhost:5000/productores/')
+            const res= await fetch('http://localhost:5000/productores/');
             const lista = await res.json();
            await this.setStateAsync({productores: lista});
-           console.log("Listo");
           } 
         
       }
 
-      async componentDidUpdate(){
-        if((this.state.proveedor_activo=="")&&(this.state.productor_activo!=="")){
-          const res= await fetch(`http://localhost:5000/proveedores/${this.state.productor_activo}`);
-          const lista = await res.json();
-          await this.setStateAsync({proveedores: lista});
-        }
+      
+    async componentDidUpdate(){
+      if((this.state.proveedor_activo==0)&&(this.state.productor_activo!==0)&&(this.state.productores.length>1)){
+        const res= await fetch(`http://localhost:5000/contratado/${this.state.productor_activo}`);
+            const lista = await res.json();
+            await this.setStateAsync({proveedores: lista});
       }
+      else{
+        console.log(this.state);
+      }
+    }
 
       setStateAsync(state){
         return new Promise(resolve =>{
@@ -83,7 +90,6 @@ class Compras extends React.Component{
       }
 
     render(){
-        console.log(this.state);
         var variables=this.state.lista;
         var variableList= variables.map(objeto=>{
             return(
@@ -103,19 +109,19 @@ class Compras extends React.Component{
                 </tr>
                 <tr>
                     <h4 className="mt-3 ml-3 mr-3">Nombre del proveedor</h4>
-                    <th><Dropdown data={this.state.proveedores} nombre={"proveedor_activo"} callbackFromParent={this.myCallback}/></th>
+                    <th><DropdownCompra data={this.state.proveedores} nombre={"proveedor_activo"} callbackFromParent={this.myCallback}/></th>
                 </tr>
                 <tr>
                     <h4 className="mt-3 ml-3 mr-3">Numero de contrato</h4>
-                    <th><label className="ml-3">#xxxxxxxxxx</label></th>
+                    <th><label className="ml-3">#{this.state.contrato}</label></th>
                 </tr>
                 <tr>
                     <h4 className="mt-3 ml-3 mr-3">Condiciones de envio</h4>
-                    <th><Dropdown data={this.state.tipo} nombre={"tipo_activo"} callbackFromParent={this.myCallback}/></th>
+                    <th><Dropdown data={this.state.tipo} nombre={"condicion_envio"} callbackFromParent={this.myCallback}/></th>
                 </tr>
                 <tr>
                     <h4 className="mt-3 ml-3 mr-3">Condiciones de pago</h4>
-                    <th><Dropdown data={this.state.tipo} nombre={"tipo_activo"} callbackFromParent={this.myCallback}/></th>
+                    <th><Dropdown data={this.state.tipo} nombre={"condicion_pago"} callbackFromParent={this.myCallback}/></th>
                 </tr>
                 <tr>
                     <h4 className="mt-3 ml-3 mr-3">Ingredientes contratados</h4>

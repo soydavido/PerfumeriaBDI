@@ -3,7 +3,7 @@ import style from '../style.css';
 
 ////LA ESTRUCTURA QUE RECIBE ES SENCILLA, SOLO LEERA LAS COLUMNAS ID Y VALUE
 
-class Dropdown extends React.Component{
+class DropdownCompra extends React.Component{
   constructor(props){
     super(props);
     this.state={
@@ -16,15 +16,18 @@ class Dropdown extends React.Component{
         let nam = event.target.name;
         let val = event.target.value;
         var idV=0;
+        var idC=0;
         var data= this.props.data;
         for(var i=0;i<data.length;i++){
           var nombre=data[i].value;
           if(nombre==val){
             idV=data[i].id;
+            idC=data[i].numero;
           }
         }
         this.setState({[nam]: val});
         this.props.callbackFromParent(this.props.nombre,idV);
+        this.props.callbackFromParent('contrato',idC);
     }
 
   render(){
@@ -46,4 +49,4 @@ class Dropdown extends React.Component{
 
 }
 
-export default Dropdown;
+export default DropdownCompra;
