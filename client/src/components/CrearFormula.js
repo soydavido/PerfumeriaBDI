@@ -15,6 +15,7 @@ class CrearFormula extends React.Component{
             productor_activo: "",
             evaluacion_activa: "",
             calificacion_total: "",
+            i:0,
             productores: [],
             formula: [],
             variable_auxiliar:0,
@@ -32,21 +33,7 @@ class CrearFormula extends React.Component{
               }
             ],
               variables: [
-                { 
-                  id: "1",
-                  nombre: "Ubicacion Geografica",
-                  peso: " "
-                },
-                {
-                    id: "2",
-                    nombre: "Costos y alternativas de envíos",
-                    peso: " " 
-                },
-                {
-                    id: "3",
-                    nombre: "Alternativas y condiciones de pago",
-                    peso: " "  
-                }
+                
               ]
         
         }
@@ -69,8 +56,9 @@ class CrearFormula extends React.Component{
 
     handleSubmit = async(event) => {
       var sumatotal=this.state.variable_1+this.state.variable_2+this.state.variable_3;
+      console.log(sumatotal);
       var valido=1;
-      if((this.state.criterio_exito<=sumatotal)&&(sumatotal=100)&&(this.state.evaluacion_activa!=="")&&(this.state.productor_activo)){
+      if((this.state.limite_inferior<this.state.limite_superior)&&(this.state.criterio_exito<=sumatotal)&&(sumatotal==100)&&(this.state.evaluacion_activa!=="")&&(this.state.productor_activo)&&(this.state.criterio_exito>0)&&(this.state.criterio_exito<100)){
           console.log("EU");
           let estructura = {
             fk_prod: this.state.productor_activo,
@@ -93,6 +81,17 @@ class CrearFormula extends React.Component{
               });
         console.log(res.body);
       }
+      else{
+          if((sumatotal>100)||(sumatotal<100)){
+              alert("Revise la suma de las variables");
+          }
+          if((this.state.criterio_exito<0)||(this.state.criterio_exito>100)){
+              alert("Revise el criterio de exito");
+          }
+          if(this.state.limite_inferior>this.state.limite_superior){
+              alert("Revise los limites");
+          }
+      }
     }
 
     setStateAsync(state){
@@ -108,6 +107,46 @@ class CrearFormula extends React.Component{
             await this.setStateAsync({productores: lista});
    
       }
+
+    async componentDidUpdate(){
+        
+        if((this.state.evaluacion_activa==2)&&(this.state.i<50)){
+            console.log("Hello");
+            var variableFinal= [
+                { 
+                  id: "1",
+                  nombre: "Cumplimiento",
+                  peso: " "
+                }
+              ];
+              this.setState({variables:variableFinal}); 
+              this.setState({i:this.state.i+1});
+          }
+          else{
+            if((this.state.evaluacion_activa==1)&&(this.state.i<5)){
+                var variableFinal= [
+                    { 
+                      id: "1",
+                      nombre: "Ubicacion Geografica",
+                      peso: " "
+                    },
+                    {
+                        id: "2",
+                        nombre: "Costos y alternativas de envíos",
+                        peso: " " 
+                    },
+                    {
+                        id: "3",
+                        nombre: "Alternativas y condiciones de pago",
+                        peso: " "  
+                    }
+                  ];
+                      this.setState({variables:variableFinal}); 
+                      this.setState({i:this.state.i+1});
+            } 
+            
+          }
+    }
 
     myChangeHandler = (event) =>{
         let nam = event.target.name;
@@ -128,6 +167,11 @@ class CrearFormula extends React.Component{
             </tr>
         )
       });
+      
+
+
+
+
         return(
             <div className="body">
                 <h1 className="mt-3 ml-3">Crear Formulas</h1>
@@ -168,7 +212,7 @@ class CrearFormula extends React.Component{
                 </table>
                 <tr>
                     <h4 className="mt-3 ml-3 mr-3">Criterio de Exito</h4>
-                    <th><input name="limite_inferior" class="input-cantidad" type="number" onChange={this.myChangeHandler}></input></th>
+                    <th><input name="criterio_exito" class="input-cantidad" type="number" onChange={this.myChangeHandler}></input></th>
                 </tr>
                 <button class="btn btn-warning mt-3 ml-3" onClick={this.handleSubmit}>Enviar Evaluacion</button>
                 <button class="btn btn-delete mt-3 ml-3">Cancelar</button>
