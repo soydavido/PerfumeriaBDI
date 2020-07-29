@@ -27,10 +27,10 @@ create table add_perfumistas (
 	perfu_id serial primary key,
 	perfu_nombre varchar (15) not null,
 	perfu_apellido varchar (15) not null,
-	perfu_apellido2 varchar (15) not null,
 	perfu_genero char not null,
 	perfu_id_pai int not null,
 	perfu_nombre2 varchar (15),
+	perfu_apellido2 varchar (15),
 	constraint perfu_fk_pai foreign key (perfu_id_pai) references add_paises (pai_id),
 	constraint check_perfu_genero check (perfu_genero in ('m', 'f'))
 );
@@ -76,7 +76,7 @@ create table add_ingredientes_esencias (
 	ing_ese_dosis_recomendada real,
 	ing_ese_ocurrencia_natural varchar (300),
 	ing_ese_apariencia varchar (250),
-	ing_ese_caracterisiticas varchar (100),
+	ing_ese_desc_olfativa varchar (100),
 	ing_ese_beneficios varchar (250),
 	ing_ese_certificaciones varchar (200),
 	ing_ese_punto_inflamabilidad varchar (5),
@@ -122,6 +122,7 @@ create table add_condiciones_pago (
 	con_pag_porcentaje real,
 	con_pag_meses int,
 	constraint pk_con_pag primary key (con_pag_id, con_pag_id_prov),
+	constraint check_con_pag_tipo check (con_pag_tipo in ('contado', 'credito')),
 	constraint con_pag_fk_prov foreign key (con_pag_id_prov) references add_proveedores (prov_id)
 );
 
@@ -258,6 +259,7 @@ create table add_escalas (
 	esc_id_prod int not null,
 	esc_rango_ini int not null,
 	esc_rango_fin int not null,
+	esc_criterio_exito int not null,
 	esc_fecha_fin date,
 	constraint pk_esc primary key (esc_fecha_ini, esc_id_prod),
 	constraint esc_fk_prod foreign key (esc_id_prod) references add_productores (prod_id)
@@ -387,7 +389,7 @@ create table add_fam_per (
 
 create table add_palabras_clave (
 	pal_cla_id serial primary key,
-	pal_cla_palabra_unica varchar (20)
+	pal_cla_palabra_unica varchar (50)
 );
 
 create table add_pal_cla_fam_olf (
