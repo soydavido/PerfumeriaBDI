@@ -26,14 +26,33 @@ app.post("/prueba", async(req,res) => {
     }
 })
 //Ventana de Creacion de formula
+app.post("/registroCompletoFormula/", async(req,res) => {
+    const {descripcion} = req.body;
+    console.log(req.body);
+        try {
+            const nuevaEvaluacion = await pool.query(
+            `insert into add_escalas (esc_fecha_ini,esc_id_prod,esc_rango_ini,esc_rango_fin,esc_criterio_exito) values (current_date,$1,$2,$3,$4);
+            insert into add_formulas_eval (for_eva_fecha,for_eva_fk_prod,for_eva_tipo) values (current_date,$1,'i');
+            insert into add_variables (var_id_for_eva, var_id_prod,var_nombre,var_peso) values ((select F.for_eva_fecha from add_formulas_eval F where F.for_eva_fk_prod=$1),$1,$5,$6),((select F.for_eva_fecha from add_formulas_eval F where F.for_eva_fk_prod=$1),$1,$7,$8),((select F.for_eva_fecha from add_formulas_eval F where F.for_eva_fk_prod=$1),$1,$9,$10);
+            `,
+            [req.body.fk_prod,req.body.limite_i,req.body.limite_s,req.body.criterio_exito,req.body.nombre1,req.body.peso1,req.body.nombre2,req.body.peso2,req.body.nombre3,req.body.peso3]);
+            res.json(nuevaEvaluacion.rows);
+            console.log(res.for_eva_fecha);
+        } catch (err) {
+            console.error(err.message);
+            res=err;
+        }
+});
+
 app.post("/registroFormula/", async(req,res) => {
     const {descripcion} = req.body;
     console.log(req.body);
         try {
             const nuevaEvaluacion = await pool.query(
-            `insert into add_formulas_eval (for_eva_fecha,for_eva_fk_prod,for_eva_tipo) values (current_date,$1,'i');`,
+            `insert into add_formulas_eval (for_eva_fecha,for_eva_fk_prod,for_eva_tipo) values (current_date,$1,'i') returning for_eva_fecha,for_eva_fk_prod;`,
             [req.body.fk_prod]);
-            res.json(nuevaEvaluacion.rows[0]);
+            res.json(nuevaEvaluacion.rows);
+            console.log(res.for_eva_fecha);
         } catch (err) {
             console.error(err.message);
             res=err;
@@ -51,6 +70,31 @@ app.post("/registroEscala/", async(req,res) => {
             console.error(err.message);
             res=err;
         }
+});
+app.post("/registroVariables/", async(req,res) => {
+    const {descripcion} = req.body;
+    console.log(req.body.fk_prod);
+        try {
+            const nuevaEvaluacion = await pool.query(
+            `insert into add_variables (var_id_for_eva, var_id_prod,var_nombre,var_peso) values ((select F.for_eva_fecha from add_formulas_eval F where F.for_eva_fk_prod=$1),$1,$2,$3);`,
+            [req.body.fk_prod,req.body.nombre,req.body.peso]);
+            res.json(nuevaEvaluacion.rows[0]);
+        } catch (err) {
+            console.error(err.message);
+            res=err;
+        }
+});
+app.get("/getFecha/:id", async(req,res) =>{
+    try {
+        const {id} = req.params;
+        console.log(req.params.id);
+        const todo = await pool.query(
+            `select to_char(for_eva_fecha,'YYYY/MM/DD') from add_formulas_eval where for_eva_fk_prod=$1;`
+            ,[id]);
+        res.json(todo.rows);
+    } catch (err) {
+        console.log(err.message);
+    }
 });
 //Ventana de evaluacion
 app.get("/productores/", async(req,res) =>{

@@ -16,6 +16,7 @@ class CrearFormula extends React.Component{
             evaluacion_activa: "",
             calificacion_total: "",
             i:0,
+            fecha_proveedor: "",
             productores: [],
             formula: [],
             variable_auxiliar:0,
@@ -33,7 +34,10 @@ class CrearFormula extends React.Component{
               }
             ],
               variables: [
-                
+                {
+                    id:0,
+                    value: ""
+                }
               ]
         
         }
@@ -57,41 +61,82 @@ class CrearFormula extends React.Component{
     handleSubmit = async(event) => {
       var sumatotal=this.state.variable_1+this.state.variable_2+this.state.variable_3;
       console.log(sumatotal);
-      var valido=1;
       if((this.state.limite_inferior<this.state.limite_superior)&&(this.state.criterio_exito<=sumatotal)&&(sumatotal==100)&&(this.state.evaluacion_activa!=="")&&(this.state.productor_activo)&&(this.state.criterio_exito>0)&&(this.state.criterio_exito<100)){
-          console.log("EU");
-          let estructura = {
+            console.log("EU");
+            let estructura = {
             fk_prod: this.state.productor_activo,
             criterio_exito: parseInt(this.state.criterio_exito),
             limite_i: parseInt(this.state.limite_inferior),
             limite_s: parseInt(this.state.limite_superior)
-          };
-          const res= await fetch(`http://localhost:5000/registroEscala/`,{
-          method: "POST",
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify(estructura)
-          });
-          let estructura2 = {
+            };
+            const res= await fetch(`http://localhost:5000/registroEscala/`,{
+            method: "POST",
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(estructura)
+            });
+            let estructura2 = {
             fk_prod: this.state.productor_activo
         };
             const res2= await fetch(`http://localhost:5000/registroFormula/`,{
                 method: "POST",
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify(estructura)
-              });
-        console.log(res.body);
-      }
-      else{
-          if((sumatotal>100)||(sumatotal<100)){
-              alert("Revise la suma de las variables");
-          }
-          if((this.state.criterio_exito<0)||(this.state.criterio_exito>100)){
-              alert("Revise el criterio de exito");
-          }
-          if(this.state.limite_inferior>this.state.limite_superior){
-              alert("Revise los limites");
-          }
-      }
+                });
+        const res3= await fetch(`http://localhost:5000/getFecha/${this.state.productor_activo}`);
+        const lista = await res3.json();
+        await this.setStateAsync({fecha_proveedor: lista});
+        if(this.state.variable_2>0){
+            var estructuraVariable = [
+                {
+                    fk_prod: this.state.productor_activo,
+                    nombre: this.state.variables[0].nombre,
+                    peso: this.state.variable_1
+                },
+                {
+                    fk_prod: this.state.productor_activo,
+                    nombre: this.state.variables[1].nombre,
+                    peso: this.state.variable_2
+                },
+                {
+                    fk_prod: this.state.productor_activo,
+                    nombre: this.state.variables[2].nombre,
+                    peso: this.state.variable_3
+                }
+            ];
+            for(var i=0;i<estructuraVariable.length;i++){
+                console.log(estructuraVariable[i]);
+                var resVariables= await fetch(`http://localhost:5000/registroVariables/`,{
+                        method: "POST",
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify(estructuraVariable[i])
+                        });  
+                    }
+        }
+        else{
+            var estructuraVariable = [
+                {
+                    fk_prod: this.state.productor_activo,
+                    nombre: this.state.variables[0].nombre,
+                    peso: this.state.variable_1
+                }];
+            var resVariables= await fetch(`http://localhost:5000/registroVariables/`,{
+                        method: "POST",
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify(estructuraVariable[i])
+                        });  
+                    }
+        }
+        else{
+            if((sumatotal>100)||(sumatotal<100)){
+                alert("Revise la suma de las variables");
+            }
+            if((this.state.criterio_exito<0)||(this.state.criterio_exito>100)){
+                alert("Revise el criterio de exito");
+            }
+            if(this.state.limite_inferior>this.state.limite_superior){
+                alert("Revise los limites");
+            }
+        }
     }
 
     setStateAsync(state){
@@ -116,7 +161,8 @@ class CrearFormula extends React.Component{
                 { 
                   id: "1",
                   nombre: "Cumplimiento",
-                  peso: " "
+                  peso: " ",
+                  correspondiente: "variable_1"
                 }
               ];
               this.setState({variables:variableFinal}); 
@@ -128,17 +174,20 @@ class CrearFormula extends React.Component{
                     { 
                       id: "1",
                       nombre: "Ubicacion Geografica",
-                      peso: " "
+                      peso: " ",
+                      correspondiente: "variable_1"
                     },
                     {
                         id: "2",
                         nombre: "Costos y alternativas de envíos",
-                        peso: " " 
+                        peso: " ",
+                        correspondiente: "variable_2"
                     },
                     {
                         id: "3",
                         nombre: "Alternativas y condiciones de pago",
-                        peso: " "  
+                        peso: " ",
+                        correspondiente: "variable_3"
                     }
                   ];
                       this.setState({variables:variableFinal}); 
