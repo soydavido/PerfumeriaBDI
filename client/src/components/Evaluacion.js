@@ -222,7 +222,8 @@ class Evaluacion extends React.Component{
         await this.setStateAsync({proveedores: lista});
       }
       if((this.state.proveedor_activo!=="")&&(this.state.productor_activo!=="")&&(this.state.formula.length===0)){
-        const res= await fetch(`http://localhost:5000/formula/${this.state.productor_activo}`);
+        if(this.state.evaluacion_activa>1){
+          const res= await fetch(`http://localhost:5000/formulaa/${this.state.productor_activo}`);
         const lista = await res.json();
         console.log(this.state.variables);
         var i=lista.length;
@@ -253,6 +254,41 @@ class Evaluacion extends React.Component{
         }
         await this.setStateAsync({variables: lista});
         await this.setStateAsync({formula: lista});
+        }
+        else{
+          const res= await fetch(`http://localhost:5000/formulai/${this.state.productor_activo}`);
+        const lista = await res.json();
+        console.log(this.state.variables);
+        var i=lista.length;
+        var cont=0;
+        if(cont<i){
+          cont++;
+          lista[0].id=cont;
+          if(cont<i){
+            cont++;
+            lista[1].id=cont;
+          }
+          if(cont<i){
+            cont++;
+            lista[2].id=cont;
+          }
+          if(cont<i){
+            cont++;
+            lista[3].id=cont;
+          }
+          if(cont<i){
+            cont++;
+            lista[4].id=cont;
+          }
+          if(cont<i){
+            cont++;
+            lista[5].id=cont;
+          }
+        }
+        await this.setStateAsync({variables: lista});
+        await this.setStateAsync({formula: lista});
+        }
+        
       }
     }
 
@@ -290,12 +326,12 @@ class Evaluacion extends React.Component{
                     <th><Dropdown data={this.state.productores} nombre={"productor_activo"} callbackFromParent={this.myCallback}/></th>
                 </tr>
                 <tr>
-                    <h4 className="mt-3 ml-3 mr-3">Nombre del proveedor</h4>
-                    <th><Dropdown data={this.state.proveedores} nombre={"proveedor_activo"} callbackFromParent={this.myCallback}/></th>
-                </tr>
-                <tr>
                     <h4 className="mt-3 ml-3 mr-3">Tipo de evaluacion</h4>
                     <th><Dropdown data={this.state.tipo_eva} nombre={"evaluacion_activa"} callbackFromParent={this.myCallback}/></th>
+                </tr>
+                <tr>
+                    <h4 className="mt-3 ml-3 mr-3">Nombre del proveedor</h4>
+                    <th><Dropdown data={this.state.proveedores} nombre={"proveedor_activo"} callbackFromParent={this.myCallback}/></th>
                 </tr>
                 <h4 class="ml-3 mt-3">Formula</h4>
                 <table className="table-pers ml-3 mt-3">

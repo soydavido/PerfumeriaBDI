@@ -17,11 +17,11 @@ class App extends React.Component{
     this.state = {
       inicio: "",
       consulta: "",
-      evaluacion: "",
+      evaluacion: "1",
       recomendador: "",
       contrato: "",
       compra: "",
-      crearformula: "1"
+      crearformula: ""
     }
   }
   

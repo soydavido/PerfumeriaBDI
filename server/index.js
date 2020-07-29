@@ -226,12 +226,24 @@ app.post("/registroEvaluacion/", async(req,res) => {
     }
 });
 
-app.get("/formula/:id", async(req,res) =>{
+app.get("/formulai/:id", async(req,res) =>{
     try {
         console.log(req.params);
         const {id} = req.params;
         const todo = await pool.query(
             `select V.var_nombre as nombre, V.var_peso as peso_total from add_variables V, add_formulas_eval F where V.var_id_prod=$1 and F.for_eva_fecha=V.var_id_for_eva and V.var_id_prod=F.for_eva_fk_prod and F.for_eva_tipo='i'`,
+            [id]);
+        res.json(todo.rows);
+    } catch (err) {
+        console.log(err.message);
+    }
+});
+app.get("/formulaa/:id", async(req,res) =>{
+    try {
+        console.log(req.params);
+        const {id} = req.params;
+        const todo = await pool.query(
+            `select V.var_nombre as nombre, V.var_peso as peso_total from add_variables V, add_formulas_eval F where V.var_id_prod=$1 and F.for_eva_fecha=V.var_id_for_eva and V.var_id_prod=F.for_eva_fk_prod and F.for_eva_tipo='a'`,
             [id]);
         res.json(todo.rows);
     } catch (err) {
