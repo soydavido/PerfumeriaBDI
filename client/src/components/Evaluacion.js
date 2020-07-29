@@ -190,8 +190,8 @@ class Evaluacion extends React.Component{
          console.log(res);
          var calificacionExito= ((parseInt(total_obtenido)*parseInt(this.state.escala[0].limite_s))/100);
          console.log(calificacionExito);
-         if(calificacionExito<this.state.escala.criterio){
-           alert("El proveedor no aprobo la evaluacion")
+         if(total_obtenido<this.state.escala[0].criterio){
+           alert("El proveedor no aprobo la evaluacion, ya que el minimo es de "+this.state.escala[0].criterio+" y su calificacion fue de "+total_obtenido);
          }
          else{
            alert("El proveedor aprobo la evaluacion con una nota de "+calificacionExito+" / "+this.state.escala[0].limite_s+" o "+total_obtenido+" / 100");
@@ -381,7 +381,7 @@ class Evaluacion extends React.Component{
                 </table>
                 <tr>
                     <h4 className="mt-3 ml-3 mr-3">Criterio de exito</h4>
-                    <th><label className="ml-3">{this.state.escala[0].criterio}</label></th>
+                    <th><label className="ml-3">{this.state.escala[0].criterio}/100</label></th>
                 </tr>
                 <button class="btn btn-warning mt-3 ml-3" onClick={this.handleSubmit}>Enviar Evaluacion</button>
                 <button class="btn btn-delete mt-3 ml-3">Cancelar</button>
