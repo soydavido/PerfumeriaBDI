@@ -18,6 +18,11 @@ class Evaluacion extends React.Component{
             calificacion_total: "",
             productores: [],
             proveedores: [],
+            escala: [{
+              limite_i: 0,
+              limite_s: 0,
+              criterio: 0
+            }],
             formula: [],
             variable_auxiliar:0,
             variable_1:0, variable_2:0, variable_3:0, variable_4:0, variable_5:0,
@@ -164,7 +169,9 @@ class Evaluacion extends React.Component{
 
       }
       var total_obtenido=this.state.variable_1+this.state.variable_2+this.state.variable_3+this.state.variable_4+this.state.variable_5+this.state.variable_6+this.state.variable_7+this.state.variable_8;
-
+      this.setState({calificacion_total:total_obtenido});
+      var calificacionExito= (total_obtenido*this.state.escala.limite_s)/100;
+      console.log(calificacionExito);
       //SE CHEQUEA ANTES DEL FETCH
 
       if(apto){
@@ -181,6 +188,14 @@ class Evaluacion extends React.Component{
           body: JSON.stringify(estructura)
         });
          console.log(res);
+         var calificacionExito= ((parseInt(total_obtenido)*parseInt(this.state.escala[0].limite_s))/100);
+         console.log(calificacionExito);
+         if(calificacionExito<this.state.escala.criterio){
+           alert("El proveedor no aprobo la evaluacion")
+         }
+         else{
+           alert("El proveedor aprobo la evaluacion con una nota de "+calificacionExito+" / "+this.state.escala[0].limite_s+" o "+total_obtenido+" / 100");
+         }
       }
       else{
         alert("Verifique los campos");
@@ -220,9 +235,14 @@ class Evaluacion extends React.Component{
         const res= await fetch(`http://localhost:5000/proveedores/${this.state.productor_activo}`);
         const lista = await res.json();
         await this.setStateAsync({proveedores: lista});
+
       }
       if((this.state.proveedor_activo!=="")&&(this.state.productor_activo!=="")&&(this.state.formula.length===0)){
         if(this.state.evaluacion_activa>1){
+          const res2= await fetch(`http://localhost:5000/escala/${this.state.productor_activo}`);
+        const listaEscala = await res2.json();
+        await this.setStateAsync({escala: listaEscala});
+
           const res= await fetch(`http://localhost:5000/formulaa/${this.state.productor_activo}`);
         const lista = await res.json();
         console.log(this.state.variables);
@@ -256,6 +276,10 @@ class Evaluacion extends React.Component{
         await this.setStateAsync({formula: lista});
         }
         else{
+          const res2= await fetch(`http://localhost:5000/escala/${this.state.productor_activo}`);
+        const listaEscala = await res2.json();
+        await this.setStateAsync({escala: listaEscala});
+
           const res= await fetch(`http://localhost:5000/formulai/${this.state.productor_activo}`);
         const lista = await res.json();
         console.log(this.state.variables);
@@ -355,6 +379,10 @@ class Evaluacion extends React.Component{
                   })}
                   </tbody>
                 </table>
+                <tr>
+                    <h4 className="mt-3 ml-3 mr-3">Criterio de exito</h4>
+                    <th><label className="ml-3">{this.state.escala[0].criterio}</label></th>
+                </tr>
                 <button class="btn btn-warning mt-3 ml-3" onClick={this.handleSubmit}>Enviar Evaluacion</button>
                 <button class="btn btn-delete mt-3 ml-3">Cancelar</button>
             </div>

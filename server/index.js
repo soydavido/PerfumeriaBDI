@@ -115,16 +115,28 @@ app.get("/getFecha/:id", async(req,res) =>{
 //Ventana de evaluacion
 app.get("/productores/", async(req,res) =>{
     try {
-        console.log(req.params);
+        console.log("productores");
         const todo = await pool.query("SELECT prod_id as id, prod_nombre as value FROM add_productores");
         res.json(todo.rows);
     } catch (err) {
         console.log(err.message);
     }
 });
-
+app.get("/escala/:id", async(req,res) =>{
+    try {
+        const {id} = req.params;
+        console.log("escala");
+        const todo = await pool.query(
+            `select esc_rango_ini as limite_i, esc_rango_fin as limite_s, esc_criterio_exito as criterio from add_escalas where esc_id_prod=$1;`
+            ,[id]);
+        res.json(todo.rows);
+    } catch (err) {
+        console.log(err.message);
+    }
+});
 app.get("/proveedores/", async(req,res) =>{
     try {
+        console.log("proveedores");
         const todo = await pool.query(
             "SELECT prov_id as id, prov_nombre as value FROM add_proveedores");
         res.json(todo.rows);
@@ -137,7 +149,7 @@ app.get("/proveedores/:id", async(req,res) =>{
         const {id} = req.params;
         console.log(req.params.id);
         const todo = await pool.query(
-            `select P.prov_id as id, P.prov_nombre as value from add_proveedores P,  add_prod_pais R, add_condiciones_envio C where P.prov_id = C.con_env_id_prov and C.con_env_id_pai = R.prod_pais_id_pai and R.prod_pais_id_prod = $1;`
+            `select DISTINCT P.prov_id as id, P.prov_nombre as value from add_proveedores P,  add_prod_pais R, add_condiciones_envio C where P.prov_id = C.con_env_id_prov and C.con_env_id_pai = R.prod_pais_id_pai and R.prod_pais_id_prod = $1;`
             ,[id]);
         res.json(todo.rows);
     } catch (err) {

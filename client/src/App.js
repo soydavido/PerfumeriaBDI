@@ -55,8 +55,8 @@ class App extends React.Component{
                 this.setState({inicio:"",consulta:"",evaluacion:"",recomendador:"",compra:"",contrato:"1",crearFormula:""});
               }
               else{
-                if(event.target.name=="crearFormula"){
-                  this.setState({inicio:"",consulta:"",evaluacion:"",recomendador:"",compra:"",contrato:"",crearFormula:"1"});
+                if(event.target.name=="crearformula"){
+                  this.setState({inicio:"",consulta:"",evaluacion:"",recomendador:"",compra:"",contrato:"",crearformula:"1"});
                 }
               }
             }
@@ -93,7 +93,9 @@ class App extends React.Component{
                 ReactDOM.render(<Compras/>,document.getElementById("contenido"));
               }
               else{
+                console.log(this.state.crearformula);
                 if(this.state.crearformula){
+                  console.log("creame");
                   ReactDOM.render(<CrearFormula/>,document.getElementById("contenido"));
                 }
               }
