@@ -78,11 +78,20 @@ class CrearFormula extends React.Component{
             limite_i: parseInt(this.state.limite_inferior),
             limite_s: parseInt(this.state.limite_superior)
           };
-          const res= await fetch(`http://localhost:5000/registroFormula/`,{
+          const res= await fetch(`http://localhost:5000/registroEscala/`,{
           method: "POST",
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify(estructura)
-        });
+          });
+          let estructura2 = {
+            fk_prod: this.state.productor_activo
+        };
+            const res2= await fetch(`http://localhost:5000/registroFormula/`,{
+                method: "POST",
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(estructura)
+              });
+        console.log(res.body);
       }
     }
 

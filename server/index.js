@@ -31,8 +31,21 @@ app.post("/registroFormula/", async(req,res) => {
     console.log(req.body);
         try {
             const nuevaEvaluacion = await pool.query(
-            `insert into add_formulas_eval (for_eva_fecha,for_eva_fk_prod,for_eva_tipo,for_eva_criterio_exito,for_eva_limite_superior,for_eva_limite_inferior) values (current_date,$1,'i',$2,$3,$4) returning for_eva_fecha, for_eva_fk_prod`,
-            [req.body.fk_prod,req.body.criterio_exito,req.body.limite_s,req.body.limite_i]);
+            `insert into add_formulas_eval (for_eva_fecha,for_eva_fk_prod,for_eva_tipo) values (current_date,$1,'i');`,
+            [req.body.fk_prod]);
+            res.json(nuevaEvaluacion.rows[0]);
+        } catch (err) {
+            console.error(err.message);
+            res=err;
+        }
+});
+app.post("/registroEscala/", async(req,res) => {
+    const {descripcion} = req.body;
+    console.log(req.body.fk_prod);
+        try {
+            const nuevaEvaluacion = await pool.query(
+            `insert into add_escalas (esc_fecha_ini,esc_id_prod,esc_rango_ini,esc_rango_fin,esc_criterio_exito) values (current_date,$1,$2,$3,$4)`,
+            [req.body.fk_prod,req.body.limite_i,req.body.limite_s,req.body.criterio_exito]);
             res.json(nuevaEvaluacion.rows[0]);
         } catch (err) {
             console.error(err.message);
