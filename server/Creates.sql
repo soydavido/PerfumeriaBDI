@@ -70,17 +70,18 @@ create table add_ingredientes_esencias (
 	ing_ese_ipc int primary key,
 	ing_ese_id_prov int not null,
 	ing_ese_tscacas varchar (15),
-	ing_ese_territorio_olfativo varchar (15),
-	ing_ese_descripcion_olfativa varchar (250),
-	ing_ese_parte_procesada varchar (20),
-	ing_ese_proceso varchar (300),
-	ing_ese_descripcion_visual varchar (250),
-	ing_ese_cosecha varchar (100),
-	ing_ese_einecs varchar (10),
-	ing_ese_solubilidad varchar (200),
+	ing_ese_nombre varchar (50),
+	ing_ese_fema int,
+	ing_ese_meses_produccion varchar (250),
+	ing_ese_dosis_recomendada real,
+	ing_ese_ocurrencia_natural varchar (300),
+	ing_ese_apariencia varchar (250),
+	ing_ese_caracterisiticas varchar (100),
+	ing_ese_beneficios varchar (250),
+	ing_ese_certificaciones varchar (200),
 	ing_ese_punto_inflamabilidad varchar (5),
-	ing_ese_ipc_alt int,
-	ing_ese_duracion varchar (70),
+	ing_ese_estado_reglamentario varchar (200),
+	ing_ese_recomendaciones_etiquetado varchar (250),
 	constraint ing_ese_fk_prov foreign key (ing_ese_id_prov) references add_proveedores (prov_id)
 );
 
@@ -204,7 +205,7 @@ create table add_miembros_ifra (
 
 create table add_perfumes (
 	per_id serial primary key,
-	per_nombre varchar (15) not null,
+	per_nombre varchar (50) not null,
 	per_edad_dirigida varchar (2) not null,
 	per_genero char not null,
 	per_id_prod int not null,

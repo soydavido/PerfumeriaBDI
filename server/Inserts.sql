@@ -56,36 +56,68 @@ insert into add_telefonos (tel_cod_pais, tel_numero, tel_id_prod, tel_id_prov) v
 		('+1', '866-984-2118', 5, null),
 		('+49', '7171 91140', null, 4);
 
-insert into add_ingredientes_esencias (ing_ese_ipc, ing_ese_id_prov, ing_ese_tscacas, ing_ese_territorio_olfativo, ing_ese_descripcion_olfativa, ing_ese_parte_procesada, ing_ese_proceso, ing_ese_descripcion_visual, ing_ese_cosecha, ing_ese_einecs, ing_ese_solubilidad, ing_ese_punto_inflamabilidad, ing_ese_ipc_alt,ing_ese_duracion) values 
-		(969340, 1, '68917-05-5', 'naturaleza', 'tiene delicado y único afrutado floral facetas que recuerdan albaricoque seco y flores blancas con matiz coriáceo.', 'flores', 'Una extracción primaria con solvente volátil en fresco o rendimientos de biomasa seca a un concreto o resinoide. El Absoluto se obtiene mediante un segundo paso de purificación en el proceso.', 'naranja a marrón oscuro', '930 Kg de flores aproximadamente para producir 1 Kg de absoluto.','296-209-1','alcohol, aceite mineral','83°C', null, '24 meses'),
-		(10610004, 2, '24720-09-0', 'naturaleza', 'Nota frutal floral única y sofisticada con un delicado y natural carácter de rosa. Nota de manzana compleja, menta y grosella negra con matices de ciruela.', null, null, 'Incoloro a amarillo pálido', null, '246-430-4', 'soluble en etanol 95º en todas las proporciones', '101°C', null, '2 años');
+insert into add_ingredientes_esencias (ing_ese_ipc, ing_ese_id_prov, ing_ese_tscacas, ing_ese_nombre, ing_ese_fema, ing_ese_meses_produccion, ing_ese_dosis_recomendada, ing_ese_ocurrencia_natural, ing_ese_apariencia, ing_ese_caracterisiticas, ing_ese_beneficios, ing_ese_certificaciones, ing_ese_punto_inflamabilidad, ing_ese_estado_reglamentario, ing_ese_recomendaciones_etiquetado) values 
+		(969340, 1, '68917-05-5', 'osmanthus absolute', 3750, 'Septiembre, Octubre', 3, null, 'Desde verde oscuro, hasta marrón oscuro, liquida pasta viscosa', 'Albaricoque floral, graso, afrutado', 'útil para la creación de esencias amarillas', ' Kosher Certified, Organic Suitable EU', null, 'EU: Natural, US: Natural, Other: Contact us', 'EU: Osmanthus absolute or Extract, Other: Contact us'),
+		(937451, 1, '23696-85-7', 'damascenone fab', 3420, null, 2.5,'Se encuentra naturalmente en tabaco, rosa, té, membrillo, grosella negra, albaricoque, manzana cocida, uva, nectarina, maracuyá, frambuesa, café, osmanthus, camomila, cerveza, coñac, vino …', 'Líquido amarillo pálido a amarillo', 'Afrutado, amaderado, floral, membrillo,fruta cocida y notas de tabaco', 'funciona bien en todo tipo de frutas, incluidas tomate, notas alcohólicas, té y sabores florales', 'Kosher Certified, Halal Certified', '100°C', 'Regulation (EC) N° 1334/2008 Flavouring Substance', null),
+		(972375, 1, '60-12-8', 'phenylethanol nat', 2858, null, 10, 'Se encuentra naturalmente en manzana, albaricoque, plátano, queso, champiñones, durazno, frambuesa, rosa, fresa y tabaco', ' Líquido incoloro a amarillo claro', 'Potente floral, rosa, miel, notas frutales', 'agrega, más allá de su típica rosa y miel perfil, una interesante nota de fondo fermentada que es excelente para sabores de chocolate. Material muy flexible, se puede utilizar a partir de queso para aplicaciones de bebidas alcohólicas', 'Kosher Certified, Halal Certified', '98°C', ' Regulation (EC) N° 1334/2008 Natural Flavouring Substance', null);
 
 insert into add_origenes (ori_id_pai, ori_id_ing_ese) values 
 		(5,969340);
 		
 insert into add_esencias_perfumes (ese_per_nombre, ese_per_tipo, ese_per_descripcion) values
-		('osmanthus absolute', 'n', null),
-		('alpha damascone', 'n', null);
+		('cardamomo', 'n', null),
+		('bergamota', 'n', null),
+		('manzana roja', 'n', null),
+		('agua de mar', 's', null),
+		('esclarea', 'n', null),
+		('pachulí', 'n', null),
+		('almizcle', 's', null),
+		('ámbar', 's', null),
+		('vainilla', 'n', null);
 
-insert into add_ing_ese_ese_per (ing_ese_ese_per_id_ing_ese, ing_ese_ese_per_id_ese_per) values
-		(969340, 1),
-		(10610004, 2);
+insert into add_familias_olfativas (fam_olf_nombre) values
+		('Verde'),
+		('Citrico'),
+		('Floral'),
+		('Frutal'),
+		('Aromatico'),
+		('Helecho'),
+		('Chipre'),
+		('Madera'),
+		('Oriental'),
+		('Otro');
 
-insert into add_ingredientes_otros (ing_otr_nombre, ing_otr_tipo, ing_otr_ipc, ing_otr_tsacas, ing_otr_id_prov) values 
-		('phenylethanol nat', 'n', 972375, '60-12-8', 1),
-		('damascenone fab', 's', 937451, '23696-85-7', 1),
-		('pine oil-20', 's', 11250013, null, 2),
-		('dihydromyrcene Extra pure', 'n', 10320011, '2436-90-0', 2),
-		('hexyl cinnamic aldehyde', 's', 1000000031, '101-86-0', 3),
-		('benzyl salicylate', 's',  1000000006, '118-58-1', 3),
-		('hamber', 'n',  1000000022,  '54464-57-2', 3),
-		('benzyl valerate', 's', 502236, '10361-39-4', 4),
-		('cyclohexyl isovalerate', 's', 500686, '7774-44-9', 4),
-		('Octyl butyrate', 'n', 501696, '110-39-4', 4);
+insert into add_fam_olf_ese_per (fam_olf_ese_per_id_fam_olf, fam_olf_ese_per_id_ese_per) values 
+		(9, 1),
+		(2, 2),
+		(4, 3),
+		(10, 4),
+		(1, 5);
 
-insert into add_prohibidos (pro_tscacas, pro_nombre) values
-		('118-58-1', 'benzyl salicylate'),
-		('54464-57-2', 'hamber');
+--insert into add_ing_ese_ese_per (ing_ese_ese_per_id_ing_ese, ing_ese_ese_per_id_ese_per) values
+	
+
+insert into add_presentaciones_ing (pre_ing_volumen, pre_ing_precio, pre_ing_id_ing_ese, pre_ing_id_ing_otr) values
+		(1, 17, 969340, null),
+		(2, 34, 969340, null),
+		(5, 73, 969340, null),
+		(15, 182, 969340, null),
+		(30, 329, 969340, null),
+		(60, 601, 969340, null),
+		(120, 1104, 969340, null),
+		(4, 13.50, 937451, null),
+		(15, 40.50, 937451, null),
+		(30, 74.50, 937451, null),
+		(80, 182.50, 937451, null),
+		(100, 11, 972375, null),
+		(1000, 44, 972375, null),
+		(500, 25, 972375, null);
+
+--insert into add_ingredientes_otros (ing_otr_nombre, ing_otr_tipo, ing_otr_ipc, ing_otr_tsacas, ing_otr_id_prov) values 
+		
+
+--insert into add_prohibidos (pro_tscacas, pro_nombre) values
+
 
 insert into add_miembros_ifra (mie_ifr_fecha_ini, mie_ifr_tipo, mie_ifr_fecha_fin, mie_ifr_id_prov, mie_ifr_id_prod) values 
 		('1980-05-05', 'r', null, 1, null),
@@ -151,41 +183,12 @@ insert into add_prod_pais (prod_pais_id_pai,prod_pais_id_prod) values
 (24,4),
 (24,5);
 
-insert into add_presentaciones_ing (pre_ing_volumen, pre_ing_precio, pre_ing_id_ing_ese, pre_ing_id_ing_otr) values
-		(1, 17, 969340, null),
-		(2, 34, 969340, null),
-		(5, 73, 969340, null),
-		(15, 182, 969340, null),
-		(30, 329, 969340, null),
-		(60, 601, 969340, null),
-		(120, 1104, 969340, null),
-		(2, 3.24, 10610004, null),
-		(15, 12.44, 10610004, null),
-		(30, 21.14, 10610004, null),
-		(80, 48.51, 10610004, null),
-		(120, 71.85, 10610004, null),
-		(240, 135.85, 10610004, null);
-
-insert into add_familias_olfativas (fam_olf_nombre) values
-		('Verde'),
-		('Citrico'),
-		('Floral'),
-		('Frutal'),
-		('Aromatico'),
-		('Helecho'),
-		('Chipre'),
-		('Madera'),
-		('Oriental'),
-		('Otro');
-
-insert into add_fam_olf_ese_per (fam_olf_ese_per_id_fam_olf, fam_olf_ese_per_id_ese_per) values 
-		(3,1),
-		(4,1),
-		(3,2),
-		(4,2);
-
 insert into add_fam_olf_ing_ese (fam_olf_ing_ese_id_ing_ese, fam_olf_ing_ese_id_fam_olf) values
 		(969340, 3),
 		(969340, 4),
-		(10610004, 3),
-		(10610004, 4);
+		(937451, 4),
+		(972375, 3);
+
+insert into add_perfumes (per_nombre, per_edad_dirigida, per_genero, per_id_prod) values
+		('Burning Ice Iceberg', 'j', 'm', 1);
+
