@@ -47,6 +47,8 @@ app.post("/registroCompletoFormula/", async(req,res) => {
 app.post("/registroFormula/", async(req,res) => {
     const {descripcion} = req.body;
     console.log(req.body);
+    if(req.body.tipo==1){
+        console.log("Inicial");
         try {
             const nuevaEvaluacion = await pool.query(
             `insert into add_formulas_eval (for_eva_fecha,for_eva_fk_prod,for_eva_tipo) values (current_date,$1,'i') returning for_eva_fecha,for_eva_fk_prod;`,
@@ -57,6 +59,20 @@ app.post("/registroFormula/", async(req,res) => {
             console.error(err.message);
             res=err;
         }
+    }
+    else{
+        console.log("Anual");
+        try {
+            const nuevaEvaluacion = await pool.query(
+            `insert into add_formulas_eval (for_eva_fecha,for_eva_fk_prod,for_eva_tipo) values (current_date,$1,'a') returning for_eva_fecha,for_eva_fk_prod;`,
+            [req.body.fk_prod]);
+            res.json(nuevaEvaluacion.rows);
+            console.log(res.for_eva_fecha);
+        } catch (err) {
+            console.error(err.message);
+            res=err;
+        }
+    }
 });
 app.post("/registroEscala/", async(req,res) => {
     const {descripcion} = req.body;

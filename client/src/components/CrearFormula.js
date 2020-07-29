@@ -75,16 +75,14 @@ class CrearFormula extends React.Component{
             body: JSON.stringify(estructura)
             });
             let estructura2 = {
-            fk_prod: this.state.productor_activo
+            fk_prod: this.state.productor_activo,
+            tipo: this.state.evaluacion_activa
         };
             const res2= await fetch(`http://localhost:5000/registroFormula/`,{
                 method: "POST",
                 headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify(estructura)
+                body: JSON.stringify(estructura2)
                 });
-        const res3= await fetch(`http://localhost:5000/getFecha/${this.state.productor_activo}`);
-        const lista = await res3.json();
-        await this.setStateAsync({fecha_proveedor: lista});
         if(this.state.variable_2>0){
             var estructuraVariable = [
                 {
@@ -122,7 +120,7 @@ class CrearFormula extends React.Component{
             var resVariables= await fetch(`http://localhost:5000/registroVariables/`,{
                         method: "POST",
                         headers: { 'Content-Type': 'application/json' },
-                        body: JSON.stringify(estructuraVariable[i])
+                        body: JSON.stringify(estructuraVariable[0])
                         });  
                     }
         }
