@@ -14,6 +14,7 @@ class Compras extends React.Component{
             cantidad: 0,
             condicion_envio: 0,
             condicion_pago: 0,
+            ingrediente_activo: 0,
             informacion: [],
             ingredientes: [
                 {
@@ -68,12 +69,9 @@ class Compras extends React.Component{
     }
 
     async componentDidMount(){
-        var lista=[];
-          if (this.state.productores.length){
             const res= await fetch('http://localhost:5000/productores/');
             const lista = await res.json();
-           await this.setStateAsync({productores: lista});
-          } 
+           await this.setStateAsync({productores: lista}); 
         
       }
 
@@ -89,7 +87,19 @@ class Compras extends React.Component{
           const res= await fetch(`http://localhost:5000/condicionesEnvio/${this.state.productor_activo}`);
           const con_env = await res.json();
           await this.setStateAsync({envios: con_env});
-          console.log(this.state);
+        }
+        else{
+          if((this.state.condicion_pago)){
+
+          }
+          else{
+            if((this.state.ingredientes.length<=1)&&(this.state.ingrediente_activo==0)){
+                const res= await fetch(`http://localhost:5000/ingredientesContratados/${this.state.productor_activo}`);
+                const con_env = await res.json();
+               await this.setStateAsync({envios: con_env});
+               console.log(this.state);
+            }
+          }
         }
       }
     }

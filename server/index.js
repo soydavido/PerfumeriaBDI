@@ -25,7 +25,20 @@ app.post("/prueba", async(req,res) => {
         console.error(err.message);
     }
 })
-
+//Ventana de Creacion de formula
+app.post("/registroFormula/", async(req,res) => {
+    const {descripcion} = req.body;
+    console.log(req.body);
+        try {
+            const nuevaEvaluacion = await pool.query(
+            `insert into add_formulas_eval (for_eva_fecha,for_eva_fk_prod,for_eva_tipo,for_eva_criterio_exito,for_eva_limite_superior,for_eva_limite_inferior) values (current_date,$1,'i',$2,$3,$4) returning for_eva_fecha, for_eva_fk_prod`,
+            [req.body.fk_prod,req.body.criterio_exito,req.body.limite_s,req.body.limite_i]);
+            res.json(nuevaEvaluacion.rows[0]);
+        } catch (err) {
+            console.error(err.message);
+            res=err;
+        }
+});
 //Ventana de evaluacion
 app.get("/productores/", async(req,res) =>{
     try {
@@ -106,6 +119,18 @@ app.get("/condicionesEnvio/:id", async(req,res) =>{
         const {id} = req.params;
         const todo = await pool.query(
             `select C.con_cond_env_id_con as idContrato, C.con_cond_env_id_cond_env as id, C.con_cond_env_id_prov as idProveedor, C.con_cond_env_id_pai as idPais, A.con_env_descripcion as value from add_con_cond_env C, add_condiciones_envio A where C.con_cond_env_id_prov=$1 and C.con_cond_env_id_cond_env= A.con_env_id`,
+            [id]);
+        res.json(todo.rows);
+    } catch (err) {
+        console.log(err.message);
+    }
+});
+app.get("/ingredientesContratados/:id", async(req,res) =>{
+    try {
+        const {id} = req.params;
+        const todo = await pool.query(
+            `
+            select I.ing_ese_ipc as id, I.ing_ese_tscacas as value from add_ingredientes_esencias I, add_ingredientes_contratados C where C.ing_con_id_con=$1 and C.ing_con_id_ing_ese = I.ing_ese_ipc;`,
             [id]);
         res.json(todo.rows);
     } catch (err) {
