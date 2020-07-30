@@ -128,7 +128,7 @@ class App extends React.Component{
                     <button className="boton-barra-menu-evaluacion" name="evaluacion" onClick={this.myChangeHandler}>Evaluacion</button>  
                     <button className="boton-barra-menu-contrato" name="contrato" onClick={this.myChangeHandler}>Contrato</button>
                     <button className="boton-barra-menu-compras" name="compra" onClick={this.myChangeHandler}>Compras</button>
-                    <button className="boton-barra-menu-recomendador" name="pedidos" onClick={this.myChangeHandler}>Pedidos</button>
+                    <button className="boton-barra-menu-pedidos" name="pedidos" onClick={this.myChangeHandler}>Pedidos</button>
                     <button className="boton-barra-menu-recomendador" name="recomendador" onClick={this.myChangeHandler}>Recomendador</button>
                 </ul>
             </div>  

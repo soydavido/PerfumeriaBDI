@@ -81,6 +81,17 @@
     border-radius: 5px;
     border: 0px solid rgba(0,0,0,0.5)
 }
+
+.boton-barra-menu-pedidos{
+    position: absolute;
+    top: 460px;
+    width: 182px;
+    height: 35px;
+    background: #ff7d31;
+    backdrop-filter: blur(4px);
+    border-radius: 5px;
+    border: 0px solid rgba(0,0,0,0.5)
+}
 .sidebar-list{
     padding-top:100px;
 }
