@@ -93,32 +93,36 @@ class Compras extends React.Component{
         const res= await fetch(`http://localhost:5000/proveedoresContratados/${this.state.productor_activo}`);
             const lista = await res.json();
             await this.setStateAsync({proveedores: lista});
+            await this.setStateAsync({proveedor_activo:lista[0].id});
             console.log(this.state.proveedores);
       }
       else{
         if((this.state.contrato!==0)&&(this.state.condicion_envio==0)){
-          const res= await fetch(`http://localhost:5000/condicionesEnvioContratadas/${this.state.productor_activo}`);
+          const res= await fetch(`http://localhost:5000/condicionesEnvioContratadas/${this.state.contrato}`);
           const con_env = await res.json();
-          await this.setStateAsync({envios: con_env});
+          await this.setStateAsync({condiciones_envio: con_env});
+          await this.setStateAsync({condicion_envio: con_env[0].id});
         }
         else{
-          if((this.state.condicion_pago==0)){
-            const res= await fetch(`http://localhost:5000/condicionesPagoContratadas/${this.state.productor_activo}`);
-            const con_env = await res.json();
-             await this.setStateAsync({envios: con_env});
+          if((this.state.contrato!==0)&&(this.state.condicion_pago==0)){
+            const res= await fetch(`http://localhost:5000/condicionesPagoContratadas/${this.state.contrato}`);
+            const con_pag = await res.json();
+            await this.setStateAsync({condiciones_pago: con_pag});
+            await this.setStateAsync({condicion_pago: con_pag[0].id});
           }
           else{
-            if((this.state.ingrediente_activo==0)){
-                const res= await fetch(`http://localhost:5000/ingredientesContratados/${this.state.productor_activo}`);
-                const con_env = await res.json();
-               await this.setStateAsync({envios: con_env});
-               await this.setStateAsync({ingrediente_activo: con_env[0].id});
-            }
-            else{
-              
-            }
+            if((this.state.contrato!==0)&&(this.state.ingrediente_activo==0)){
+              const res= await fetch(`http://localhost:5000/ingredientesContratados/${this.state.contrato}`);
+              const con = await res.json();
+             await this.setStateAsync({ingredientes: con});
+             await this.setStateAsync({ingrediente_activo: con[0].id});
           }
-        }
+          else{
+            
+          }
+          }
+          }
+    
       }
     }
 
@@ -129,6 +133,7 @@ class Compras extends React.Component{
       }
 
     render(){
+      console.log(this.state);
         var variables=this.state.lista;
         var variableList= variables.map(objeto=>{
             return(

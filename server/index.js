@@ -272,6 +272,20 @@ app.post("/registroCondicionesPagos/", async(req,res) => {
             res=err;
         }
 });
+app.post("/registroIngredientesContrato/", async(req,res) => {
+    const {descripcion} = req.body;
+    console.log("Ingrediente");
+    console.log(req.body);
+        try {
+            const nuevaEvaluacion = await pool.query(
+            `insert into add_ingredientes_contratados (ing_con_id_con,ing_con_id_con_prod,ing_con_id_con_prov,ing_con_id_ing_ese) values ((select con_numero from add_contratos where con_id_prod=$1 and con_id_prov=$2),$1,$2,$3);`,
+            [req.body.id_prod,req.body.id_prov,req.body.ipc]);
+            res.json(nuevaEvaluacion.rows[0]);
+        } catch (err) {
+            console.error(err.message);
+            res=err;
+        }
+});
 //COMPRAS
 app.get("/proveedoresContratados/:id", async(req,res) =>{
     try {
@@ -287,9 +301,11 @@ app.get("/proveedoresContratados/:id", async(req,res) =>{
 });
 app.get("/condicionesPagoContratadas/:id", async(req,res) =>{
     try {
+        console.log("Pago contratado");
+        console.log(req.params);
         const {id} = req.params;
         const todo = await pool.query(
-            `select M.con_pag_id as id, M.con_pag_descripcion as value from add_condiciones_pago M, add_proveedores P, add_con_cond_pag E, add_contratos C where C.con_numero = E.con_cond_pag_id_con and C.con_id_prov = $1 and M.con_pag_id = E.con_cond_pag_id_cond_pag;`,
+            `select C.con_pag_id as id, C.con_pag_descripcion as value from add_condiciones_pago C, add_con_cond_pag E where E.con_cond_pag_id_con=$1 and E.con_cond_pag_id_cond_pag = C.con_pag_id`,
             [id]);
         res.json(todo.rows);
     } catch (err) {
@@ -298,9 +314,11 @@ app.get("/condicionesPagoContratadas/:id", async(req,res) =>{
 });
 app.get("/condicionesEnvioContratadas/:id", async(req,res) =>{
     try {
+        console.log("Envio contratado");
+        console.log(req.params);
         const {id} = req.params;
         const todo = await pool.query(
-            `select M.con_env_id as id, M.con_env_descripcion as value from add_condiciones_envio M, add_proveedores P, add_con_cond_env E, add_contratos C where C.con_numero = E.con_cond_env_id_con and C.con_id_prov = $1 and M.con_env_id = E.con_cond_env_id_cond_env;`,
+            `select C.con_env_id as id, concat(C.con_env_descripcion, ' hacia ',P.pai_nombre,' | $',C.con_env_costo) as value from add_condiciones_envio C, add_con_cond_env E, add_paises P where E.con_cond_env_id_con=$1 and E.con_cond_env_id_cond_env = C.con_env_id and C.con_env_id_pai = P.pai_id`,
             [id]);
         res.json(todo.rows);
     } catch (err) {
@@ -322,8 +340,7 @@ app.get("/ingredientesContratados/:id", async(req,res) =>{
     try {
         const {id} = req.params;
         const todo = await pool.query(
-            `
-            select I.ing_ese_ipc as id, I.ing_ese_tscacas as value from add_ingredientes_esencias I, add_ingredientes_contratados C where C.ing_con_id_con=$1 and C.ing_con_id_ing_ese = I.ing_ese_ipc;`,
+            `select I.ing_ese_ipc as id, I.ing_ese_tscacas as value from add_ingredientes_esencias I, add_ingredientes_contratados C where C.ing_con_id_con=$1 and C.ing_con_id_ing_ese = I.ing_ese_ipc;`,
             [id]);
         res.json(todo.rows);
     } catch (err) {

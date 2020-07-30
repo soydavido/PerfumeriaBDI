@@ -118,6 +118,8 @@ class Contrato extends React.Component{
 
        handleSubmit = async(event) => {
         console.log(this.state);
+
+        //CONTRATO
       let estructura = {
           id_prod: this.state.productor_activo,
           id_prov: this.state.proveedor_activo,
@@ -128,6 +130,8 @@ class Contrato extends React.Component{
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify(estructura)
         });
+
+        //ENVIO
       for(var i=0;i<this.state.condiciones_envio.length;i++){
           if(this.state.condiciones_envio[i].id==this.state.condicion_envio_activo){
               console.log(this.state.condiciones_envio[i]);
@@ -144,6 +148,8 @@ class Contrato extends React.Component{
                 });
           }
       }
+
+      //PAGO
       for(var i=0;i<this.state.condiciones_pago.length;i++){
         if(this.state.condiciones_pago[i].id==this.state.condicion_pago_activo){
             var parapagos = {
@@ -156,6 +162,22 @@ class Contrato extends React.Component{
                         headers: { 'Content-Type': 'application/json' },
                         body: JSON.stringify(parapagos)
                         });
+        }
+      }
+
+      //INGREDIENTES
+      for(var i=0;i<this.state.ingredientes.length;i++){
+        if(this.state.ingredientes[i].id==this.state.ingrediente_activo){
+            var paraingredientes = {
+                id_prod: this.state.productor_activo,
+                id_prov: this.state.proveedor_activo,
+                ipc: this.state.ingredientes[i].id
+              };
+              const res= await fetch(`http://localhost:5000/registroIngredientesContrato/`,{
+                 method: "POST",
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(paraingredientes)
+                });
         }
     }
       
