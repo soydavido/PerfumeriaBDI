@@ -352,15 +352,15 @@ app.get("/ingredientesContratados/:id", async(req,res) =>{
 app.post("/registroCompra/", async(req,res) => {
     const {descripcion} = req.body;
     console.log(req.body);
-    /*try {
+    try {
         const nuevaEvaluacion = await pool.query(
            `insert into add_pedidos (ped_fecha,ped_total,ped_status,ped_id_prod,ped_id_prov,ped_id_con_pag,ped_id_prod_con_pag,ped_id_prov_con_pag,ped_id_cond_pag,ped_id_prov_pag,ped_id_con_env,ped_id_prod_con_env,ped_id_prov_con_env,ped_id_cond_env,ped_id_prov_env,ped_id_pai_env) values (current_date,$3,'s',$1,$2,$4,$1,$2,$5,$2,$4,$1,$2,$6,$2,$7);`,
-        [req.body.idprod,req.body.idprov,req.body.total,req.body.idcontrato,req,body.idcondicionpago,req.body.idcondicionenvio,req.body.idpais]);
+        [req.body.idprod,req.body.idprov,req.body.total,req.body.idcontrato,req.body.idcondicionpago,req.body.idcondicionenvio,req.body.idpais]);
         res.json(nuevaEvaluacion.rows[0]);
     } catch (err) {
         console.error(err.message);
         res=err;
-    }*/
+    }
 });
 
 //EVALUACION
