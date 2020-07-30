@@ -70,6 +70,11 @@ class Recomendador extends React.Component{
         }
     }
 
+    //Funcion para cambiar datos desde el hijo, name es el nombre del atributo a cambiar, y dataFromChild es la informacion a cambiar
+    myCallback = (name,dataFromChild) => {
+        this.setState({[name]: dataFromChild});
+    }
+
     getSnapshotBeforeUpdate(prevProps,prevState){
         // El estado anterior se monta aqui
     }

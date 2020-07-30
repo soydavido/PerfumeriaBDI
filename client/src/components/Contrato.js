@@ -203,22 +203,18 @@ class Contrato extends React.Component{
                 <tr>
                     <h4 className="mt-3 ml-3 mr-3">Ingredientes disponibles</h4>
                     <th><Dropdown data={this.state.ingredientes} nombre={"ingrediente_activo"} callbackFromParent={this.myCallback}/></th>
-                    <button class="boton-seleccion-contrato">Agregar</button>
                 </tr>
                 <tr>
                     <h4 className="mt-3 ml-3 mr-3">Exclusividad</h4>
                     <th><Dropdown data={this.state.exclusividad} nombre={"exclusividad_activo"} callbackFromParent={this.myCallback}/></th>
-                    <button class="boton-seleccion-contrato">Agregar</button>
                 </tr>
                 <tr>
                     <h4 className="mt-3 ml-3 mr-3">Condiciones de envio</h4>
                     <th><Dropdown data={this.state.condiciones_envio} nombre={"condicion_envio_activo"} callbackFromParent={this.myCallback}/></th>
-                    <button class="boton-seleccion-contrato">Agregar</button>
                 </tr>
                 <tr>
                     <h4 className="mt-3 ml-3 mr-3">Condiciones de pago</h4>
                     <th><Dropdown data={this.state.condiciones_pago} nombre={"condicion_pago_activo"} callbackFromParent={this.myCallback}/></th>
-                    <button class="boton-seleccion-contrato">Agregar</button>
                 </tr>
                 <tr>
                     <button class="btn btn-warning mt-3 ml-3" onClick={this.handleSubmit}>Registrar Contrato</button>

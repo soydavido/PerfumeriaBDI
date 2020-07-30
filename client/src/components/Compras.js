@@ -18,6 +18,7 @@ class Compras extends React.Component{
             informacion: [],
             total: 0,
             costo: 1,
+            pais: 0,
             condiciones_pago: [
               {
                   id: 0,
@@ -80,10 +81,6 @@ class Compras extends React.Component{
         let nam = event.target.name;
         let val = event.target.value;
         this.setState({[nam]: val});
-        if(nam=='cantidad'){
-          console.log('Hola');
-          this.setState({total: parseInt(this.state.costo)*parseInt(this.state.cantidad)});
-        }
     }
 
     async componentDidMount(){
@@ -138,6 +135,31 @@ class Compras extends React.Component{
           this.setState({total: this.state.cantidad * this.state.ingredientes[i].costo});
         }
       }
+      for(var i=0;i<this.state.condiciones_envio.length;i++){
+        if(this.state.condiciones_envio[i].id==this.state.condicion_envio){
+          console.log("Soy el numero ",this.state.ingrediente_activo);
+          console.log(this.state.ingredientes[i]);
+          this.setState({pais: this.state.condiciones_envio[i].pai_id});
+        }
+      }
+      if((this.state.total!==0)&&(this.state.pais!==0)){
+        console.log('Envio');
+        var estructura= {
+          idprod: this.state.productor_activo,
+          idprov: this.state.proveedor_activo,
+          total: this.state.total,
+          idcontrato: this.state.contrato,
+          idcondicionpago: this.state.condicion_pago,
+          idcondicionenvio: this.state.condicion_envio,
+          idpais: this.state.pais
+        };
+        const res= await fetch(`http://localhost:5000/registroCompra/`,{
+                   method: "POST",
+                  headers: { 'Content-Type': 'application/json' },
+                  body: JSON.stringify(estructura)
+                  });
+      }
+      
     }
 
       setStateAsync(state){
