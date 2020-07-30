@@ -16,6 +16,8 @@ class Compras extends React.Component{
             condicion_pago: 0,
             ingrediente_activo: 0,
             informacion: [],
+            total: 0,
+            costo: 1,
             condiciones_pago: [
               {
                   id: 0,
@@ -78,6 +80,10 @@ class Compras extends React.Component{
         let nam = event.target.name;
         let val = event.target.value;
         this.setState({[nam]: val});
+        if(nam=='cantidad'){
+          console.log('Hola');
+          this.setState({total: parseInt(this.state.costo)*parseInt(this.state.cantidad)});
+        }
     }
 
     async componentDidMount(){
@@ -87,14 +93,12 @@ class Compras extends React.Component{
         
       }
 
-      
+     
     async componentDidUpdate(){
       if((this.state.proveedor_activo==0)&&(this.state.productor_activo!==0)&&(this.state.productores.length>1)){
         const res= await fetch(`http://localhost:5000/proveedoresContratados/${this.state.productor_activo}`);
             const lista = await res.json();
             await this.setStateAsync({proveedores: lista});
-            await this.setStateAsync({proveedor_activo:lista[0].id});
-            console.log(this.state.proveedores);
       }
       else{
         if((this.state.contrato!==0)&&(this.state.condicion_envio==0)){
@@ -123,6 +127,16 @@ class Compras extends React.Component{
           }
           }
     
+      }
+    }
+
+    handleSubmit = async(event) => {
+      for(var i=0;i<this.state.ingredientes.length;i++){
+        if(this.state.ingredientes[i].id==this.state.ingrediente_activo){
+          console.log("Soy el numero ",this.state.ingrediente_activo);
+          console.log(this.state.ingredientes[i]);
+          this.setState({total: this.state.cantidad * this.state.ingredientes[i].costo});
+        }
       }
     }
 
@@ -171,35 +185,13 @@ class Compras extends React.Component{
                     <h4 className="mt-3 ml-3 mr-3">Ingredientes contratados</h4>
                     <th><Dropdown data={this.state.ingredientes} nombre={"ingrediente_activo"} callbackFromParent={this.myCallback}/></th>
                     <th><input class="input-cantidad" type="number" name="cantidad" onChange={this.myChangeHandler}></input></th>
-                    <button class="boton-seleccion-contrato">Agregar</button>
                 </tr>
-                <table className="table-pers ml-3 mt-3">
-                <thead>
-                  <tr class="table-borders">
-                    <th >Ingrediente</th>
-                    <th></th>
-                    <th >Cantidad</th>
-                    <th >Total</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  {variables.map(objeto=>{ 
-                    this.state.i=this.state.i+1;
-                    return(
-                    <tr key={objeto.id} class="table-borders">
-                      <td>{objeto.nombre}</td>
-                      <td></td>
-                      <td>{objeto.cantidad}</td>
-                      <td >{objeto.total}</td>
-                    </tr>
-                    )
-                  })}
-                  <tr>
-                      <label>Total</label>
-                  </tr>
-                  </tbody>
-                </table>
-                <button class="boton-seleccion-contrato mt-3">Ordenar</button>
+                <tr>
+                    <h4 className="mt-3 ml-3 mr-3">Total</h4>
+                    <th><label className="ml-3">#{this.state.total}</label></th>
+                </tr>
+
+                <button class="boton-seleccion-contrato mt-3" onClick={this.handleSubmit}>Ordenar</button>
             </div>
         )
     }

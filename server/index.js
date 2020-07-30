@@ -342,7 +342,7 @@ app.get("/ingredientesContratados/:id", async(req,res) =>{
         console.log("Ingredientes contratados");
         console.log({id});
         const todo = await pool.query(
-            `select I.ing_ese_ipc as id, I.ing_ese_nombre as value from add_ingredientes_esencias I, add_ingredientes_contratados C where C.ing_con_id_con=$1 and C.ing_con_id_ing_ese = I.ing_ese_ipc;`,
+            `select X.pre_ing_id as id, I.ing_ese_ipc as idIngrediente, concat(I.ing_ese_nombre,' | ',X.pre_ing_volumen,' ml') as value, X.pre_ing_precio as costo from add_ingredientes_esencias I, add_ingredientes_contratados C, add_presentaciones_ing X where X.pre_ing_id_ing_ese = I.ing_ese_ipc and C.ing_con_id_con=$1 and C.ing_con_id_ing_ese = I.ing_ese_ipc`,
             [id]);
         res.json(todo.rows);
     } catch (err) {
