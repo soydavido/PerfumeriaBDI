@@ -34,11 +34,12 @@ insert into add_asociaciones_nacionales (aso_nac_nombre,aso_nac_region,aso_nac_i
 insert into add_proveedores (prov_nombre,prov_email,prov_pag_web,prov_direccion,prov_id_aso_nac,prov_id_pai) values 
 ('Firmenich','info@firmenich.com','www.firmenich.com/','Rue de la Bergère 7, 1217 Meyrin, Suiza',3,15),
 ('Privi','info@privi.co.in','www.privi.com/','Privi House, A-71,TTC Industrial Area,Thane Belapur Road,Kopar Khairane,Navi Mumbai - 400 709, India',null,1),
-('Eternis','info@eternis.com','www.eternis.com/','1004 Peninsula Tower, Peninsula Corporate Park, G.K. Marg, Lower Parel, Mumbai 400 013 ',null,1),
+--('Eternis','info@eternis.com','www.eternis.com/','1004 Peninsula Tower, Peninsula Corporate Park, G.K. Marg, Lower Parel, Mumbai 400 013 ',null,1),
 ('Grau Aromatics', 'info@grau.biz', 'www.grau-aromatics.de/en/','Bismarckstr. 4, 73525 Schwäbisch Gmünd', 2, 11);
 
 insert into add_productores (prod_nombre,prod_email,prod_pag_web,prod_direccion,prod_id_aso_nac) values 
 ('Symrise','info@symrise.com','www.symrise.com/','Muhlenfeldstrasse 1, Holzminden, Lower Saxony 37603 DE',2),
+('Ultra international LTD', 'ultra@ultraintl.com', 'http://ultrainternational.com', '304, AVG Bhawan M-3, Connaught Circus New Delhi - 110001', null),
 ('Perfumarte','info@perfumarte.com','www.perfumarte.com/','Pol. Industrial Picassent, Calle Cinco, nº 20.46220 Picassent (Valencia), España',1),
 ('Bellevue Parfums','info@bellevueparfums.com','www.bellevueparfums.com/','12/14 Rond-Point des Champs-Élysées Marcel-Dassault, 75008 Paris, France',4),
 ('Armaf', 'CS@armaf.co.in', 'www.armaf.co.in/', 'Bangalore', null),
@@ -48,24 +49,24 @@ insert into add_miembros_ifra (mie_ifr_fecha_ini, mie_ifr_tipo, mie_ifr_fecha_fi
 		('1980-05-05', 'r', null, 1, null),
 		('1995-08-23', 'r', null, null, 1),
 		('2000-04-10', 's', null, 2, null),
-		('2001-04-25', 's', null, 3, null),
-		('1982-03-01', 'mn', null, null, 2),
-		('2005-01-21', 'mn', null, null, 3),
-		('1994-09-06', 'mn', '2015-07-12', null, 4),
-		('2003-06-20', 'mn', null, null, 5),
-		('1986-11-17', 'mn', null, 4, null);
+		('2001-04-25', 's', null, null, 2),
+		('1982-03-01', 'mn', null, null, 3),
+		('2005-01-21', 'mn', null, null, 4),
+		('1994-09-06', 'mn', '2015-07-12', null, 5),
+		('2003-06-20', 'mn', null, null, 6),
+		('1986-11-17', 'mn', null, 3, null);
 
 insert into add_telefonos (tel_cod_pais, tel_numero, tel_id_prod, tel_id_prov) values
 		('+41', '22 780 22 11', null, 1),
 		('+91', '22 33043500', null, 2),
 		('+91', '22 33043600', null, 2),
 		('+49', '(0)5531/90-0', 1, null),
-		('+34', '961 278 559', 2, null),
-		('+33','6 26 22 36 53', 3, null),
-		('+91', '22 66513400', null, 3),
-		('+91', '9019 859 785', 4, null),
-		('+1', '866-984-2118', 5, null),
-		('+49', '7171 91140', null, 4);
+		('+91', '11 4151 7010', 2, null),
+		('+34', '961 278 559', 3, null),
+		('+33','6 26 22 36 53', 4, null),
+		('+91', '9019 859 785', 5, null),
+		('+1', '866-984-2118', 6, null),
+		('+49', '7171 91140', null, 3);
 
 insert into add_ingredientes_esencias (ing_ese_ipc, ing_ese_id_prov, ing_ese_tscacas, ing_ese_nombre, ing_ese_fema, ing_ese_meses_produccion, ing_ese_dosis_recomendada, ing_ese_ocurrencia_natural, ing_ese_apariencia, ing_ese_desc_olfativa, ing_ese_beneficios, ing_ese_certificaciones, ing_ese_punto_inflamabilidad, ing_ese_estado_reglamentario, ing_ese_recomendaciones_etiquetado) values 
 		(969340, 1, '68917-05-5', 'osmanthus absolute', 3750, 'Septiembre, Octubre', 3, null, 'Desde verde oscuro, hasta marrón oscuro, liquida pasta viscosa', 'Albaricoque floral, graso, afrutado', 'útil para la creación de esencias amarillas', ' Kosher Certified, Organic Suitable EU', null, 'EU: Natural, US: Natural, Other: Contact us', 'EU: Osmanthus absolute or Extract, Other: Contact us'),
@@ -136,7 +137,38 @@ insert into add_esencias_perfumes (ese_per_nombre, ese_per_tipo, ese_per_descrip
 		('nuez moscada', 'n', null),
 		('palisandro', 'n', null),
 		('té negro', 'n', null),
-		('flor de cuaba blanca (madera de amyris)', 'n', null);
+		('flor de cuaba blanca (madera de amyris)', 'n', null),
+		('manzana verde', 'n', null),
+		('chocolate', 'n', null),
+		('incienso', 'n', null),
+		('benjuí', 'n', null),
+		('iris', 'n', null),
+		('mandarina', 'n', null),
+		('gálbano', 'n', null),
+		('naranja', 'n', null),
+		('rosa', 'n', null),
+		('jazmin', 'n', null),
+		('almizcle blanco', 's', null),
+		('lima', 'n', null),
+		('menta', 'n', null),
+		('geranio', 'n', null),
+		('haba de tonka', 'n', null),
+		('musgo de roble', 'n', null),
+		('ámbar gris', 's', null),
+		('pomelo', 'n', null),
+		('melocotón', 'n', null),
+		('sándalo', 'n', null),
+		('pimenta rosa', 'n', null),
+		('azahar', 'n', null),
+		('pera', 'n', null),
+		('almendra amarga', 'n', null),
+		('regaliz', 'n', null),
+		('madera de vainilla', 'n', null),
+		('cachemira', 's', null),
+		('limón (lima ácida)', 'n', null),
+		('jengibre', 'n', null),
+		('cedrón', 'n', null),
+		('canela', 'n', null);
 
 insert into add_familias_olfativas (fam_olf_nombre) values
 		('Verde'),
@@ -175,7 +207,38 @@ insert into add_fam_olf_ese_per (fam_olf_ese_per_id_fam_olf, fam_olf_ese_per_id_
 		(9, 21),
 		(8, 22),
 		(6, 23),
-		(8, 24);
+		(8, 24),
+		(4, 25),
+		(10, 26),
+		(8, 27),
+		(5, 28),
+		(3, 29),
+		(2, 30),
+		(6, 31),
+		(2, 32),
+		(3, 33),
+		(3, 34),
+		(10, 35),
+		(2, 36),
+		(6, 37),
+		(3, 38),
+		(9, 39),
+		(8, 40),
+		(9, 41),
+		(2, 42),
+		(3, 43),
+		(8, 44),
+		(9, 45),
+		(3, 46),
+		(4, 47),
+		(4, 48),
+		(9, 49),
+		(8, 50),
+		(10, 51),
+		(2, 52),
+		(9, 53),
+		(2, 54),
+		(9, 55);
 
 insert into add_fam_olf_ing_ese (fam_olf_ing_ese_id_ing_ese, fam_olf_ing_ese_id_fam_olf) values
 		(969340, 3),
@@ -190,7 +253,8 @@ insert into add_fam_olf_ing_ese (fam_olf_ing_ese_id_ing_ese, fam_olf_ing_ese_id_
 insert into add_palabras_clave (pal_cla_palabra_unica) values
 		('Diario'),
 		('Trabajo'),
-		('Casual');
+		('Casual'),
+		('Noche');
 
 insert into add_pal_cla_fam_olf (pal_cla_id_pal_cla, pal_cla_id_fam_olf) values
 		(1, 6),
@@ -198,7 +262,12 @@ insert into add_pal_cla_fam_olf (pal_cla_id_pal_cla, pal_cla_id_fam_olf) values
 		(2, 8),
 		(2, 5),
 		(3, 8),
-		(3, 5);
+		(3, 5),
+		(1, 4),
+		(4, 3),
+		(1, 7),
+		(1, 5),
+		(4, 9);
 
 
 --insert into add_ing_ese_ese_per (ing_ese_ese_per_id_ing_ese, ing_ese_ese_per_id_ese_per) values
@@ -212,9 +281,9 @@ insert into add_condiciones_pago (con_pag_id_prov, con_pag_descripcion, con_pag_
 		(2, 'Pago completo al recibir de mercancia', 'contado', 1, 100, null),
 		(2, 'Pago antes del envio', 'contado', 1, 100, null),
 		(3, 'Pago unico luego de recibir la mercancia', 'credito', 1, 100, 1),
-		(3, 'Pagos posteriores a recibir la mercancia', 'credito', 4, 25, 4),
-		(4, 'Pago en cuotas mensuales luego de recibir la mercancia', 'credito',2,50, 3),
-		(4, 'Pago completo al enviar la mercancia', 'contado', 1, 100, null);
+		(3, 'Pagos posteriores a recibir la mercancia', 'credito', 4, 25, 4);
+		--(4, 'Pago en cuotas mensuales luego de recibir la mercancia', 'credito',2,50, 3),
+		--(4, 'Pago completo al enviar la mercancia', 'contado', 1, 100, null);
 
 insert into add_formulas_eval (for_eva_fecha,for_eva_fk_prod,for_eva_tipo) values 
 ('2020-07-23',1,'i'),
@@ -263,13 +332,36 @@ insert into add_prod_pais (prod_pais_id_pai,prod_pais_id_prod) values
 insert into add_perfumes (per_nombre, per_edad_dirigida, per_genero, per_id_prod) values
 		('Burning Ice Iceberg', 'j', 'm', 1),
 		('Six Scents 3 Cosmic Wonder: Spirit of Wood', 'a', 'u', 1),
-		('Six Scents 4 Gareth Pugh: Diagonal', 'a', 'u', 1);
+		('Six Scents 4 Gareth Pugh: Diagonal', 'a', 'u', 1),
+		('Skin Ceuticals Face Cream', 'a', 'u', 2),
+		('Deep Fragrance Fresh Magic Hand Wash', 'at', 'u', 2),
+		('Cocoa Butter Body Lotion Up&Up', 'at', 'u', 2),
+		('Pétalos de Iris (PRI)', 'a', 'f', 3),
+		('Corazón Rosa (LAI)', 'j', 'f', 3),
+		('Agua Aromática (VEE)', 'a', 'm', 3),
+		('ELIANA-POUR', 'j', 'f', 4),
+		('ESTELLE', 'j', 'f', 4),
+		('ESTELLE POUR-FEMME', 'j', 'f', 4),
+		('Voyage Bleu Eau', 'a', 'f', 5),
+		('The Pride Pour Homme', 'a', 'u', 5);
 
 insert into add_fam_per (fam_per_id_per, fam_per_id_fam_olf) values
 		(1, 9),
 		(1, 6),
 		(2, 8),
-		(2, 5);
+		(2, 5),
+		(3, 8),
+		(3, 5),
+		(5, 4),
+		(6, 10),
+		(7, 3),
+		(8, 7),
+		(9, 6),
+		(9, 5),
+		(10, 9),
+		(11, 9),
+		(13, 9),
+		(14, 3);
 
 insert into add_notas (not_id_per, not_id_ese_per, not_tipo, not_concentracion) values
 		(1, 1, 's', null),
@@ -280,7 +372,73 @@ insert into add_notas (not_id_per, not_id_ese_per, not_tipo, not_concentracion) 
 		(1, 6, 'c', null),
 		(1, 7, 'f', null),
 		(1, 8, 'f', null),
-		(1, 9, 'f', null);
+		(1, 9, 'f', null),
+		(7, 27, 's', null),
+		(7, 28, 's', null),
+		(7, 16, 'c', null),
+		(7, 29, 'c', null),
+		(7, 12, 'c', null),
+		(7, 30, 'f', null),
+		(7, 31, 'f', null),
+		(7, 32, 'f', null),
+		(8, 33, 's', null),
+		(8, 2, 's', null),
+		(8, 34, 'c', null),
+		(8, 9, 'c', null),
+		(8, 35, 'f', null),
+		(9, 36, 's', null),
+		(9, 37, 's', null),
+		(9, 25, 's', null),
+		(9, 38, 'c', null),
+		(9, 41, 'c', null),
+		(9, 39, 'c', null),
+		(9, 9, 'f', null),
+		(9, 16, 'f', null),
+		(9, 40, 'f', null),
+		(9, 12, 'f', null),
+		(10, 42, 's', null),
+		(10, 2, 's', null),
+		(10, 32, 's', null),
+		(10, 33, 'c', null),
+		(10, 34, 'c', null),
+		(10, 43, 'c', null),
+		(10, 44, 'f', null),
+		(10, 9, 'f', null),
+		(10, 6, 'f', null),
+		(11, 42, 's', null),
+		(11, 2, 's', null),
+		(11, 32, 's', null),
+		(11, 33, 'c', null),
+		(11, 34, 'c', null),
+		(11, 43, 'c', null),
+		(11, 44, 'f', null),
+		(11, 9, 'f', null),
+		(11, 6, 'f', null),
+		(12, 45, 's', null),
+		(12, 46, 's', null),
+		(12, 47, 's', null),
+		(12, 34, 'c', null),
+		(12, 48, 'c', null),
+		(12, 49, 'c', null),
+		(12, 50, 'f', null),
+		(12, 6, 'f', null),
+		(12, 51, 'f', null),
+		(13, 2, 's', null),
+		(13, 42, 's', null),
+		(13, 45, 's', null),
+		(13, 52, 's', null),
+		(13, 37, 'c', null),
+		(13, 21, 'c', null),
+		(13, 53, 'c', null),
+		(13, 16, 'f', null),
+		(13, 6, 'f', null),
+		(13, 44, 'f', null),
+		(13, 12, 'f', null),
+		(14, 2, 's', null),
+		(14, 52, 's', null),
+		(14, 54, 's', null),
+		(14, 55, 'c', null),
+		(14, 21, 'c', null);
 
 insert into add_monoliticas (mon_id_per, mon_id_ese_per) values
 		(2, 10),
@@ -299,34 +457,67 @@ insert into add_monoliticas (mon_id_per, mon_id_ese_per) values
 		(3, 22),
 		(3, 23),
 		(3, 24),
-		(3, 18);
+		(3, 18),
+		(5, 25),
+		(6, 26);
 
 insert into add_intensidades (int_id_per, int_nombre, int_concentracion, int_descripcion) values
 		(1, 'edt', null, null),
 		(2, 'edp', null, null),
-		(3, 'edp', null, null);
+		(3, 'edp', null, null),
+		(4, 'eds', null, null),
+		(5, 'eds', null, null),
+		(6, 'eds', null, null),
+		(7, 'edc', null, null),
+		(8, 'edc', null, null),
+		(9, 'edc', null, null),
+		(10, 'edc', null, null),
+		(10, 'edp', null, null),
+		(11, 'edc', null, null),
+		(11, 'edp', null, null),
+		(12, 'edc', null, null),
+		(12, 'edp', null, null),
+		(13, 'edc', null, null),
+		(13, 'edp', null, null);
 
 insert into add_presentaciones_perfumes (pre_per_id_int, pre_per_id_per, pre_per_volumen) values
 		(1, 1, 100),
 		(2, 2, 100),
-		(3, 3, 100);
+		(3, 3, 100),
+		(4, 4, 50),
+		(5, 5, 250),
+		(6, 6, 950),
+		(7, 7, 50),
+		(8, 8, 75),
+		(9, 9, 50),
+		(10, 10, 100),
+		(11, 10, 100),
+		(12, 11, 100),
+		(13, 11, 100),
+		(14, 12, 100),
+		(15, 12, 100),
+		(16, 13, 100),
+		(17, 13, 100);
 
 insert into add_perfumistas (perfu_nombre, perfu_apellido, perfu_genero, perfu_id_pai, perfu_nombre2, perfu_apellido2) values
 		('Bernard', 'Ellena', 'm', 10, null, null),
 		('Philippe', 'Paparella', 'm', 10, null, 'Paris'),
-		('Emilie', 'Coppermann', 'f', 10, null, null);
+		('Emilie', 'Coppermann', 'f', 10, null, null),
+		('Amit', 'Kumar', 'm', 1, 'Raj', null);
 
 insert into add_per_perfu (per_perfu_id_per, per_perfu_id_perfu) values
-		(1,1),
-		(2,2),
-		(3,3);
+		(1, 1),
+		(2, 2),
+		(3, 3),
+		(4, 4),
+		(5, 4);
 
-insert into add_contratos (con_fecha_ini,con_exclusividad,con_id_prod,con_id_prov) values 
-		('2020-01-03','s',1,1),
-		('2019-12-24','n',2,2);
+--insert into add_contratos (con_fecha_ini,con_exclusividad,con_id_prod,con_id_prov) values 
+		--('2020-01-03','s',1,1),
+		--('2019-12-24','n',2,2);
 
-insert into add_con_cond_env (con_cond_env_id_con,con_cond_env_id_cond_env,con_cond_env_id_prov,con_cond_env_id_pai) values 
-		(1,1,1,14);
+--insert into add_con_cond_env (con_cond_env_id_con,con_cond_env_id_cond_env,con_cond_env_id_prov,con_cond_env_id_pai) values 
+		--(1,1,1,14);
 
-insert into add_ingredientes_contratados (ing_con_id_con,ing_con_id_ing_ese) values 
-		(1,969340);	
+--insert into add_ingredientes_contratados (ing_con_id_con,ing_con_id_ing_ese) values 
+		--(1,969340);	

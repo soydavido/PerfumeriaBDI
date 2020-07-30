@@ -138,13 +138,14 @@ create table add_historicos_evluaciones (
 );
 
 create table add_contratos (
-	con_numero serial primary key,
+	con_numero serial not null,
 	con_fecha_ini date not null,
 	con_exclusividad char not null,
 	con_id_prod int not null,
 	con_id_prov int not null,
 	con_cancelado boolean,
 	con_fecha_canc date,
+	constraint pk_contratos primary key (con_numero, con_id_prod, con_id_prov),
 	constraint con_fk_prod foreign key (con_id_prod) references add_productores (prod_id),
 	constraint con_fk_prov foreign key (con_id_prov) references add_proveedores (prov_id),
 	constraint check_con_exclusividad check (con_exclusividad in ('s', 'n'))
@@ -152,20 +153,24 @@ create table add_contratos (
 
 create table add_con_cond_pag (
 	con_cond_pag_id_con int not null,
-	con_cond_pag_id_cond_pag int not null,
+	con_cond_pag_id_prod int not null,
 	con_cond_pag_id_prov int not null,
-	constraint pk_con_cond_pag primary key (con_cond_pag_id_con, con_cond_pag_id_cond_pag, con_cond_pag_id_prov),
-	constraint con_cond_pag_fk_con foreign key (con_cond_pag_id_con) references add_contratos (con_numero),
-	constraint con_cond_pag_fk_cond_pag foreign key (con_cond_pag_id_cond_pag, con_cond_pag_id_prov) references add_condiciones_pago (con_pag_id, con_pag_id_prov)
+	con_cond_pag_id_cond_pag int not null,
+	con_cond_pag_id_prov_cond_pag int not null,
+	constraint pk_con_cond_pag primary key (con_cond_pag_id_con, con_cond_pag_id_prod, con_cond_pag_id_prov, con_cond_pag_id_cond_pag, con_cond_pag_id_prov_cond_pag),
+	constraint con_cond_pag_fk_con foreign key (con_cond_pag_id_con, con_cond_pag_id_prod, con_cond_pag_id_prov) references add_contratos (con_numero, con_id_prod, con_id_prov),
+	constraint con_cond_pag_fk_cond_pag foreign key (con_cond_pag_id_cond_pag, con_cond_pag_id_prov_cond_pag) references add_condiciones_pago (con_pag_id, con_pag_id_prov)
 );
 
 create table add_con_cond_env (
 	con_cond_env_id_con int not null,
-	con_cond_env_id_cond_env int not null,
+	con_cond_env_id_prod int not null,
 	con_cond_env_id_prov int not null,
+	con_cond_env_id_cond_env int not null,
+	con_cond_env_id_prov_cond_env int not null,
 	con_cond_env_id_pai int not null,
-	constraint pk_con_cond_env primary key (con_cond_env_id_con, con_cond_env_id_cond_env, con_cond_env_id_prov, con_cond_env_id_pai),
-	constraint con_cond_env_fk_con foreign key (con_cond_env_id_con) references add_contratos (con_numero),
+	constraint pk_con_cond_env primary key (con_cond_env_id_con, con_cond_env_id_prod, con_cond_env_id_prov, con_cond_env_id_cond_env, con_cond_env_id_prov_cond_env, con_cond_env_id_pai),
+	constraint con_cond_env_fk_con foreign key (con_cond_env_id_con, con_cond_env_id_prod, con_cond_env_id_prov) references add_contratos (con_numero, con_id_prod, con_id_prov),
 	constraint con_cond_env_fk_cond_env foreign key (con_cond_env_id_cond_env, con_cond_env_id_prov, con_cond_env_id_pai) references add_condiciones_envio (con_env_id, con_env_id_prov, con_env_id_pai)
 );
 
@@ -177,9 +182,13 @@ create table add_pedidos (
 	ped_id_prod int not null,
 	ped_id_prov int not null,
 	ped_id_con_pag int not null,
+	ped_id_prod_con_pag int not null,
+	ped_id_prov_con_pag int not null,
 	ped_id_cond_pag int not null,
 	ped_id_prov_pag int not null,
 	ped_id_con_env int not null,
+	ped_id_prod_con_env int not null,
+	ped_id_prov_con_env int not null,
 	ped_id_cond_env int not null,
 	ped_id_prov_env int not null,
 	ped_id_pai_env int not null,
@@ -187,8 +196,8 @@ create table add_pedidos (
 	ped_nro_factura int,
 	constraint ped_fk_prod foreign key (ped_id_prod) references add_productores (prod_id),
 	constraint ped_fk_prov foreign key (ped_id_prov) references add_proveedores (prov_id),
-	constraint ped_fk_con_cond_pag foreign key (ped_id_con_pag, ped_id_cond_pag, ped_id_prov_pag) references add_con_cond_pag (con_cond_pag_id_con, con_cond_pag_id_cond_pag, con_cond_pag_id_prov),
-	constraint ped_fk_con_cond_env foreign key (ped_id_con_env, ped_id_cond_env, ped_id_prov_env, ped_id_pai_env) references add_con_cond_env (con_cond_env_id_con, con_cond_env_id_cond_env, con_cond_env_id_prov, con_cond_env_id_pai),
+	constraint ped_fk_con_cond_pag foreign key (ped_id_con_pag, ped_id_prod_con_pag, ped_id_prov_con_pag, ped_id_cond_pag, ped_id_prov_pag) references add_con_cond_pag (con_cond_pag_id_con, con_cond_pag_id_prod, con_cond_pag_id_prov, con_cond_pag_id_cond_pag, con_cond_pag_id_prov_cond_pag),
+	constraint ped_fk_con_cond_env foreign key (ped_id_con_env, ped_id_prod_con_env, ped_id_prov_con_env, ped_id_cond_env, ped_id_prov_env, ped_id_pai_env) references add_con_cond_env (con_cond_env_id_con, con_cond_env_id_prod, con_cond_env_id_prov, con_cond_env_id_cond_env, con_cond_env_id_prov_cond_env, con_cond_env_id_pai),
 	constraint check_ped_status check (ped_status in ('s', 'c', 'p', 'e'))
 );
 
@@ -305,10 +314,13 @@ create table add_fam_olf_ing_ese (
 );
 
 create table add_ingredientes_contratados (
-	ing_con_id_con int primary key,
+	ing_con_id_con int not null,
+	ing_con_id_con_prod int not null,
+	ing_con_id_con_prov int not null,
 	ing_con_id_ing_ese int,
 	ing_con_id_ing_otr int,
-	constraint ing_con_fk_con foreign key (ing_con_id_con) references add_contratos (con_numero),
+	constraint pk_ingredientes_contratados primary key (ing_con_id_con, ing_con_id_con_prod, ing_con_id_con_prov),
+	constraint ing_con_fk_con foreign key (ing_con_id_con, ing_con_id_con_prod, ing_con_id_con_prov) references add_contratos (con_numero, con_id_prod, con_id_prov),
 	constraint ing_con_fk_ing_ese foreign key (ing_con_id_ing_ese) references add_ingredientes_esencias (ing_ese_ipc),
 	constraint ing_con_fk_ing_otr foreign key (ing_con_id_ing_otr) references add_ingredientes_otros (ing_otr_id)
 );
@@ -324,9 +336,11 @@ create table add_otros_componentes (
 create table add_renovaciones (
 	ren_id serial not null,
 	ren_id_con int not null,
+	ren_id_con_prod int not null,
+	ren_id_con_prov int not null,
 	ren_fecha date not null,
-	constraint pk_ren primary key (ren_id, ren_id_con),
-	constraint ren_fk_con foreign key (ren_id_con) references add_contratos (con_numero)
+	constraint pk_ren primary key (ren_id, ren_id_con, ren_id_con_prod, ren_id_con_prov),
+	constraint ren_fk_con foreign key (ren_id_con, ren_id_con_prod, ren_id_con_prov) references add_contratos (con_numero, con_id_prod, con_id_prov)
 );
 
 create table add_detalles (
