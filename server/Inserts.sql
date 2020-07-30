@@ -78,7 +78,28 @@ insert into add_ingredientes_esencias (ing_ese_ipc, ing_ese_id_prov, ing_ese_tsc
 		(500686, 3, '7774-44-9', 'Cyclohexyl isovalerate', 2355, null, null, null, 'líquido transparente incoloro', 'aroma a manzana y plátano.', null, 'Kosher certificate', '89°C', null, null),
 		(501696, 3, '110-39-4', 'Octyl butyrate', 2807, null, null, null, 'líquido transparente incoloro', ' jazmín verde ceroso afrutado fresco aceitoso cremoso natural', null, 'Kosher certificate', '104°C', null, null);
 
---insert into add_ingredientes_otros (ing_otr_nombre, ing_otr_tipo, ing_otr_ipc, ing_otr_tsacas, ing_otr_id_prov) values 
+insert into add_ingredientes_otros (ing_otr_nombre, ing_otr_tipo, ing_otr_ipc, ing_otr_tsacas, ing_otr_id_prov) values 
+		('agua', 'n', null, '7732-18-5', null),
+		('alcohol denat', 's', null, null, null),
+		('citral', 'n', null, '5392-40-5', null),
+		('citronellol', 'n', null, '106-22-9', null),
+		('coumarin', 'n', null, '91-64-5', null),
+		('limonene', 'n', null, '138-86-3', null),
+		('linalool', 's', null, '78-70-6', null),
+		('lilial', 's', null, '80-54-6', null),
+		('Benzyl salicylate', 'n', null, '118-58-1', null),
+		('alpha-TERPINEOL', 'n', null, '8000-41-7', null);
+
+insert into add_componentes_extras (comp_ext_id_ing_ese, comp_ext_id_ing_otr) values
+		(11210013, 10),
+		(969340, 1),
+		(937451, 1),
+		(972375, 1),
+		(11210013, 1),
+		(12320002, 1),
+		(10610004, 1),
+		(502236, 1),
+		(500686, 1);
 
 insert into add_presentaciones_ing (pre_ing_volumen, pre_ing_precio, pre_ing_id_ing_ese, pre_ing_id_ing_otr) values
 		(1, 17, 969340, null),
@@ -116,7 +137,10 @@ insert into add_origenes (ori_id_pai, ori_id_ing_ese) values
 		(5,969340),
 		(1, 11210013),
 		(1, 12320002),
-		(1, 10610004);
+		(1, 10610004),
+		(11, 502236),
+		(11, 500686),
+		(11, 501696);
 		
 insert into add_esencias_perfumes (ese_per_nombre, ese_per_tipo, ese_per_descripcion) values
 		('cardamomo', 'n', null),
@@ -196,7 +220,10 @@ insert into add_esencias_perfumes (ese_per_nombre, ese_per_tipo, ese_per_descrip
 		('cardamomo negro', 'n', null),
 		('jazmín sambac (sampaguita)', 'n', null),
 		('té Blanco', 'n', null),
-		('sándalo blanco', 'n', null);
+		('sándalo blanco', 'n', null),
+		('osmanthus', 'n', null),
+		('pino', 'n', null),
+		('tabaco', 's', null);
 
 insert into add_familias_olfativas (fam_olf_nombre) values
 		('Verde'),
@@ -289,7 +316,11 @@ insert into add_fam_olf_ese_per (fam_olf_ese_per_id_fam_olf, fam_olf_ese_per_id_
 		(9, 75),
 		(3, 76),
 		(6, 77),
-		(8, 78);
+		(8, 78),
+		(3, 79),
+		(4, 79),
+		(8, 80),
+		(10, 81);
 
 insert into add_fam_olf_ing_ese (fam_olf_ing_ese_id_ing_ese, fam_olf_ing_ese_id_fam_olf) values
 		(969340, 3),
@@ -341,9 +372,20 @@ insert into add_pal_cla_fam_olf (pal_cla_id_pal_cla, pal_cla_id_fam_olf) values
 		(9, 3);
 
 
---insert into add_ing_ese_ese_per (ing_ese_ese_per_id_ing_ese, ing_ese_ese_per_id_ese_per) values
-	
---insert into add_prohibidos (pro_tscacas, pro_nombre) values
+insert into add_ing_ese_ese_per (ing_ese_ese_per_id_ing_ese, ing_ese_ese_per_id_ese_per) values
+ 		(969340, 79),
+ 		(972375, 33),
+ 		(12320002, 44),
+ 		(10610004, 3),
+ 		(10610004, 37),
+ 		(502236, 3),
+ 		(500686, 3),
+ 		(11210013, 80),
+ 		(937451, 81);
+
+insert into add_prohibidos (pro_tscacas, pro_nombre) values
+		('8002-09-3', 'Pine oil-85'),
+		('28219-61-6', 'Sandal Fleur');
 
 
 insert into add_condiciones_pago (con_pag_id_prov, con_pag_descripcion, con_pag_tipo, con_pag_cuotas, con_pag_porcentaje, con_pag_meses) values
@@ -407,6 +449,17 @@ insert into add_perfumes (per_nombre, per_edad_dirigida, per_genero, per_id_prod
 		('NECTAR LOVE', 'a', 'm', 6),
 		('Be delicious', 'at', 'f', 6),
 		('Stories DKYN', 'j', 'f', 6);
+
+insert into add_otros_componentes (otr_com_id_ing_otr, otr_com_id_per) values
+			(1, 13),
+			(2, 13),
+			(3, 13),
+			(4, 13),
+			(5, 13),
+			(6, 13),
+			(7, 13),
+			(8, 13),
+			(9, 15);
 
 insert into add_fam_per (fam_per_id_per, fam_per_id_fam_olf) values
 		(1, 9),
