@@ -217,6 +217,7 @@ app.get("/ingredientesProveedor/:id", async(req,res) =>{
 });
 app.post("/registroContrato/", async(req,res) => {
     const {descripcion} = req.body;
+    console.log("Contrato");
     if(req.body.exclusividad==1){
         console.log('No exclusivo');
         try {
@@ -245,7 +246,7 @@ app.post("/registroContrato/", async(req,res) => {
 });
 app.post("/registroCondicionesEnvios/", async(req,res) => {
     const {descripcion} = req.body;
-    console.log("Hello");
+    console.log("Envio");
     console.log(req.body);
         try {
             const nuevaEvaluacion = await pool.query(
@@ -257,7 +258,20 @@ app.post("/registroCondicionesEnvios/", async(req,res) => {
             res=err;
         }
 });
-
+app.post("/registroCondicionesPagos/", async(req,res) => {
+    const {descripcion} = req.body;
+    console.log("Pago");
+    console.log(req.body);
+        try {
+            const nuevaEvaluacion = await pool.query(
+            `insert into add_con_cond_pag (con_cond_pag_id_con,con_cond_pag_id_prod,con_cond_pag_id_prov,con_cond_pag_id_cond_pag,con_cond_pag_id_prov_cond_pag) values ((select con_numero from add_contratos where con_id_prod=$1 and con_id_prov=$2),$1,$2,$3,$2);`,
+            [req.body.id_prod,req.body.id_prov,req.body.id_cond_pago]);
+            res.json(nuevaEvaluacion.rows[0]);
+        } catch (err) {
+            console.error(err.message);
+            res=err;
+        }
+});
 //COMPRAS
 app.get("/proveedoresContratados/:id", async(req,res) =>{
     try {

@@ -144,12 +144,20 @@ class Contrato extends React.Component{
                 });
           }
       }
-      
-      var parapagos = {
-        id_prod: this.state.productor_activo,
-        id_prov: this.state.proveedor_activo,
-        id_cond_pago: this.state.condiciones_envio[i].con_env_id
-      };
+      for(var i=0;i<this.state.condiciones_pago.length;i++){
+        if(this.state.condiciones_pago[i].id==this.state.condicion_pago_activo){
+            var parapagos = {
+                id_prod: this.state.productor_activo,
+                id_prov: this.state.proveedor_activo,
+                id_cond_pago: this.state.condiciones_envio[i].id
+              };
+              const alo= await fetch(`http://localhost:5000/registroCondicionesPagos/`,{
+                         method: "POST",
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify(parapagos)
+                        });
+        }
+    }
       
     }
 
