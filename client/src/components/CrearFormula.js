@@ -261,7 +261,7 @@ class CrearFormula extends React.Component{
                     <h4 className="mt-3 ml-3 mr-3">Criterio de Exito</h4>
                     <th><input name="criterio_exito" class="input-cantidad" type="number" onChange={this.myChangeHandler}></input></th>
                 </tr>
-                <button class="btn btn-warning mt-3 ml-3" onClick={this.handleSubmit}>Enviar Evaluacion</button>
+                <button class="btn btn-warning mt-3 ml-3" onClick={this.handleSubmit}>Registrar Formula</button>
                 <button class="btn btn-delete mt-3 ml-3">Cancelar</button>
             </div>
             </div>
