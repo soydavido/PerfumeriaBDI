@@ -170,8 +170,6 @@ class Evaluacion extends React.Component{
       }
       var total_obtenido=this.state.variable_1+this.state.variable_2+this.state.variable_3+this.state.variable_4+this.state.variable_5+this.state.variable_6+this.state.variable_7+this.state.variable_8;
       this.setState({calificacion_total:total_obtenido});
-      var calificacionExito= (total_obtenido*this.state.escala.limite_s)/100;
-      console.log(calificacionExito);
       //SE CHEQUEA ANTES DEL FETCH
 
       if(apto){

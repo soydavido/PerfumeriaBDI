@@ -128,8 +128,27 @@ class Contrato extends React.Component{
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify(estructura)
         });
-      let estructura2={
-
+      for(var i=0;i<this.state.condiciones_envio.length;i++){
+          if(this.state.condiciones_envio[i].id==this.state.condicion_envio_activo){
+              console.log(this.state.condiciones_envio[i]);
+              var paraenvios = {
+                id_prod: this.state.productor_activo,
+                id_prov: this.state.proveedor_activo,
+                id_pais: this.state.condiciones_envio[i].con_env_id_pai,
+                id_cond_env: this.state.condiciones_envio[i].con_env_id
+              };
+              const res= await fetch(`http://localhost:5000/registroCondicionesEnvios/`,{
+                 method: "POST",
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(paraenvios)
+                });
+          }
+      }
+      
+      var parapagos = {
+        id_prod: this.state.productor_activo,
+        id_prov: this.state.proveedor_activo,
+        id_cond_pago: this.state.condiciones_envio[i].con_env_id
       };
       
     }

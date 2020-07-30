@@ -19,8 +19,8 @@ class App extends React.Component{
       consulta: "",
       evaluacion: "",
       recomendador: "",
-      contrato: "1",
-      compra: "",
+      contrato: "",
+      compra: "1",
       crearformula: ""
     }
   }

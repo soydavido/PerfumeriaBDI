@@ -90,9 +90,10 @@ class Compras extends React.Component{
       
     async componentDidUpdate(){
       if((this.state.proveedor_activo==0)&&(this.state.productor_activo!==0)&&(this.state.productores.length>1)){
-        const res= await fetch(`http://localhost:5000/contratado/${this.state.productor_activo}`);
+        const res= await fetch(`http://localhost:5000/proveedoresContratados/${this.state.productor_activo}`);
             const lista = await res.json();
             await this.setStateAsync({proveedores: lista});
+            console.log(this.state.proveedores);
       }
       else{
         if((this.state.contrato!==0)&&(this.state.condicion_envio==0)){

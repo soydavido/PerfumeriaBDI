@@ -197,7 +197,7 @@ app.get("/condicionesEnvioProveedor/:id", async(req,res) =>{
     try {
         const {id} = req.params;
         const todo = await pool.query(
-            `select C.con_env_id as id, concat(C.con_env_descripcion, ' hacia ',P.pai_nombre,' | $',C.con_env_costo) as value from add_condiciones_envio C, add_paises P where C.con_env_id_prov=$1 and C.con_env_id_pai = P.pai_id `,
+            `select C.con_env_id as id, concat(C.con_env_descripcion, ' hacia ',P.pai_nombre,' | $',C.con_env_costo) as value, con_env_id, con_env_id_pai,con_env_id_prov from add_condiciones_envio C, add_paises P where C.con_env_id_prov=$1 and C.con_env_id_pai = P.pai_id  `,
             [id]);
         res.json(todo.rows);
     } catch (err) {
@@ -217,7 +217,6 @@ app.get("/ingredientesProveedor/:id", async(req,res) =>{
 });
 app.post("/registroContrato/", async(req,res) => {
     const {descripcion} = req.body;
-    console.log(req.body.fk_prod);
     if(req.body.exclusividad==1){
         console.log('No exclusivo');
         try {
@@ -244,16 +243,30 @@ app.post("/registroContrato/", async(req,res) => {
     }
         
 });
+app.post("/registroCondicionesEnvios/", async(req,res) => {
+    const {descripcion} = req.body;
+    console.log("Hello");
+    console.log(req.body);
+        try {
+            const nuevaEvaluacion = await pool.query(
+            `insert into add_con_cond_env (con_cond_env_id_con,con_cond_env_id_prod,con_cond_env_id_prov,con_cond_env_id_cond_env,con_cond_env_id_prov_cond_env,con_cond_env_id_pai) values ((select con_numero from add_contratos where con_id_prod=$1 and con_id_prov=$2),$1,$2,$3,$2,$4);`,
+            [req.body.id_prod,req.body.id_prov,req.body.id_cond_env,req.body.id_pais]);
+            res.json(nuevaEvaluacion.rows[0]);
+        } catch (err) {
+            console.error(err.message);
+            res=err;
+        }
+});
+
 //COMPRAS
 app.get("/proveedoresContratados/:id", async(req,res) =>{
     try {
         const {id} = req.params;
         console.log(id);
         const todo = await pool.query(
-            `select C.con_numero as numero, C.con_id_prov as id, P.prov_nombre as value from add_contratos  C, add_proveedores P where C.con_id_prod=1 and P.prov_id=1;`,
+            `select C.con_numero as numero, C.con_id_prov as id, P.prov_nombre as value from add_contratos  C, add_proveedores P where C.con_id_prod=$1 and P.prov_id=1;`,
             [id]);
         res.json(todo.rows);
-        console.log(res);
     } catch (err) {
         console.log(err.message);
     }
