@@ -6,6 +6,13 @@ class Contrato extends React.Component{
     constructor(props){
         super(props);
         this.state= {
+            exclusividad_activo: 1,
+            condicion_pago_activo: "",
+            condicion_envio_activo: "",
+            ingrediente_activo: "",
+            proveedor_activo: "",
+            productor_activo: "",
+            tipo_activo: "",
             tipo:[
                 {
                   id: 1,
@@ -16,6 +23,16 @@ class Contrato extends React.Component{
                   value: "Renovacion"
                 }
               ],
+              exclusividad:[
+                {
+                  id: 1,
+                  value: "No"
+                },
+                {
+                  id: 2,
+                  value: "Si"
+                }
+              ],
               productores: [{
                   id: 0,
                   value: ""
@@ -24,16 +41,98 @@ class Contrato extends React.Component{
                 id: 0,
                 value: ""
             }],
-            proveedor_activo: "",
-            productor_activo: "",
-            tipo_activo: ""
+            ingredientes:[{
+                id:0,
+                value: 0
+            }],
+            condiciones_pago: [
+                {
+                    id: 0,
+                    value: 0
+                }
+            ],
+            condiciones_envio: [
+                {
+                    id: 0,
+                    value: 0
+                }
+            ]
         }
     }
+
+    async componentDidMount(){
+        var lista=[]
+        for( var i=1;i<4;i++){
+          if (this.state.productores.length){
+            const res= await fetch('http://localhost:5000/productores/')
+             const lista = await res.json();
+            await this.setStateAsync({productores: lista});
+          }
+          else{
+            
+          }
+        }  
+        
+      }
+
+      async componentDidUpdate(){
+        if((this.state.proveedor_activo=="")&&(this.state.productor_activo!=="")){
+          const res= await fetch(`http://localhost:5000/posibles/${this.state.productor_activo}`);
+          const lista = await res.json();
+          await this.setStateAsync({proveedores: lista});
+        }
+        if((this.state.proveedor_activo!=="")&&(this.state.ingrediente_activo=="")){
+            const res= await fetch(`http://localhost:5000/ingredientesProveedor/${this.state.proveedor_activo}`);
+            const listai = await res.json();
+          await this.setStateAsync({ingredientes: listai});
+          this.setStateAsync({ingrediente_activo: listai[0]});
+        }
+        else{
+            if((this.state.ingrediente_activo!=="")&&(this.state.condicion_pago_activo=="")){
+                const res= await fetch(`http://localhost:5000/condicionesPagoProveedor/${this.state.proveedor_activo}`);
+                const listacp = await res.json();
+              await this.setStateAsync({condiciones_pago: listacp});
+              this.setStateAsync({condicion_pago_activo: listacp[0]});
+            }
+            else{
+                if((this.state.condicion_pago_activo!=="")&&((this.state.condicion_envio_activo==""))){
+                    const res= await fetch(`http://localhost:5000/condicionesEnvioProveedor/${this.state.proveedor_activo}`);
+                    const listace = await res.json();
+                    await this.setStateAsync({condiciones_envio: listace});
+                    this.setStateAsync({condicion_envio_activo: listace[0]});
+                }
+            }
+        }
+      }
+
+      setStateAsync(state){
+        return new Promise(resolve =>{
+          this.setState(state,resolve);
+        });
+      }
 
     //Funcion para cambiar datos desde el hijo, name es el nombre del atributo a cambiar, y dataFromChild es la informacion a cambiar
     myCallback = (name,dataFromChild) => {
         this.setState({[name]: dataFromChild});
       }
+
+       handleSubmit = async(event) => {
+        console.log(this.state);
+      let estructura = {
+          id_prod: this.state.productor_activo,
+          id_prov: this.state.proveedor_activo,
+          exclusividad: this.state.exclusividad_activo
+        };
+        const res= await fetch(`http://localhost:5000/registroContrato/`,{
+          method: "POST",
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(estructura)
+        });
+      let estructura2={
+
+      };
+      
+    }
 
     render(){
         console.log(this.state);
@@ -54,18 +153,26 @@ class Contrato extends React.Component{
                 </tr>
                 <tr>
                     <h4 className="mt-3 ml-3 mr-3">Ingredientes disponibles</h4>
-                    <th><Dropdown data={this.state.tipo} nombre={"tipo_activo"} callbackFromParent={this.myCallback}/></th>
+                    <th><Dropdown data={this.state.ingredientes} nombre={"ingrediente_activo"} callbackFromParent={this.myCallback}/></th>
+                    <button class="boton-seleccion-contrato">Agregar</button>
+                </tr>
+                <tr>
+                    <h4 className="mt-3 ml-3 mr-3">Exclusividad</h4>
+                    <th><Dropdown data={this.state.exclusividad} nombre={"exclusividad_activo"} callbackFromParent={this.myCallback}/></th>
                     <button class="boton-seleccion-contrato">Agregar</button>
                 </tr>
                 <tr>
                     <h4 className="mt-3 ml-3 mr-3">Condiciones de envio</h4>
-                    <th><Dropdown data={this.state.tipo} nombre={"tipo_activo"} callbackFromParent={this.myCallback}/></th>
+                    <th><Dropdown data={this.state.condiciones_envio} nombre={"condicion_envio_activo"} callbackFromParent={this.myCallback}/></th>
                     <button class="boton-seleccion-contrato">Agregar</button>
                 </tr>
                 <tr>
-                    <h4 className="mt-3 ml-3 mr-3">Condiciones de envio</h4>
-                    <th><Dropdown data={this.state.tipo} nombre={"tipo_activo"} callbackFromParent={this.myCallback}/></th>
+                    <h4 className="mt-3 ml-3 mr-3">Condiciones de pago</h4>
+                    <th><Dropdown data={this.state.condiciones_pago} nombre={"condicion_pago_activo"} callbackFromParent={this.myCallback}/></th>
                     <button class="boton-seleccion-contrato">Agregar</button>
+                </tr>
+                <tr>
+                    <button class="btn btn-warning mt-3 ml-3" onClick={this.handleSubmit}>Registrar Contrato</button>
                 </tr>
             </div>
         )

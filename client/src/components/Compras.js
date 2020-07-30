@@ -16,6 +16,18 @@ class Compras extends React.Component{
             condicion_pago: 0,
             ingrediente_activo: 0,
             informacion: [],
+            condiciones_pago: [
+              {
+                  id: 0,
+                  value: 0
+              }
+            ],
+            condiciones_envio: [
+              {
+                  id: 0,
+                  value: 0
+              }
+          ],
             ingredientes: [
                 {
                 id:0,
@@ -84,20 +96,25 @@ class Compras extends React.Component{
       }
       else{
         if((this.state.contrato!==0)&&(this.state.condicion_envio==0)){
-          const res= await fetch(`http://localhost:5000/condicionesEnvio/${this.state.productor_activo}`);
+          const res= await fetch(`http://localhost:5000/condicionesEnvioContratadas/${this.state.productor_activo}`);
           const con_env = await res.json();
           await this.setStateAsync({envios: con_env});
         }
         else{
-          if((this.state.condicion_pago)){
-
+          if((this.state.condicion_pago==0)){
+            const res= await fetch(`http://localhost:5000/condicionesPagoContratadas/${this.state.productor_activo}`);
+            const con_env = await res.json();
+             await this.setStateAsync({envios: con_env});
           }
           else{
-            if((this.state.ingredientes.length<=1)&&(this.state.ingrediente_activo==0)){
+            if((this.state.ingrediente_activo==0)){
                 const res= await fetch(`http://localhost:5000/ingredientesContratados/${this.state.productor_activo}`);
                 const con_env = await res.json();
                await this.setStateAsync({envios: con_env});
-               console.log(this.state);
+               await this.setStateAsync({ingrediente_activo: con_env[0].id});
+            }
+            else{
+              
             }
           }
         }
@@ -138,11 +155,11 @@ class Compras extends React.Component{
                 </tr>
                 <tr>
                     <h4 className="mt-3 ml-3 mr-3">Condiciones de envio</h4>
-                    <th><Dropdown data={this.state.envios} nombre={"condicion_envio"} callbackFromParent={this.myCallback}/></th>
+                    <th><Dropdown data={this.state.condiciones_envio} nombre={"condicion_envio"} callbackFromParent={this.myCallback}/></th>
                 </tr>
                 <tr>
                     <h4 className="mt-3 ml-3 mr-3">Condiciones de pago</h4>
-                    <th><Dropdown data={this.state.tipo} nombre={"condicion_pago"} callbackFromParent={this.myCallback}/></th>
+                    <th><Dropdown data={this.state.condiciones_pago} nombre={"condicion_pago"} callbackFromParent={this.myCallback}/></th>
                 </tr>
                 <tr>
                     <h4 className="mt-3 ml-3 mr-3">Ingredientes contratados</h4>

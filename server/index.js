@@ -159,32 +159,91 @@ app.get("/proveedores/:id", async(req,res) =>{
 
 //CONTRATOS
 
-app.get("/contratado/:id", async(req,res) =>{
+app.get("/posibles/:id", async(req,res) =>{
     try {
         const {id} = req.params;
         console.log({id});
         const nuevaEvaluacion = await pool.query(
-            `select C.con_numero as numero, C.con_id_prov as id, P.prov_nombre as value from add_contratos C, add_proveedores P where C.con_id_prod = $1 and C.con_id_prov = P.prov_id;`,
+            `select H.his_eva_id_prov as id, P.prov_nombre as value, H.his_eva_calificacion from add_historicos_evluaciones H, add_escalas E, add_proveedores P where E.esc_id_prod = $1 and H.his_eva_calificacion >= E.esc_criterio_exito and H.his_eva_id_prod = E.esc_id_prod and P.prov_id = H.his_eva_id_prov order by H.his_eva_id_prov, H.his_eva_id_prod`,
          [id]);
         res.json(nuevaEvaluacion.rows);
     } catch (err) {
         console.log(err.message);
     }
 });
-app.get("/proveedoresContratados/:id", async(req,res) =>{
+app.get("/proveedoresEvaluados/:id", async(req,res) =>{
     try {
         const {id} = req.params;
-        console.log(id);
         const todo = await pool.query(
-            `select C.con_numero as numero, C.con_id_prov as id, P.prov_nombre as value from add_contratos  C, add_proveedores P where C.con_id_prod=1 and P.prov_id=1;`,
+            `select H.his_eva_id_prov, H.his_eva_id_prod, H.his_eva_calificacion from add_historicos_evluaciones H, add_escalas E where E.esc_id_prod = $1 and H.his_eva_calificacion >= E.esc_criterio_exito and H.his_eva_id_prod = E.esc_id_prod  order by H.his_eva_id_prov, H.his_eva_id_prod;`,
             [id]);
         res.json(todo.rows);
-        console.log(res);
     } catch (err) {
         console.log(err.message);
     }
 });
-
+app.get("/condicionesPagoProveedor/:id", async(req,res) =>{
+    try {
+        const {id} = req.params;
+        const todo = await pool.query(
+            `select con_pag_id as id, con_pag_descripcion as value from add_condiciones_pago where con_pag_id_prov=$1`,
+            [id]);
+        res.json(todo.rows);
+    } catch (err) {
+        console.log(err.message);
+    }
+});
+app.get("/condicionesEnvioProveedor/:id", async(req,res) =>{
+    try {
+        const {id} = req.params;
+        const todo = await pool.query(
+            `select C.con_env_id as id, concat(C.con_env_descripcion, ' hacia ',P.pai_nombre,' | $',C.con_env_costo) as value from add_condiciones_envio C, add_paises P where C.con_env_id_prov=$1 and C.con_env_id_pai = P.pai_id `,
+            [id]);
+        res.json(todo.rows);
+    } catch (err) {
+        console.log(err.message);
+    }
+});
+app.get("/ingredientesProveedor/:id", async(req,res) =>{
+    try {
+        const {id} = req.params;
+        const todo = await pool.query(
+            `select ing_ese_ipc as id, ing_ese_nombre as value from add_ingredientes_esencias where ing_ese_id_prov = $1;`,
+            [id]);
+        res.json(todo.rows);
+    } catch (err) {
+        console.log(err.message);
+    }
+});
+app.post("/registroContrato/", async(req,res) => {
+    const {descripcion} = req.body;
+    console.log(req.body.fk_prod);
+    if(req.body.exclusividad==1){
+        console.log('No exclusivo');
+        try {
+            const nuevaEvaluacion = await pool.query(
+            `insert into add_contratos (con_fecha_ini, con_exclusividad,con_id_prod,con_id_prov) values (current_date,'n',$1,$2);`,
+            [req.body.id_prod,req.body.id_prov]);
+            res.json(nuevaEvaluacion.rows[0]);
+        } catch (err) {
+            console.error(err.message);
+            res=err;
+        }
+    }
+    else{
+        console.log('Exclusivo');
+        try {
+            const nuevaEvaluacion = await pool.query(
+            `insert into add_contratos (con_fecha_ini, con_exclusividad,con_id_prod,con_id_prov) values (current_date,'s',$1,$2);`,
+            [req.body.id_prod,req.body.id_prov]);
+            res.json(nuevaEvaluacion.rows[0]);
+        } catch (err) {
+            console.error(err.message);
+            res=err;
+        }
+    }
+        
+});
 //COMPRAS
 app.get("/proveedoresContratados/:id", async(req,res) =>{
     try {
@@ -195,6 +254,28 @@ app.get("/proveedoresContratados/:id", async(req,res) =>{
             [id]);
         res.json(todo.rows);
         console.log(res);
+    } catch (err) {
+        console.log(err.message);
+    }
+});
+app.get("/condicionesPagoContratadas/:id", async(req,res) =>{
+    try {
+        const {id} = req.params;
+        const todo = await pool.query(
+            `select M.con_pag_id as id, M.con_pag_descripcion as value from add_condiciones_pago M, add_proveedores P, add_con_cond_pag E, add_contratos C where C.con_numero = E.con_cond_pag_id_con and C.con_id_prov = $1 and M.con_pag_id = E.con_cond_pag_id_cond_pag;`,
+            [id]);
+        res.json(todo.rows);
+    } catch (err) {
+        console.log(err.message);
+    }
+});
+app.get("/condicionesEnvioContratadas/:id", async(req,res) =>{
+    try {
+        const {id} = req.params;
+        const todo = await pool.query(
+            `select M.con_env_id as id, M.con_env_descripcion as value from add_condiciones_envio M, add_proveedores P, add_con_cond_env E, add_contratos C where C.con_numero = E.con_cond_env_id_con and C.con_id_prov = $1 and M.con_env_id = E.con_cond_env_id_cond_env;`,
+            [id]);
+        res.json(todo.rows);
     } catch (err) {
         console.log(err.message);
     }

@@ -17,9 +17,9 @@ class App extends React.Component{
     this.state = {
       inicio: "",
       consulta: "",
-      evaluacion: "1",
+      evaluacion: "",
       recomendador: "",
-      contrato: "",
+      contrato: "1",
       compra: "",
       crearformula: ""
     }
@@ -108,15 +108,17 @@ class App extends React.Component{
       <div>
         <nav class="sidebar">
             <div class="sidebar-header">
-                <img src={logo} width="40" height="40"/>
-                <h3 className="text mt-3 ml-5">Adomatics</h3>
+              <tr>
+                <th><img src={logo} width="40" height="40"/></th>
+                <th><h3 className="text mt-3 ml-5">Adomatics</h3></th>
+              </tr>
                 <ul>
                     <button className="boton-barra-menu-inicio" name="inicio" onClick={this.myChangeHandler}>Inicio</button>
                     <button className="boton-barra-menu-consulta" name="crearformula" onClick={this.myChangeHandler}>Crear Formula</button>
-                    <button className="boton-barra-menu-evaluacion" name="evaluacion" onClick={this.myChangeHandler}>Evaluacion</button>
+                    <button className="boton-barra-menu-evaluacion" name="evaluacion" onClick={this.myChangeHandler}>Evaluacion</button>  
+                    <button className="boton-barra-menu-contrato" name="contrato" onClick={this.myChangeHandler}>Contrato</button>
                     <button className="boton-barra-menu-compras" name="compra" onClick={this.myChangeHandler}>Compras</button>
                     <button className="boton-barra-menu-recomendador" name="recomendador" onClick={this.myChangeHandler}>Recomendador</button>
-                    <button className="boton-barra-menu-contrato" name="contrato" onClick={this.myChangeHandler}>Contrato</button>
                 </ul>
             </div>  
         </nav>

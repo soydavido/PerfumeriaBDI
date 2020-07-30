@@ -194,7 +194,7 @@ class Evaluacion extends React.Component{
            alert("El proveedor no aprobo la evaluacion, ya que el minimo es de "+this.state.escala[0].criterio+" y su calificacion fue de "+total_obtenido);
          }
          else{
-           alert("El proveedor aprobo la evaluacion con una nota de "+calificacionExito+" / "+this.state.escala[0].limite_s+" o "+total_obtenido+" / 100");
+           alert("El proveedor aprobo la evaluacion con una nota de "+calificacionExito+" / "+this.state.escala[0].limite_s+" u "+total_obtenido+" / 100");
          }
       }
       else{
