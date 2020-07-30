@@ -107,6 +107,9 @@ class App extends React.Component{
                   if(this.state.pedidos){
                     ReactDOM.render(<Pedidos/>,document.getElementById("contenido"));
                   }
+                  else{
+                    
+                  }
                 }
               }
             }

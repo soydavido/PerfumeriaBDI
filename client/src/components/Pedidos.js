@@ -38,6 +38,7 @@ class Pedidos extends React.Component{
             const res= await fetch('http://localhost:5000/proveedores/')
              const lista = await res.json();
             await this.setStateAsync({proveedores: lista});
+            
           }
         }  
     async componentDidUpdate(){
@@ -46,6 +47,7 @@ class Pedidos extends React.Component{
             const res= await fetch(`http://localhost:5000/pedidosPendientes/${this.state.proveedor_activo}`);
             const lista = await res.json();
            await this.setStateAsync({pedidos: lista});
+           await this.setStateAsync({i: this.state.i + 1});
         }
     }
         
