@@ -157,6 +157,24 @@ app.get("/proveedores/:id", async(req,res) =>{
     }
 });
 
+//PEDIDOS
+app.get("/pedidosPendientes/:id", async(req,res) =>{
+    try {
+        const {id} = req.params;
+        console.log({id});
+        const nuevaEvaluacion = await pool.query(
+            `SELECT prov_id as idprov, prov_nombre as nombre, ped_codigo as codigopedido, ped_total as total
+            FROM add_proveedores AS pr
+            INNER JOIN
+            add_pedidos AS ped
+            ON ped.ped_id_prov = pr.prov_id  where pr.prov_id=$1;`,
+         [id]);
+        res.json(nuevaEvaluacion.rows);
+    } catch (err) {
+        console.log(err.message);
+    }
+});
+
 //CONTRATOS
 
 app.get("/posibles/:id", async(req,res) =>{

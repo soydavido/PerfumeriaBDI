@@ -10,6 +10,7 @@ import Recomendador from "./components/Recomendador"
 import Contrato from "./components/Contrato"
 import Compras from "./components/Compras"
 import CrearFormula from "./components/CrearFormula"
+import Pedidos from "./components/Pedidos"
 
 class App extends React.Component{
   constructor(props){
@@ -20,8 +21,9 @@ class App extends React.Component{
       evaluacion: "",
       recomendador: "",
       contrato: "",
-      compra: "1",
-      crearformula: ""
+      compra: "",
+      crearformula: "",
+      pedidos: "1"
     }
   }
   
@@ -32,31 +34,36 @@ class App extends React.Component{
     this.setState({[nam]: val});
     console.log(this.state);
     if(event.target.name=="inicio"){
-      this.setState({inicio:"1",consulta:"",evaluacion:"",recomendador:"",compra:"",contrato:"",crearFormula:""});
+      this.setState({inicio:"1",consulta:"",evaluacion:"",recomendador:"",compra:"",contrato:"",crearFormula:"",pedidos:""});
     }
     else{
       if(event.target.name=="consulta"){
-        this.setState({inicio:"",consulta:"1",evaluacion:"",recomendador:"",compra:"",contrato:"",crearFormula:""});
+        this.setState({inicio:"",consulta:"1",evaluacion:"",recomendador:"",compra:"",contrato:"",crearFormula:"",pedidos:""});
       }
       else{
         if(event.target.name=="evaluacion"){
-          this.setState({inicio:"",consulta:"",evaluacion:"1",recomendador:"",compra:"",contrato:"",crearFormula:""});
+          this.setState({inicio:"",consulta:"",evaluacion:"1",recomendador:"",compra:"",contrato:"",crearFormula:"",pedidos:""});
         }
         else{
           if(event.target.name=="recomendador"){
-            this.setState({inicio:"",consulta:"",evaluacion:"",recomendador:"1",compra:"",contrato:"",crearFormula:""});
+            this.setState({inicio:"",consulta:"",evaluacion:"",recomendador:"1",compra:"",contrato:"",crearFormula:"",pedidos:""});
           }
           else{
             if(event.target.name=="compra"){
-              this.setState({inicio:"",consulta:"",evaluacion:"",recomendador:"",compra:"1",contrato:"",crearFormula:""});
+              this.setState({inicio:"",consulta:"",evaluacion:"",recomendador:"",compra:"1",contrato:"",crearFormula:"",pedidos:""});
             }
             else{
               if(event.target.name=="contrato"){
-                this.setState({inicio:"",consulta:"",evaluacion:"",recomendador:"",compra:"",contrato:"1",crearFormula:""});
+                this.setState({inicio:"",consulta:"",evaluacion:"",recomendador:"",compra:"",contrato:"1",crearFormula:"",pedidos:""});
               }
               else{
                 if(event.target.name=="crearformula"){
-                  this.setState({inicio:"",consulta:"",evaluacion:"",recomendador:"",compra:"",contrato:"",crearformula:"1"});
+                  this.setState({inicio:"",consulta:"",evaluacion:"",recomendador:"",compra:"",contrato:"",crearformula:"1",pedidos:""});
+                }
+                else{
+                  if(event.target=="pedidos"){
+                    this.setState({inicio:"",consulta:"",evaluacion:"",recomendador:"",compra:"",contrato:"",crearformula:"",pedidos:"1"});
+                  }
                 }
               }
             }
@@ -93,10 +100,13 @@ class App extends React.Component{
                 ReactDOM.render(<Compras/>,document.getElementById("contenido"));
               }
               else{
-                console.log(this.state.crearformula);
                 if(this.state.crearformula){
-                  console.log("creame");
                   ReactDOM.render(<CrearFormula/>,document.getElementById("contenido"));
+                }
+                else{
+                  if(this.state.pedidos){
+                    ReactDOM.render(<Pedidos/>,document.getElementById("contenido"));
+                  }
                 }
               }
             }
@@ -118,6 +128,7 @@ class App extends React.Component{
                     <button className="boton-barra-menu-evaluacion" name="evaluacion" onClick={this.myChangeHandler}>Evaluacion</button>  
                     <button className="boton-barra-menu-contrato" name="contrato" onClick={this.myChangeHandler}>Contrato</button>
                     <button className="boton-barra-menu-compras" name="compra" onClick={this.myChangeHandler}>Compras</button>
+                    <button className="boton-barra-menu-recomendador" name="pedidos" onClick={this.myChangeHandler}>Pedidos</button>
                     <button className="boton-barra-menu-recomendador" name="recomendador" onClick={this.myChangeHandler}>Recomendador</button>
                 </ul>
             </div>  
