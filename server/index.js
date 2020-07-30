@@ -339,8 +339,10 @@ app.get("/condicionesEnvio/:id", async(req,res) =>{
 app.get("/ingredientesContratados/:id", async(req,res) =>{
     try {
         const {id} = req.params;
+        console.log("Ingredientes contratados");
+        console.log({id});
         const todo = await pool.query(
-            `select I.ing_ese_ipc as id, I.ing_ese_tscacas as value from add_ingredientes_esencias I, add_ingredientes_contratados C where C.ing_con_id_con=$1 and C.ing_con_id_ing_ese = I.ing_ese_ipc;`,
+            `select I.ing_ese_ipc as id, I.ing_ese_nombre as value from add_ingredientes_esencias I, add_ingredientes_contratados C where C.ing_con_id_con=$1 and C.ing_con_id_ing_ese = I.ing_ese_ipc;`,
             [id]);
         res.json(todo.rows);
     } catch (err) {

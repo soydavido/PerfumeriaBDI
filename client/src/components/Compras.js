@@ -169,7 +169,7 @@ class Compras extends React.Component{
                 </tr>
                 <tr>
                     <h4 className="mt-3 ml-3 mr-3">Ingredientes contratados</h4>
-                    <th><Dropdown data={this.state.tipo} nombre={"tipo_activo"} callbackFromParent={this.myCallback}/></th>
+                    <th><Dropdown data={this.state.ingredientes} nombre={"ingrediente_activo"} callbackFromParent={this.myCallback}/></th>
                     <th><input class="input-cantidad" type="number" name="cantidad" onChange={this.myChangeHandler}></input></th>
                     <button class="boton-seleccion-contrato">Agregar</button>
                 </tr>
