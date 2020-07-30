@@ -411,12 +411,13 @@ insert into add_escalas (esc_fecha_ini,esc_id_prod,esc_rango_ini,esc_rango_fin,e
 
 
 insert into add_condiciones_envio (con_env_id_pai,con_env_id_prov,con_env_descripcion,con_env_tipo_transporte,con_env_costo) values 
-(14,1,null,'a',2000),
-(11,1,null,'m',1200),
-(10,2,null,'a',1000),
-(14,3,null,'t',1700),
-(24,3,null,'t',3000),
-(24,1,null,'m',2000);
+(14,1,'Aereo','a',2000),
+(11,1,'Maritimo','m',1200),
+(10,2,'Aereo','a',1000),
+(14,3,'Terrestre','t',1700),
+(24,3,'Terrestre','t',3000),
+(24,1,'Maritimo','m',2000),
+(11,2,'Aereo','a',2500);
 
 insert into add_prod_pais (prod_pais_id_pai,prod_pais_id_prod) values 
 (11,1),
@@ -700,4 +701,3 @@ insert into add_per_perfu (per_perfu_id_per, per_perfu_id_perfu) values
 		(5, 4),
 		(17, 5),
 		(18, 6);
-
