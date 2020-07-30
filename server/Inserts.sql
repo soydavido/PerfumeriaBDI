@@ -309,7 +309,12 @@ insert into add_palabras_clave (pal_cla_palabra_unica) values
 		('Diario'),
 		('Trabajo'),
 		('Casual'),
-		('Noche');
+		('Noche'),
+		('Templado'),
+		('Fresco'),
+		('Verano'),
+		('Cálido'),
+		('Primavera');
 
 insert into add_pal_cla_fam_olf (pal_cla_id_pal_cla, pal_cla_id_fam_olf) values
 		(1, 6),
@@ -324,7 +329,16 @@ insert into add_pal_cla_fam_olf (pal_cla_id_pal_cla, pal_cla_id_fam_olf) values
 		(1, 5),
 		(4, 9),
 		(4, 8),
-		(1, 3);
+		(1, 3),
+		(5, 9),
+		(5, 6),
+		(6, 3),
+		(6, 7),
+		(7, 5),
+		(7, 6),
+		(8, 9),
+		(7, 3),
+		(9, 3);
 
 
 --insert into add_ing_ese_ese_per (ing_ese_ese_per_id_ing_ese, ing_ese_ese_per_id_ese_per) values
@@ -343,27 +357,15 @@ insert into add_condiciones_pago (con_pag_id_prov, con_pag_descripcion, con_pag_
 		--(4, 'Pago completo al enviar la mercancia', 'contado', 1, 100, null);
 
 insert into add_formulas_eval (for_eva_fecha,for_eva_fk_prod,for_eva_tipo) values 
-('2020-07-23',1,'i'),
-('2020-07-23',2,'i'),
-('2020-07-23',3,'i'),
-('2020-07-23',4,'i'),
-('2020-07-23',5,'i');
+('2020-07-23',1,'i');
 
 insert into add_variables (var_id_for_eva,var_id_prod,var_nombre,var_peso) values 
 ('2020-07-23',1,'Ubicacion geografica',20),
-('2020-07-23',1,'Costos',40), 
-('2020-07-23',1,'Alternativas de envios',20),
-('2020-07-23',1,'Alternativas de pagos',20),
-('2020-07-23',2,'Costos',40), 
-('2020-07-23',2,'Alternativas de envios',30),
-('2020-07-23',2,'Alternativas de pagos',30),
-('2020-07-23',3,'Alternativas de envios',50),
-('2020-07-23',3,'Costo',50),
-('2020-07-23',4,'Alternativas de pagos',30),
-('2020-07-23',4,'Alternativas de envios',30),
-('2020-07-23',4,'Costo',40),
-('2020-07-23',5,'Ubicacion geografica',60),
-('2020-07-23',5,'Costo',40);;
+('2020-07-23',1,'Costos y alternativas de envíos',40), 
+('2020-07-23',1,'Alternativas y condiciones de pago',40);
+
+insert into add_escalas (esc_fecha_ini,esc_id_prod,esc_rango_ini,esc_rango_fin,esc_criterio_exito) values 
+('2020-07-23',1,0,20,60);
 
 
 insert into add_condiciones_envio (con_env_id_pai,con_env_id_prov,con_env_descripcion,con_env_tipo_transporte,con_env_costo) values 
@@ -646,12 +648,3 @@ insert into add_per_perfu (per_perfu_id_per, per_perfu_id_perfu) values
 		(17, 5),
 		(18, 6);
 
---insert into add_contratos (con_fecha_ini,con_exclusividad,con_id_prod,con_id_prov) values 
-		--('2020-01-03','s',1,1),
-		--('2019-12-24','n',2,2);
-
---insert into add_con_cond_env (con_cond_env_id_con,con_cond_env_id_cond_env,con_cond_env_id_prov,con_cond_env_id_pai) values 
-		--(1,1,1,14);
-
---insert into add_ingredientes_contratados (ing_con_id_con,ing_con_id_ing_ese) values 
-		--(1,969340);	
