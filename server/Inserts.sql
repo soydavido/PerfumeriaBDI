@@ -34,7 +34,6 @@ insert into add_asociaciones_nacionales (aso_nac_nombre,aso_nac_region,aso_nac_i
 insert into add_proveedores (prov_nombre,prov_email,prov_pag_web,prov_direccion,prov_id_aso_nac,prov_id_pai) values 
 ('Firmenich','info@firmenich.com','www.firmenich.com/','Rue de la Bergère 7, 1217 Meyrin, Suiza',3,15),
 ('Privi','info@privi.co.in','www.privi.com/','Privi House, A-71,TTC Industrial Area,Thane Belapur Road,Kopar Khairane,Navi Mumbai - 400 709, India',null,1),
---('Eternis','info@eternis.com','www.eternis.com/','1004 Peninsula Tower, Peninsula Corporate Park, G.K. Marg, Lower Parel, Mumbai 400 013 ',null,1),
 ('Grau Aromatics', 'info@grau.biz', 'www.grau-aromatics.de/en/','Bismarckstr. 4, 73525 Schwäbisch Gmünd', 2, 11);
 
 insert into add_productores (prod_nombre,prod_email,prod_pag_web,prod_direccion,prod_id_aso_nac) values 
@@ -74,7 +73,10 @@ insert into add_ingredientes_esencias (ing_ese_ipc, ing_ese_id_prov, ing_ese_tsc
 		(972375, 1, '60-12-8', 'phenylethanol nat', 2858, null, 10, 'Se encuentra naturalmente en manzana, albaricoque, plátano, queso, champiñones, durazno, frambuesa, rosa, fresa y tabaco', ' Líquido incoloro a amarillo claro', 'Potente floral, rosa, miel, notas frutales', 'agrega, más allá de su típica rosa y miel perfil, una interesante nota de fondo fermentada que es excelente para sabores de chocolate. Material muy flexible, se puede utilizar a partir de queso para aplicaciones de bebidas alcohólicas', 'Kosher Certified, Halal Certified', '98°C', ' Regulation (EC) N° 1334/2008 Natural Flavouring Substance', null),
 		(11210013, 2, '8002-09-3', 'Pine oil-85', 3045, null, null, null, ' Líquido transparente incoloro a amarillo pálido', 'base de hierbas, pino, cítricos frescos', null, null, '88°C', null, null),
 		(12320002, 2, '28219-61-6', 'Sandal Fleur', null, null, null, null, 'Líquido transparente e incoloro', 'Leñosa, sandalia, dulce, floral.', null, null, '110°C', null, null),
-		(10610004, 2, '24720-09-0', 'alpha damascone', 3659, null, null, null, 'líquido claro amarillo pálido', 'Dulce floral metálico afrutado manzana picante ciruela menta', null, null, '100°C', null, null);
+		(10610004, 2, '24720-09-0', 'alpha damascone', 3659, null, null, null, 'líquido claro amarillo pálido', 'Dulce floral metálico afrutado manzana picante ciruela menta', null, null, '100°C', null, null),
+		(502236, 3, '10361-39-4', 'Benzyl valerate', null, null, null, null, ' Líquido Incoloro amarillo pálido', 'piel de manzana floral afrutada', null, 'Kosher certificate', '116°C', null, null),
+		(500686, 3, '7774-44-9', 'Cyclohexyl isovalerate', 2355, null, null, null, 'líquido transparente incoloro', 'aroma a manzana y plátano.', null, 'Kosher certificate', '89°C', null, null),
+		(501696, 3, '110-39-4', 'Octyl butyrate', 2807, null, null, null, 'líquido transparente incoloro', ' jazmín verde ceroso afrutado fresco aceitoso cremoso natural', null, 'Kosher certificate', '104°C', null, null);
 
 --insert into add_ingredientes_otros (ing_otr_nombre, ing_otr_tipo, ing_otr_ipc, ing_otr_tsacas, ing_otr_id_prov) values 
 
@@ -105,7 +107,10 @@ insert into add_presentaciones_ing (pre_ing_volumen, pre_ing_precio, pre_ing_id_
 		(30, 21.14, 10610004, null),
 		(80, 48.51, 10610004, null),
 		(120, 71.85, 10610004, null),
-		(240, 135.26, 10610004, null);
+		(240, 135.26, 10610004, null),
+		(15, 13, 502236, null),
+		(15, 20, 500686, null),
+		(15, 25, 501696, null);
 
 insert into add_origenes (ori_id_pai, ori_id_ing_ese) values 
 		(5,969340),
@@ -123,7 +128,7 @@ insert into add_esencias_perfumes (ese_per_nombre, ese_per_tipo, ese_per_descrip
 		('almizcle', 's', null),
 		('ámbar', 's', null),
 		('vainilla', 'n', null),
-		('cilantro', 'n', null),
+/*10*/	('cilantro', 'n', null),
 		('ciprés', 'n', null),
 		('vetiver', 'n', null),
 		('hierba verde', 'n', null),
@@ -133,7 +138,7 @@ insert into add_esencias_perfumes (ese_per_nombre, ese_per_tipo, ese_per_descrip
 		('madera de ciprés hinoki', 'n', null),
 		('ámbar blanco', 's', null),
 		('eneldo', 'n', null),
-		('pimienta negra', 'n', null),
+/*20*/	('pimienta negra', 'n', null),
 		('nuez moscada', 'n', null),
 		('palisandro', 'n', null),
 		('té negro', 'n', null),
@@ -143,7 +148,7 @@ insert into add_esencias_perfumes (ese_per_nombre, ese_per_tipo, ese_per_descrip
 		('incienso', 'n', null),
 		('benjuí', 'n', null),
 		('iris', 'n', null),
-		('mandarina', 'n', null),
+/*30*/	('mandarina', 'n', null),
 		('gálbano', 'n', null),
 		('naranja', 'n', null),
 		('rosa', 'n', null),
@@ -153,7 +158,7 @@ insert into add_esencias_perfumes (ese_per_nombre, ese_per_tipo, ese_per_descrip
 		('menta', 'n', null),
 		('geranio', 'n', null),
 		('haba de tonka', 'n', null),
-		('musgo de roble', 'n', null),
+/*40*/	('musgo de roble', 'n', null),
 		('ámbar gris', 's', null),
 		('pomelo', 'n', null),
 		('melocotón', 'n', null),
@@ -163,12 +168,35 @@ insert into add_esencias_perfumes (ese_per_nombre, ese_per_tipo, ese_per_descrip
 		('pera', 'n', null),
 		('almendra amarga', 'n', null),
 		('regaliz', 'n', null),
-		('madera de vainilla', 'n', null),
+/*50*/	('madera de vainilla', 'n', null),
 		('cachemira', 's', null),
 		('limón (lima ácida)', 'n', null),
 		('jengibre', 'n', null),
 		('cedrón', 'n', null),
-		('canela', 'n', null);
+		('canela', 'n', null),
+		('romero', 'n', null),
+		('ylang-ylang', 'n', null),
+		('incienso de olíbano', 'n', null),
+		('tuberosa', 'n', null),
+		('agujas de cedro', 'n', null),
+		('nectarina', 'n', null),
+		('lirio de los valles (muguete)', 's', null),
+		('ciruela Mirabel', 'n', null),
+		('cera de abeja', 'n', null),
+		('neroli', 'n', null),
+		('fresia amarilla', 's', null),
+		('notas solares', 's', null),
+		('pepino', 'n', null),
+		('magnolia', 'n', null),
+		('nardos', 'n', null),
+		('violeta', 's', null),
+		('notas amaderada', 'n', null),
+		('guayaba', 'n', null),
+		('mousse de dulce de leche', 's', null),
+		('cardamomo negro', 'n', null),
+		('jazmín sambac (sampaguita)', 'n', null),
+		('té Blanco', 'n', null),
+		('sándalo blanco', 'n', null);
 
 insert into add_familias_olfativas (fam_olf_nombre) values
 		('Verde'),
@@ -238,7 +266,30 @@ insert into add_fam_olf_ese_per (fam_olf_ese_per_id_fam_olf, fam_olf_ese_per_id_
 		(2, 52),
 		(9, 53),
 		(2, 54),
-		(9, 55);
+		(9, 55),
+		(1, 56),
+		(3, 57),
+		(5, 58),
+		(3, 59),
+		(8, 60),
+		(4, 61),
+		(3, 62),
+		(4, 63),
+		(10, 64),
+		(2, 65),
+		(3, 66),
+		(10, 67),
+		(4, 68),
+		(3, 69),
+		(3, 70),
+		(3, 71),
+		(8, 72),
+		(4, 73),
+		(10, 74),
+		(9, 75),
+		(3, 76),
+		(6, 77),
+		(8, 78);
 
 insert into add_fam_olf_ing_ese (fam_olf_ing_ese_id_ing_ese, fam_olf_ing_ese_id_fam_olf) values
 		(969340, 3),
@@ -248,7 +299,11 @@ insert into add_fam_olf_ing_ese (fam_olf_ing_ese_id_ing_ese, fam_olf_ing_ese_id_
 		(11210013, 8),
 		(12320002, 8),
 		(10610004, 3),
-		(10610004, 4);
+		(10610004, 4),
+		(502236, 4),
+		(502236, 3),
+		(500686, 4),
+		(501696, 4);
 
 insert into add_palabras_clave (pal_cla_palabra_unica) values
 		('Diario'),
@@ -267,7 +322,9 @@ insert into add_pal_cla_fam_olf (pal_cla_id_pal_cla, pal_cla_id_fam_olf) values
 		(4, 3),
 		(1, 7),
 		(1, 5),
-		(4, 9);
+		(4, 9),
+		(4, 8),
+		(1, 3);
 
 
 --insert into add_ing_ese_ese_per (ing_ese_ese_per_id_ing_ese, ing_ese_ese_per_id_ese_per) values
@@ -343,7 +400,11 @@ insert into add_perfumes (per_nombre, per_edad_dirigida, per_genero, per_id_prod
 		('ESTELLE', 'j', 'f', 4),
 		('ESTELLE POUR-FEMME', 'j', 'f', 4),
 		('Voyage Bleu Eau', 'a', 'f', 5),
-		('The Pride Pour Homme', 'a', 'u', 5);
+		('The Pride Pour Homme', 'a', 'u', 5),
+		('Hunter For Men', 'at', 'm', 5),
+		('NECTAR LOVE', 'a', 'm', 6),
+		('Be delicious', 'at', 'f', 6),
+		('Stories DKYN', 'j', 'f', 6);
 
 insert into add_fam_per (fam_per_id_per, fam_per_id_fam_olf) values
 		(1, 9),
@@ -361,7 +422,15 @@ insert into add_fam_per (fam_per_id_per, fam_per_id_fam_olf) values
 		(10, 9),
 		(11, 9),
 		(13, 9),
-		(14, 3);
+		(14, 3),
+		(15, 3),
+		(15, 8),
+		(16, 9),
+		(16, 3),
+		(16, 4),
+		(17, 3),
+		(18, 9),
+		(18, 3);
 
 insert into add_notas (not_id_per, not_id_ese_per, not_tipo, not_concentracion) values
 		(1, 1, 's', null),
@@ -438,7 +507,55 @@ insert into add_notas (not_id_per, not_id_ese_per, not_tipo, not_concentracion) 
 		(14, 52, 's', null),
 		(14, 54, 's', null),
 		(14, 55, 'c', null),
-		(14, 21, 'c', null);
+		(14, 21, 'c', null),
+		(14, 40, 'c', null),
+		(14, 44, 'f', null),
+		(14, 9, 'f', null),
+		(14, 39, 'f', null),
+		(15, 42, 's', null),
+		(15, 56, 's', null),
+		(15, 1, 's', null),
+		(15, 60, 's', null),
+		(15, 57, 'c', null),
+		(15, 58, 'c', null),
+		(15, 59, 'c', null),
+		(15, 12, 'f', null),
+		(15, 44, 'f', null),
+		(15, 16, 'f', null),
+		(16, 42, 's', null),
+		(16, 30, 's', null),
+		(16, 61, 's', null),
+		(16, 66, 's', null),
+		(16, 67, 's', null),
+		(16, 34, 'c', null),
+		(16, 62, 'c', null),
+		(16, 63, 'c', null),
+		(16, 64, 'f', null),
+		(16, 16, 'f', null),
+		(16, 9, 'f', null),
+		(16, 7, 'f', null),
+		(16, 65, 'f', null),
+		(17, 42, 's', null),
+		(17, 68, 's', null),
+		(17, 69, 's', null),
+		(17, 70, 'c', null),
+		(17, 33, 'c', null),
+		(17, 63, 'c', null),
+		(17, 71, 'c', null),
+		(17, 25, 'c', null),
+		(17, 72, 'f', null),
+		(17, 8, 'f', null),
+		(17, 44, 'f', null),
+		(18, 73, 's', null),
+		(18, 74, 's', null),
+		(18, 45, 's', null),
+		(18, 75, 's', null),
+		(18, 76, 'c', null),
+		(18, 29, 'c', null),
+		(18, 77, 'c', null),
+		(18, 9, 'f', null),
+		(18, 78, 'f', null),
+		(18, 41, 'f', null);
 
 insert into add_monoliticas (mon_id_per, mon_id_ese_per) values
 		(2, 10),
@@ -471,14 +588,15 @@ insert into add_intensidades (int_id_per, int_nombre, int_concentracion, int_des
 		(7, 'edc', null, null),
 		(8, 'edc', null, null),
 		(9, 'edc', null, null),
-		(10, 'edc', null, null),
 		(10, 'edp', null, null),
-		(11, 'edc', null, null),
 		(11, 'edp', null, null),
-		(12, 'edc', null, null),
 		(12, 'edp', null, null),
-		(13, 'edc', null, null),
-		(13, 'edp', null, null);
+		(13, 'edp', null, null),
+		(14, 'edp', null, null),
+		(15, 'edt', null, null),
+		(16, 'edp', null, null),
+		(17, 'edp', null, null),
+		(18, 'edp', null, null);
 
 insert into add_presentaciones_perfumes (pre_per_id_int, pre_per_id_per, pre_per_volumen) values
 		(1, 1, 100),
@@ -487,30 +605,46 @@ insert into add_presentaciones_perfumes (pre_per_id_int, pre_per_id_per, pre_per
 		(4, 4, 50),
 		(5, 5, 250),
 		(6, 6, 950),
+		(7, 7, 10),
 		(7, 7, 50),
+		(7, 7, 75),
+		(7, 7, 100),
+		(8, 8, 10),
+		(8, 8, 50),
 		(8, 8, 75),
+		(8, 8, 100),
+		(9, 9, 10),
 		(9, 9, 50),
+		(9, 9, 75),
+		(9, 9, 100),
 		(10, 10, 100),
-		(11, 10, 100),
-		(12, 11, 100),
-		(13, 11, 100),
-		(14, 12, 100),
-		(15, 12, 100),
-		(16, 13, 100),
-		(17, 13, 100);
+		(11, 11, 100),
+		(12, 12, 100),
+		(13, 13, 100),
+		(14, 14, 100),
+		(15, 15, 100),
+		(16, 16, 100),
+		(17, 17, 100),
+		(17, 17, 150),
+		(18, 18, 100),
+		(18, 18, 4);
 
 insert into add_perfumistas (perfu_nombre, perfu_apellido, perfu_genero, perfu_id_pai, perfu_nombre2, perfu_apellido2) values
 		('Bernard', 'Ellena', 'm', 10, null, null),
 		('Philippe', 'Paparella', 'm', 10, null, 'Paris'),
 		('Emilie', 'Coppermann', 'f', 10, null, null),
-		('Amit', 'Kumar', 'm', 1, 'Raj', null);
+		('Amit', 'Kumar', 'm', 1, 'Raj', null),
+		('Maurice', 'Roucel', 'm', 10, null, null),
+		('Stephen', 'Nilsen', 'm', 24, null, null);
 
 insert into add_per_perfu (per_perfu_id_per, per_perfu_id_perfu) values
 		(1, 1),
 		(2, 2),
 		(3, 3),
 		(4, 4),
-		(5, 4);
+		(5, 4),
+		(17, 5),
+		(18, 6);
 
 --insert into add_contratos (con_fecha_ini,con_exclusividad,con_id_prod,con_id_prov) values 
 		--('2020-01-03','s',1,1),
